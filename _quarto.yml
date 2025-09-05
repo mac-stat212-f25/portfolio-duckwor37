@@ -22,7 +22,7 @@ number-depth: 2
 
 book:
   title: "COMP/STAT212 Portfolio"
-  author: "Your Name Here"
+  author: "Tori Duckworth"
   date: today  # use today to update date published based on last time project was edited
   date-format: full
   # favicon: path/to/favorite-logo.png
@@ -45,7 +45,7 @@ book:
       # footer text
 
   sidebar:
-    title: "Your Name Here"
+    title: "Tori Duckworth"
     logo: assets/sidebar-logo.png
     logo-alt: "Random negative space illustration"
     collapse-level: 2
@@ -71,7 +71,7 @@ book:
 
     - part: "In-Class Activities"
       chapters:
-      - src/ica/ica-sample1.qmd
+      - src/ica/cleaning.qmd
       - src/ica/ica-sample2.qmd
 
   appendices:
