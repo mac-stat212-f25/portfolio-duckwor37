@@ -1,0 +1,43 @@
+---
+title: "Homework 01"
+---
+
+
+## TidyTuesday Section
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r}
+#Necessary Libraries
+#| include: false
+#| echo: false
+
+library(readxl)
+library(dplyr)
+library(tidyverse)
+```
+
+## Importing Data
+
+Reading in the data both about the families and genus of the frogs as well as individual frog ID events. The events were recorded frog calls by citizen scientists in the country of Australia which were identified by experts. 
+
+```{r} 
+#| include: true
+#| echo: true
+
+Frog_ID <- read.csv("tidytuesday/data/2025/2025-09-02/frogID_data.csv")
+Frog_names <- read.csv("tidytuesday/data/2025/2025-09-02/frog_names.csv")
+```
+
+## Exploring the Data 
+
+```{r}
+
+```
+
+## Visualizations 
+
+```{r}
+
+```
+
