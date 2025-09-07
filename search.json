@@ -43,14 +43,25 @@
     ]
   },
   {
-    "objectID": "src/ica/ica-sample1.html",
-    "href": "src/ica/ica-sample1.html",
-    "title": "ICA Sample 1",
+    "objectID": "src/ica/Review.html",
+    "href": "src/ica/Review.html",
+    "title": "Cleaning SFO Weather Data",
     "section": "",
-    "text": "Add content here",
+    "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(tidyverse)\nlibrary(readr) #To get read_csv in the CSV\n\n#Step 1\nweather_data &lt;- read_csv(\"../../data/raw/weather.csv\") #Reading in the Data\nCode#Step 2\n#Cleaning out large value in PrecipYr\nweather_clean &lt;- weather_data |&gt; \n  mutate(PrecipYr &lt;- na_if(PrecipYr, 99999))\nCode#Step 3\n#Creating variable that shows the day of the year\nweather_clean &lt;- weather_data |&gt; \n  arrange(Month, Day) |&gt; \n  mutate(dateInYear &lt;- seq(from = 1, to = 365, by = 1))\nCode#Step 4\n#Creating variable that shows 3 letter month abbreviation\nweather_clean &lt;- weather_data |&gt; \n  mutate(month_name &lt;- month.abb[Month])\nCode#Step 5\n#Saving the data to another source \nwrite_csv(weather_clean, file = \"../../data/processed/weather_clean.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Review.html#exercise",
+    "href": "src/ica/Review.html#exercise",
+    "title": "Cleaning SFO Weather Data",
+    "section": "",
+    "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\n\n\n\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\n\n\n\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\n\n\n\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\n\n\n\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
