@@ -71,7 +71,7 @@ book:
 
     - part: "In-Class Activities"
       chapters:
-      - src/ica/cleaning.qmd
+      - src/ica/Review.qmd
       - src/ica/ica-sample2.qmd
 
   appendices:
