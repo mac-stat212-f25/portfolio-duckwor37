@@ -15,11 +15,13 @@ Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 library(readxl)
 library(dplyr)
 library(tidyverse)
+library(hrbrthemes)
+library(viridis)
 ```
 
 ## Importing Data
 
-Reading in the data both about the families and genus of the frogs as well as individual frog ID events. The events were recorded frog calls by citizen scientists in the country of Australia which were identified by experts. 
+Reading in the data both about the families and genus of the frogs as well as individual frog ID events. The individual observation events were recorded frog calls by citizen scientists in Australia. The frogs were then identified via their calls by experts. 
 
 ```{r} 
 #| include: true
@@ -29,14 +31,92 @@ Frog_ID <- read.csv("tidytuesday/data/2025/2025-09-02/frogID_data.csv")
 Frog_names <- read.csv("tidytuesday/data/2025/2025-09-02/frog_names.csv")
 ```
 
+Research Question: What subfamilies are the most abundant in Australia, and when are they the most abundant?
+
 ## Exploring the Data 
 
-```{r}
+In order to create visualizations and have subfamilies corresponding to each observation I had to join the two different data sets by their scientific name. 
 
+```{r}
+#Joining data sets together via scientific name and getting month of the observations
+Frog_expanded <- 
+  left_join(Frog_ID, Frog_names, by = "scientificName") |> 
+  mutate(eventDate = as.Date(eventDate)) |> 
+  mutate(month = format(eventDate, "%b")) 
 ```
+I then created a table that shows the counts of each subfamily of frog for each month over the year of 2023 in order to get an idea of what family was most abundant and when. 
+
+```{r}
+#Demonstrating the count of each subfamily for each month
+Frog_expanded |> 
+  na.omit(subfamily) |> #omiting observations that do not have a subfamily, excludes >9000 observations
+  count(month, subfamily) |> 
+  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |> 
+  arrange(month)
+```
+
+It is important to note that in this case there are no observations for the month of December, so we cannot make a blanket statement saying the months Nov-Jan for example, as strickly speaking it is not true. 
+
 
 ## Visualizations 
-```{r}
 
+In order to get a better idea of the abundance of each family in comparison to the overall density for each month I created the following visualization. 
+
+```{r}
+#| include: true
+#| echo: true
+
+#Shows the overall amount of frogs over the year compared to the 
+Frog_expanded |> 
+  na.omit(subfamily) |>
+  ggplot(aes(x = eventDate)) + 
+  geom_density(aes(fill = subfamily), alpha = 0.5) +
+  geom_histogram(aes(y = after_stat(density)), binwidth = 29, alpha = 0.5) + 
+  theme_minimal() + 
+  scale_fill_viridis_d() 
+```
+As we can see in above visualization is that frog calls tend to be more abundant October to January which is spring to summer in Australia. Toads most abundant around January-Febuary, late season. In comparison, Hylids are most abundant in December and January, mid to late season. Myobatrachid peaked in October as well as November. Ranid stay pretty consistent throughout the year. However the visuals layering of all the different subfamilies make it difficult to pull out exact measurements. For example, no trends for Microhylidae can be distinguished. The follow visualization splits all the different subfamiles so that they can be better compared against one another rather than the general trend. 
+
+
+```{r}
+#| include: true
+#| echo: true
+
+#Shows the distribution of each subfamily over the course of a year
+Frog_expanded |> 
+  na.omit(subfamily) |>
+  ggplot(aes(x = eventDate, fill = subfamily)) +
+  geom_density() +
+  facet_wrap(~subfamily) + 
+  labs(title = "Distribution of Subfamilies", subtitle = "2023", x = "Date", y = "Probability Density", fill = "Subfamily") + 
+  theme_minimal() + 
+  scale_fill_viridis_d()
 ```
 
+From this we can tell much more distinctly that Frogs that fall under the Microhylidae family tend to peak in January-Feburary while staying relatively consistent the rest of the year. However while this visual allows you to compare the density of each species relative to the total of **each species** not the total number of frogs or count. The following visualization addresses this issue. 
+
+
+```{r}
+#| include: true
+#| echo: true
+
+# Function to hide every other label
+every_other_label <- function(x) {
+      labels <- as.character(x)
+      labels[seq(2, length(labels), 2)] <- ""
+      return(labels)}
+
+#Shows the proportion of the different frog families over the course of the year 
+Frog_expanded |>
+  na.omit(subfamily) |>
+  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |> 
+  ggplot(aes(x = month, , fill = subfamily)) + 
+  geom_bar() + 
+  facet_wrap(~subfamily) + 
+  scale_fill_viridis_d() + 
+  scale_x_discrete(labels = every_other_label)
+```
+
+Through this visual we can clearly see that the Myobatrachid of frogs are the most abundant year round and make up most of the frogs that were documented in Australia in 2023. Hylids are the second most common subfamily, followed by Toad and Microhylidae and lastly Ranid. However because the last 3 categories are all significantly smaller than Hylids and Myobatrachid it is difficult to compare them. 
+
+Nevertheless we have answered the research question that Myobatrachids are the most abundant Frog subfamily in Australia and are more relatively abundant during the months of August to November. 
