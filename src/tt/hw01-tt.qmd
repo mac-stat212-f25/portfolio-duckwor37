@@ -1,5 +1,5 @@
 ---
-title: "Homework 01"
+title: "Homework 01 -- TidyTuesday 09/02/2025"
 ---
 
 
@@ -73,7 +73,8 @@ Frog_expanded |>
   geom_density(aes(fill = subfamily), alpha = 0.5) +
   geom_histogram(aes(y = after_stat(density)), binwidth = 29, alpha = 0.5) + 
   theme_minimal() + 
-  scale_fill_viridis_d() 
+  scale_fill_viridis_d() + 
+  labs(x = "Date", y = "Density", title = "Density of Frogs and their Subfamilies over Time", subtitle = "2023", fill = "Subfamily")
 ```
 As we can see in above visualization is that frog calls tend to be more abundant October to January which is spring to summer in Australia. Toads most abundant around January-Febuary, late season. In comparison, Hylids are most abundant in December and January, mid to late season. Myobatrachid peaked in October as well as November. Ranid stay pretty consistent throughout the year. However the visuals layering of all the different subfamilies make it difficult to pull out exact measurements. For example, no trends for Microhylidae can be distinguished. The follow visualization splits all the different subfamiles so that they can be better compared against one another rather than the general trend. 
 
@@ -114,7 +115,8 @@ Frog_expanded |>
   geom_bar() + 
   facet_wrap(~subfamily) + 
   scale_fill_viridis_d() + 
-  scale_x_discrete(labels = every_other_label)
+  scale_x_discrete(labels = every_other_label) + 
+  labs(x = "Month", y = "Number of Frogs", title = "The Number of Frogs of each Subfamily per Month", subtitle = "2023", fill = "Subfamily")
 ```
 
 Through this visual we can clearly see that the Myobatrachid of frogs are the most abundant year round and make up most of the frogs that were documented in Australia in 2023. Hylids are the second most common subfamily, followed by Toad and Microhylidae and lastly Ranid. However because the last 3 categories are all significantly smaller than Hylids and Myobatrachid it is difficult to compare them. 
