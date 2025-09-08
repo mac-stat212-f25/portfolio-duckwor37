@@ -72,7 +72,7 @@ book:
     - part: "In-Class Activities"
       chapters:
       - src/ica/Review.qmd
-      - src/ica/ica-sample2.qmd
+      - src/ica/Advanced_data_viz.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd
