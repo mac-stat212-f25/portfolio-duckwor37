@@ -7,3 +7,5 @@
 ![0905-Review_mind_map.jpeg](0905-Review_mind_map.jpeg)
 
 ![0908-Data_Visualization.jpeg](0908-Data_visualization.jpeg)
+
+![0910-Advanced_spatial_data_viz.jpeg](0908-Advanced_spatial_data_viz.jpeg)
