@@ -21,14 +21,47 @@
     ]
   },
   {
-    "objectID": "src/tt/2025-07-08.html",
-    "href": "src/tt/2025-07-08.html",
-    "title": "TidyTuesday Sample 1",
+    "objectID": "src/tt/hw01-tt.html",
+    "href": "src/tt/hw01-tt.html",
+    "title": "Homework 01 – TidyTuesday 09/02/2025",
     "section": "",
-    "text": "Add content here",
+    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCode#Necessary Libraries\n#| include: false\n#| echo: false\n\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(hrbrthemes)\nlibrary(viridis)",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+    ]
+  },
+  {
+    "objectID": "src/tt/hw01-tt.html#importing-data",
+    "href": "src/tt/hw01-tt.html#importing-data",
+    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "section": "Importing Data",
+    "text": "Importing Data\nReading in the data both about the families and genus of the frogs as well as individual frog ID events. The individual observation events were recorded frog calls by citizen scientists in Australia. The frogs were then identified via their calls by experts.\n\nCodeFrog_ID &lt;- read.csv(\"tidytuesday/data/2025/2025-09-02/frogID_data.csv\")\nFrog_names &lt;- read.csv(\"tidytuesday/data/2025/2025-09-02/frog_names.csv\")\n\n\nResearch Question: What subfamilies are the most abundant in Australia, and when are they the most abundant?",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+    ]
+  },
+  {
+    "objectID": "src/tt/hw01-tt.html#exploring-the-data",
+    "href": "src/tt/hw01-tt.html#exploring-the-data",
+    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "section": "Exploring the Data",
+    "text": "Exploring the Data\nIn order to create visualizations and have subfamilies corresponding to each observation I had to join the two different data sets by their scientific name.\n\nCode#Joining data sets together via scientific name and getting month of the observations\nFrog_expanded &lt;- \n  left_join(Frog_ID, Frog_names, by = \"scientificName\") |&gt; \n  mutate(eventDate = as.Date(eventDate)) |&gt; \n  mutate(month = format(eventDate, \"%b\")) \n\n\nI then created a table that shows the counts of each subfamily of frog for each month over the year of 2023 in order to get an idea of what family was most abundant and when.\n\nCode#Demonstrating the count of each subfamily for each month\nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt; #omiting observations that do not have a subfamily, excludes &gt;9000 observations\n  count(month, subfamily) |&gt; \n  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |&gt; \n  arrange(month)\n\n   month     subfamily     n\n1    Jan         Hylid  8664\n2    Jan  Microhylidae   155\n3    Jan  Myobatrachid  7021\n4    Jan         Ranid    12\n5    Jan          Toad   282\n6    Feb         Hylid  3675\n7    Feb  Microhylidae   103\n8    Feb  Myobatrachid  4735\n9    Feb         Ranid     5\n10   Feb          Toad   201\n11   Mar         Hylid  1516\n12   Mar  Microhylidae    53\n13   Mar  Myobatrachid  4697\n14   Mar         Ranid    15\n15   Mar          Toad   112\n16   Apr         Hylid   883\n17   Apr  Microhylidae    21\n18   Apr  Myobatrachid  5810\n19   Apr         Ranid    22\n20   Apr          Toad    36\n21   May         Hylid   630\n22   May  Microhylidae     7\n23   May  Myobatrachid  3270\n24   May         Ranid    13\n25   May          Toad     9\n26   Jun         Hylid  1291\n27   Jun  Microhylidae    30\n28   Jun  Myobatrachid  5002\n29   Jun         Ranid    13\n30   Jun          Toad    12\n31   Jul         Hylid  1476\n32   Jul  Microhylidae    60\n33   Jul  Myobatrachid  7471\n34   Jul         Ranid    21\n35   Jul          Toad    36\n36   Aug         Hylid  2634\n37   Aug  Microhylidae    24\n38   Aug  Myobatrachid 12016\n39   Aug         Ranid    18\n40   Aug          Toad    18\n41   Sep         Hylid  5992\n42   Sep  Microhylidae    48\n43   Sep  Myobatrachid 12323\n44   Sep         Ranid    12\n45   Sep          Toad    74\n46   Oct         Hylid  6851\n47   Oct  Microhylidae    28\n48   Oct  Myobatrachid  8677\n49   Oct         Ranid    11\n50   Oct          Toad    59\n51   Nov         Hylid 11195\n52   Nov  Microhylidae    38\n53   Nov  Myobatrachid  9862\n54   Nov         Ranid    19\n55   Nov          Toad   209\n\n\nIt is important to note that in this case there are no observations for the month of December, so we cannot make a blanket statement saying the months Nov-Jan for example, as strickly speaking it is not true.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+    ]
+  },
+  {
+    "objectID": "src/tt/hw01-tt.html#visualizations",
+    "href": "src/tt/hw01-tt.html#visualizations",
+    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "section": "Visualizations",
+    "text": "Visualizations\nIn order to get a better idea of the abundance of each family in comparison to the overall density for each month I created the following visualization.\n\nCode#Shows the overall amount of frogs over the year compared to the \nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt;\n  ggplot(aes(x = eventDate)) + \n  geom_density(aes(fill = subfamily), alpha = 0.5) +\n  geom_histogram(aes(y = after_stat(density)), binwidth = 29, alpha = 0.5) + \n  theme_minimal() + \n  scale_fill_viridis_d() + \n  labs(x = \"Date\", y = \"Density\", title = \"Density of Frogs and their Subfamilies over Time\", subtitle = \"2023\", fill = \"Subfamily\")\n\n\n\n\n\n\n\nAs we can see in above visualization is that frog calls tend to be more abundant October to January which is spring to summer in Australia. Toads most abundant around January-Febuary, late season. In comparison, Hylids are most abundant in December and January, mid to late season. Myobatrachid peaked in October as well as November. Ranid stay pretty consistent throughout the year. However the visuals layering of all the different subfamilies make it difficult to pull out exact measurements. For example, no trends for Microhylidae can be distinguished. The follow visualization splits all the different subfamiles so that they can be better compared against one another rather than the general trend.\n\nCode#Shows the distribution of each subfamily over the course of a year\nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt;\n  ggplot(aes(x = eventDate, fill = subfamily)) +\n  geom_density() +\n  facet_wrap(~subfamily) + \n  labs(title = \"Distribution of Subfamilies\", subtitle = \"2023\", x = \"Date\", y = \"Probability Density\", fill = \"Subfamily\") + \n  theme_minimal() + \n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nFrom this we can tell much more distinctly that Frogs that fall under the Microhylidae family tend to peak in January-Feburary while staying relatively consistent the rest of the year. However while this visual allows you to compare the density of each species relative to the total of each species not the total number of frogs or count. The following visualization addresses this issue.\n\nCode# Function to hide every other label\nevery_other_label &lt;- function(x) {\n      labels &lt;- as.character(x)\n      labels[seq(2, length(labels), 2)] &lt;- \"\"\n      return(labels)}\n\n#Shows the proportion of the different frog families over the course of the year \nFrog_expanded |&gt;\n  na.omit(subfamily) |&gt;\n  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |&gt; \n  ggplot(aes(x = month, , fill = subfamily)) + \n  geom_bar() + \n  facet_wrap(~subfamily) + \n  scale_fill_viridis_d() + \n  scale_x_discrete(labels = every_other_label) + \n  labs(x = \"Month\", y = \"Number of Frogs\", title = \"The Number of Frogs of each Subfamily per Month\", subtitle = \"2023\", fill = \"Subfamily\")\n\n\n\n\n\n\n\nThrough this visual we can clearly see that the Myobatrachid of frogs are the most abundant year round and make up most of the frogs that were documented in Australia in 2023. Hylids are the second most common subfamily, followed by Toad and Microhylidae and lastly Ranid. However because the last 3 categories are all significantly smaller than Hylids and Myobatrachid it is difficult to compare them.\nNevertheless we have answered the research question that Myobatrachids are the most abundant Frog subfamily in Australia and are more relatively abundant during the months of August to November.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
     ]
   },
   {
