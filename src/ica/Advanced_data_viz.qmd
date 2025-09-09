@@ -54,7 +54,6 @@ Below is the codebook of the data.  Familiarize yourself with the meaning of eac
 - `CulmPrec`: Cumulative precipitation for the month up to this day
 
 
-
 ## Exercise 1
 
 Examine the [NYTimes 2015 Temperature Visualization (html)](https://www.nytimes.com/interactive/2016/02/19/us/2015-year-in-weather-temperature-precipitation.html) then answer the following questions.
@@ -218,6 +217,7 @@ ggplot(weather) +
 
 
 Try to figuring out this new challenge using search engines and large language models:
+
 - **Search Engines.** Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.
 
 - **LLMs.** Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?
@@ -233,7 +233,22 @@ Create a precipitation plot that looks like the following. Note that
 ![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_third_graph.png)
 
 ```{r weather_plot_precip}
+Month_average <- weather |> 
+  group_by(Month) |> 
+  summarize(CulmPrec = max(CulmPrec), dateInYear = max(dateInYear))
 
+Record <- weather |> 
+  filter(RecordP == TRUE) 
+  
+
+ggplot(weather, aes(x = dateInYear, y = CulmPrec)) +
+  geom_area(fill = "#ebeae2", alpha = 0.5) +
+  geom_line(color = "#32a3d8", size = 0.5) +  
+  geom_text(data = Month_average, aes(label = round(CulmPrec, 2)), 
+            vjust = -0.5, size = 3) +
+  geom_point(data = Record, aes(x = dateInYear, y = CulmPrec), 
+             shape = 25, fill = "black", size = 2) + 
+  theme_minimal() 
 ```
 
 ## Done!
