@@ -117,7 +117,6 @@ ggplot(diamonds, aes(x = carat, y = price)) +
     size = 3
   )
 ```
-
 :::
 
 
@@ -154,7 +153,7 @@ ggplot(weather) +
   geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + 
   geom_linerange(aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + 
   geom_linerange(aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + 
-  theme_classic()
+  theme_classic() 
 ```
 
 
@@ -169,14 +168,18 @@ Recreate the visual demarcations of the months by adding vertical lines separati
 
 ```{r }
 #Small data set with end of the month for each month, 
+Month_data <- weather |> 
+  group_by(Month) |> 
+  filter(Day == max(Day)) |> 
+  ungroup()
 
-ggplot(weather) +
-  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + 
-  geom_linerange(aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + 
-  geom_linerange(aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + 
+ggplot() +
+  geom_linerange(data = weather, aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + 
+  geom_linerange(data = weather, aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + 
+  geom_linerange(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + 
+  #geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + 
   theme_classic() + 
-  geom_vline(aes(x = Month))
-
+  geom_vline(data = Month_data, aes(xintercept = dateInYear), linetype = "dotted")
 ```
 
 
@@ -189,17 +192,39 @@ Change the x-axis labels so that the month names display in the center of each m
 R has built-in variables called `month.abb` and `month.name` that contain abbreviated and full month names.
 :::
 
+```{r}
+#Small data set with end of the month for each month, 
+Month_data <- weather |> 
+  group_by(Month) |> 
+  filter(Day == max(Day)) |> 
+  ungroup() 
 
-Try to figuring out this new challenge using search engines and LLMs:
+Mid_month <- weather |> 
+  group_by(Month) |> 
+  summarize(across(where(is.numeric), ~mean(.x, na.rm = TRUE)))
 
+month_numeric <- as.numeric(format(month, format = "%U"))
+month_label <- format(month, format = "%b")
+
+ggplot(weather) +
+  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + 
+  geom_linerange(aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + 
+  geom_linerange(aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + 
+  scale_x_continuous(breaks = Mid_month$dateInYear, labels = month.abb) + 
+  #geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + 
+  theme_classic() + 
+  geom_vline(data = Month_data, aes(xintercept = dateInYear), linetype = "dotted")
+```
+
+
+Try to figuring out this new challenge using search engines and large language models:
 - **Search Engines.** Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.
 
-- **LLMs.** Use [ChatGPT](https://chat.openai.com/) or [Gemini](https://gemini.google.com/) with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?
-
+- **LLMs.** Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?
 
 ## Exercise 6 
 
-Create a precipitation plot that looks like the following.  Note that 
+Create a precipitation plot that looks like the following. Note that 
 
 - The triangles point to precipitation records--refer to the data codebook above for the `RecordP` variable.
 - The numbers on the plot indicate the total precipitation for the month--search the `hjust` and `vjust` options to adjust the alignment of the numbers.
@@ -207,10 +232,10 @@ Create a precipitation plot that looks like the following.  Note that
 
 ![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_third_graph.png)
 
-
 ```{r weather_plot_precip}
 
 ```
+
 ## Done!
 
 - Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
