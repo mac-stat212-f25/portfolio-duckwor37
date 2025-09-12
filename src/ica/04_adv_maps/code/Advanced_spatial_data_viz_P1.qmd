@@ -227,8 +227,10 @@ mn_counties_transfored <- mn_counties |> st_transform(crs = st_crs(mn_cities))
 - Install the `ggthemes` package, and add the following layer to use a clean map theme: `+ ggthemes::theme_map()`
 
 ```{r}
-
-
+ggplot() + 
+  geom_sf(data = mn_counties, fill = "white") + 
+  geom_sf(data = mn_cities) + 
+  ggthemes::theme_map() 
 ```
 
 
@@ -250,9 +252,11 @@ ggplot() +
 Look up the `scale_color_viridis_c()` documentation via the [ggplot2 reference](https://ggplot2.tidyverse.org/reference/scale_viridis.html).
 
 - Read the function description at the top. What is the advantage of using this function for making color palettes?
+This function turns the colors into a scale that is seeable for color blind individuals making your data more accessable to more people. 
+
 - Look through the examples section. What is the difference between the `_d()`, `_c()`, and `_b()` variants of this function?
 
-
+The d stands for discrete scale, while the c stands for continuous scale (such as the one used above), and the b stands for a binned scale. You have to use a different function depending on what sort of data you are using. 
 
 
 ### Adding Elevation Raster Data
