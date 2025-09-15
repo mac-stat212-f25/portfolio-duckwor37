@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.html" rel="next">
+<link href="../../src/appx/appx-sample1.html" rel="next">
 <link href="../../src/ica/Review.html" rel="prev">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
@@ -193,7 +193,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tt/hw02-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 02</span></a>
+  <a href="../../src/tt/2025-07-15.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday Sample 2</span></a>
   </div>
 </li>
       </ul>
@@ -215,11 +215,6 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/ica/Advanced_data_viz.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">3 Advanced Data Viz</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Advanced Spatial Viz P1</span></a>
   </div>
 </li>
       </ul>
@@ -560,10 +555,10 @@ Month Names
 </div>
 </div>
 </div>
-<p>Try to figuring out this new challenge using search engines and large language models:</p>
+<p>Try to figuring out this new challenge using search engines and large language models: - <strong>Search Engines.</strong> Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.</p>
 <ul>
-<li><p><strong>Search Engines.</strong> Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.</p></li>
-<li><p><strong>LLMs.</strong> Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?</p></li>
+<li>
+<strong>LLMs.</strong> Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?</li>
 </ul></section><section id="exercise-6" class="level2"><h2 class="anchored" data-anchor-id="exercise-6">Exercise 6</h2>
 <p>Create a precipitation plot that looks like the following. Note that</p>
 <ul>
@@ -574,30 +569,6 @@ Month Names
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="https://hash-mac.github.io/stat212site-f25/images/sfo_third_graph.png" class="img-fluid figure-img"></p>
 <figcaption>SFO Precipitation in 2011</figcaption></figure>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>Month_average <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">summarize</span>(<span class="at">CulmPrec =</span> <span class="fu">max</span>(CulmPrec), <span class="at">dateInYear =</span> <span class="fu">max</span>(dateInYear))</span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a>Record <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">filter</span>(RecordP <span class="sc">==</span> <span class="cn">TRUE</span>) </span>
-<span id="cb7-7"><a href="#cb7-7"></a>  </span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec)) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"#ebeae2"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#32a3d8"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  </span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Month_average, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(CulmPrec, <span class="dv">2</span>)), </span>
-<span id="cb7-13"><a href="#cb7-13"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> Record, <span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">y =</span> CulmPrec), </span>
-<span id="cb7-15"><a href="#cb7-15"></a>             <span class="at">shape =</span> <span class="dv">25</span>, <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="Advanced_data_viz_files/figure-html/weather_plot_precip-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
 </div>
 </section><section id="done" class="level2"><h2 class="anchored" data-anchor-id="done">Done!</h2>
 <ul>
@@ -1232,267 +1203,252 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.html" class="pagination-link" aria-label="4 Advanced Spatial Viz P1">
-        <span class="nav-page-text"><span class="chapter-title">4 Advanced Spatial Viz P1</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/appx/appx-sample1.html" class="pagination-link" aria-label="Appendix Sample 1">
+        <span class="nav-page-text"><span class="chapter-title">Appendix Sample 1</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="an">title:</span><span class="co"> "3 Advanced Data Viz"</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">---</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">## 🧩 Learning Goals</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a>By the end of this lesson, you should be able to:</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="ss">- </span>Navigate <span class="co">[</span><span class="ot">`ggplot2` reference page</span><span class="co">](https://ggplot2.tidyverse.org/reference/)</span> to find needed functions for a desired visualization</span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="ss">- </span>Navigate the different sections of a function help page to construct desired plot features, in particular, </span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="ss">    - </span>Navigate the **Usage** section to identify arguments that must be set</span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="ss">    - </span>Navigate the **Arguments** section to understand how arguments work</span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="ss">    - </span>Navigate the **Aesthetics** section to learn how plot appearance can be controlled</span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="ss">    - </span>Navigate the **Examples** section for some usage examples</span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="ss">- </span>Identify when to use different <span class="in">`data`</span> arguments within <span class="in">`ggplot()`</span> and <span class="in">`geom_()`</span> layers</span>
-<span id="cb8-17"><a href="#cb8-17"></a></span>
-<span id="cb8-18"><a href="#cb8-18"></a></span>
-<span id="cb8-19"><a href="#cb8-19"></a></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="fu">## Introduction ^[The exercise in this lesson are inspired by an assignment from the Concepts in Computing with Data course at UC Berkeley taught by Dr. Deborah Nolan.]</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a></span>
-<span id="cb8-22"><a href="#cb8-22"></a></span>
-<span id="cb8-23"><a href="#cb8-23"></a>In this lesson, we are going to recreate <span class="co">[</span><span class="ot">NYTimes 2015 Temperature Visualization (html)</span><span class="co">](https://www.nytimes.com/interactive/2016/02/19/us/2015-year-in-weather-temperature-precipitation.html)</span> using data from San Francisco (SFO) in 2011.</span>
-<span id="cb8-24"><a href="#cb8-24"></a></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="al">![Screenshot of NYTimes 2015 Temperature Visualization](https://hash-mac.github.io/stat212site-f25/images/sfo_nytimes.jpg)</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="fu">## Reading Data</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a></span>
-<span id="cb8-29"><a href="#cb8-29"></a>Run the code chunk below to load the <span class="in">`tidyverse`</span> package and read in the San Francisco weather data.</span>
-<span id="cb8-30"><a href="#cb8-30"></a></span>
-<span id="cb8-31"><a href="#cb8-31"></a><span class="in">```{r setup}</span></span>
-<span id="cb8-32"><a href="#cb8-32"></a><span class="in">library(tidyverse)</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a><span class="in">weather &lt;- read_csv("https://mac-stat.github.io/data/sfo_weather.csv")</span></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="in">```</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="fu">## Understanding Data</span></span>
-<span id="cb8-37"><a href="#cb8-37"></a></span>
-<span id="cb8-38"><a href="#cb8-38"></a>Below is the codebook of the data.  Familiarize yourself with the meaning of each variable.  Use the codebook as a reference when using the data.</span>
-<span id="cb8-39"><a href="#cb8-39"></a></span>
-<span id="cb8-40"><a href="#cb8-40"></a><span class="ss">- </span><span class="in">`Month`</span>: Month of the year (1-12)</span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="ss">- </span><span class="in">`Day`</span>: Day within the month (1-31)</span>
-<span id="cb8-42"><a href="#cb8-42"></a><span class="ss">- </span><span class="in">`Low`</span>/<span class="in">`High`</span>: Low/high temperature this day</span>
-<span id="cb8-43"><a href="#cb8-43"></a><span class="ss">- </span><span class="in">`NormalLow`</span>/<span class="in">`NormalHigh`</span>: Typical low/high temperature for this day of the year</span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="ss">- </span><span class="in">`RecordLow`</span>/<span class="in">`RecordHigh`</span>: Record low/high temperature for this day of the year</span>
-<span id="cb8-45"><a href="#cb8-45"></a><span class="ss">- </span><span class="in">`LowYr`</span>/<span class="in">`HighYr`</span>: Year in which the record low/high was observed</span>
-<span id="cb8-46"><a href="#cb8-46"></a><span class="ss">- </span><span class="in">`Precip`</span>: Amount of precipitation (inches) this day</span>
-<span id="cb8-47"><a href="#cb8-47"></a><span class="ss">- </span><span class="in">`RecordPrecip`</span>: Record amount of precipitation for this day of the year</span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="ss">- </span><span class="in">`PrecipYr`</span>: Year in which the record precipitation was observed</span>
-<span id="cb8-49"><a href="#cb8-49"></a><span class="ss">- </span><span class="in">`date`</span>: The actual date in 2011 for this day in YYYY-MM-DD format</span>
-<span id="cb8-50"><a href="#cb8-50"></a><span class="ss">- </span><span class="in">`dateInYear`</span>: What day of the year is it? (1-365)</span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="ss">- </span><span class="in">`Record`</span>: Logical (TRUE/FALSE) indicating whether this day had a high temperature record</span>
-<span id="cb8-52"><a href="#cb8-52"></a><span class="ss">- </span><span class="in">`RecordText`</span>: Text that displays the record high for this day (<span class="in">`"Record high: ##"`</span>)</span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="ss">- </span><span class="in">`RecordP`</span>: Logical (TRUE/FALSE) indicating whether this day had a precipitation record</span>
-<span id="cb8-54"><a href="#cb8-54"></a><span class="ss">- </span><span class="in">`CulmPrec`</span>: Cumulative precipitation for the month up to this day</span>
-<span id="cb8-55"><a href="#cb8-55"></a></span>
-<span id="cb8-56"><a href="#cb8-56"></a></span>
-<span id="cb8-57"><a href="#cb8-57"></a><span class="fu">## Exercise 1</span></span>
-<span id="cb8-58"><a href="#cb8-58"></a></span>
-<span id="cb8-59"><a href="#cb8-59"></a>Examine the <span class="co">[</span><span class="ot">NYTimes 2015 Temperature Visualization (html)</span><span class="co">](https://www.nytimes.com/interactive/2016/02/19/us/2015-year-in-weather-temperature-precipitation.html)</span> then answer the following questions.</span>
-<span id="cb8-60"><a href="#cb8-60"></a></span>
-<span id="cb8-61"><a href="#cb8-61"></a>**Data Storytelling** </span>
-<span id="cb8-62"><a href="#cb8-62"></a></span>
-<span id="cb8-63"><a href="#cb8-63"></a><span class="ss">- </span>Relate the intro paragraph: "Scientists declared that 2015 was Earth’s hottest year on record..." to the *design* of the visualization.  In particular, based on the intro paragraph,</span>
-<span id="cb8-64"><a href="#cb8-64"></a><span class="ss">  - </span>What key message/claim does NYTimes want readers to be able to explore? </span>
-<span id="cb8-65"><a href="#cb8-65"></a>  NYT wants readers to explore their own cities and see how 2015 compares to the historical average temperature over the course of a year regardless of location. </span>
-<span id="cb8-66"><a href="#cb8-66"></a>  </span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="ss">  - </span>How did this goal inform what information is displayed in the visualization?</span>
-<span id="cb8-68"><a href="#cb8-68"></a>It means that there is a part that shows the historical average and then one that shows the daily average from 2025 overlayed on one another. Then it also provides the option to switch through cities to compare how they have changed easier. </span>
-<span id="cb8-69"><a href="#cb8-69"></a></span>
-<span id="cb8-70"><a href="#cb8-70"></a>**Aesthetic Mapping** </span>
-<span id="cb8-71"><a href="#cb8-71"></a></span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="ss">- </span>What specific variables (from the data codebook) underlie the visualization?</span>
-<span id="cb8-73"><a href="#cb8-73"></a><span class="ss">- </span>How do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?</span>
-<span id="cb8-74"><a href="#cb8-74"></a></span>
-<span id="cb8-75"><a href="#cb8-75"></a>For x most likely the dateInYear or date variable, for y it is the Record Low/High overlayed with NormalHigh/NormalLow. Depending on the city there is RecordPrecip. Date in year makes up the x axis and is spkit into months very nicely, which each day making a small rectangular box. The record High and low are a redish pink cover overlayed on the grey to allow for comparison. The high and low make up either end of the box or each day, so longer boxes have more of a range of temperatures. Grey tends to take a more even slope/change as it are historical averages. They move from city to city up or down normally situating around a certain average temperature. </span>
-<span id="cb8-76"><a href="#cb8-76"></a></span>
-<span id="cb8-77"><a href="#cb8-77"></a></span>
-<span id="cb8-78"><a href="#cb8-78"></a><span class="fu">## Exercise 2</span></span>
-<span id="cb8-79"><a href="#cb8-79"></a></span>
-<span id="cb8-80"><a href="#cb8-80"></a>Navigate the **Geoms** section of the <span class="co">[</span><span class="ot">ggplot2 reference page</span><span class="co">](https://ggplot2.tidyverse.org/reference/)</span> to find a <span class="in">`geom`</span> that corresponds to the visual elements in the temperature plot.  Using both the small thumbnail visuals on the right and the names of the <span class="in">`geom`</span>'s, brainstorm some possibilities for <span class="in">`geom`</span>'s you might use to recreate the temperature visualization.</span>
-<span id="cb8-81"><a href="#cb8-81"></a></span>
-<span id="cb8-82"><a href="#cb8-82"></a></span>
-<span id="cb8-83"><a href="#cb8-83"></a>::: {.callout-note title="Navigating Documentation / Reference Pages"}</span>
-<span id="cb8-84"><a href="#cb8-84"></a>You need to navigate the <span class="in">`geom`</span>s further by opening up their reference pages to understand if a particular <span class="in">`geom`</span> is suitable for our task. Let's look at the  <span class="co">[</span><span class="ot">`geom_point` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_point.html)</span> to learn how to read a documentation page..</span>
-<span id="cb8-85"><a href="#cb8-85"></a></span>
-<span id="cb8-86"><a href="#cb8-86"></a>The **Usage** section shows all of the possible inputs (arguments) to the <span class="in">`geom`</span>.  These are all of the ways that a <span class="in">`geom`</span> can be customized. Just looking at the argument names can help give a hint as to what arguments might fit our needs.</span>
-<span id="cb8-87"><a href="#cb8-87"></a></span>
-<span id="cb8-88"><a href="#cb8-88"></a></span>
-<span id="cb8-89"><a href="#cb8-89"></a>The **Arguments** section, on the other hand, explains in detail what each argument does and the possible values the argument can take. The <span class="in">`mapping`</span>, <span class="in">`data`</span>, and <span class="in">`...`</span> arguments will be the most commonly used by far.</span>
-<span id="cb8-90"><a href="#cb8-90"></a></span>
-<span id="cb8-91"><a href="#cb8-91"></a><span class="ss">- </span><span class="in">`mapping`</span> is the argument that is being used when we specify which variables should link or map to the plot <span class="in">`aes`</span>thetics (the code inside <span class="in">`aes()`</span>).</span>
-<span id="cb8-92"><a href="#cb8-92"></a><span class="ss">- </span><span class="in">`data`</span> is the argument where we specify the dataset containing the variables that the <span class="in">`geom`</span> is using.</span>
-<span id="cb8-93"><a href="#cb8-93"></a><span class="ss">- </span><span class="in">`...`</span> is used for fixed aesthetics (ones that don't correspond to a variable), eg, to set the color of all points, we use <span class="in">`color = "red"`</span> and to set the size of all points, we use <span class="in">`size = 3`</span>.</span>
-<span id="cb8-94"><a href="#cb8-94"></a></span>
-<span id="cb8-95"><a href="#cb8-95"></a>The **Aesthetics** section of a <span class="in">`geom`</span> documentation page gives information on how the visual elements of the <span class="in">`geom`</span> correspond to data. For example, the <span class="co">[</span><span class="ot">`geom_point` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_point.html)</span> shows that <span class="in">`x`</span> and <span class="in">`y`</span> aesthetics are available. It also shows some new aesthetics like <span class="in">`stroke`</span>.</span>
-<span id="cb8-96"><a href="#cb8-96"></a>:::</span>
-<span id="cb8-97"><a href="#cb8-97"></a></span>
-<span id="cb8-98"><a href="#cb8-98"></a>::: {.callout-note title="<span class="in">`data`</span> Argument"}</span>
-<span id="cb8-99"><a href="#cb8-99"></a>Previously you have used one dataset per plot by specifying that as the first argument of <span class="in">`ggplot()`</span>. However, multiple data sets can be passed into ggplot as shown in the example below.</span>
-<span id="cb8-100"><a href="#cb8-100"></a></span>
-<span id="cb8-101"><a href="#cb8-101"></a><span class="in">```{r diamonds_scatter}</span></span>
-<span id="cb8-102"><a href="#cb8-102"></a><span class="in">data(diamonds)</span></span>
-<span id="cb8-103"><a href="#cb8-103"></a></span>
-<span id="cb8-104"><a href="#cb8-104"></a><span class="in">diamonds_avg_price &lt;- diamonds |&gt;</span></span>
-<span id="cb8-105"><a href="#cb8-105"></a><span class="in">  group_by(carat) |&gt;</span></span>
-<span id="cb8-106"><a href="#cb8-106"></a><span class="in">  summarize(avg_price = mean(price)) |&gt;</span></span>
-<span id="cb8-107"><a href="#cb8-107"></a><span class="in">  arrange(carat)</span></span>
-<span id="cb8-108"><a href="#cb8-108"></a><span class="in">diamonds_avg_price &lt;- diamonds_avg_price[seq(1, nrow(diamonds_avg_price), 3), ]</span></span>
-<span id="cb8-109"><a href="#cb8-109"></a></span>
-<span id="cb8-110"><a href="#cb8-110"></a><span class="in">ggplot(diamonds, aes(x = carat, y = price)) +</span></span>
-<span id="cb8-111"><a href="#cb8-111"></a><span class="in">  geom_point() +</span></span>
-<span id="cb8-112"><a href="#cb8-112"></a><span class="in">  geom_point(</span></span>
-<span id="cb8-113"><a href="#cb8-113"></a><span class="in">    data = diamonds_avg_price,</span></span>
-<span id="cb8-114"><a href="#cb8-114"></a><span class="in">    aes(x = carat, y = avg_price),</span></span>
-<span id="cb8-115"><a href="#cb8-115"></a><span class="in">    color = "deepskyblue",</span></span>
-<span id="cb8-116"><a href="#cb8-116"></a><span class="in">    size = 3</span></span>
-<span id="cb8-117"><a href="#cb8-117"></a><span class="in">  )</span></span>
-<span id="cb8-118"><a href="#cb8-118"></a><span class="in">```</span></span>
-<span id="cb8-119"><a href="#cb8-119"></a>:::</span>
-<span id="cb8-120"><a href="#cb8-120"></a></span>
-<span id="cb8-121"><a href="#cb8-121"></a></span>
-<span id="cb8-122"><a href="#cb8-122"></a>Look at the <span class="co">[</span><span class="ot">`geom_linerange` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_linerange.html)</span> and start off your temperature visualization with the record lows and highs.  Your plot should look like the one below.  The hex code of the used light tan color is <span class="in">`#ECEBE3`</span>.</span>
-<span id="cb8-123"><a href="#cb8-123"></a></span>
-<span id="cb8-124"><a href="#cb8-124"></a><span class="al">![SFO Weather Records in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_first_graph.png)</span></span>
-<span id="cb8-125"><a href="#cb8-125"></a></span>
-<span id="cb8-126"><a href="#cb8-126"></a><span class="in">```{r weather_plot_temp_records}</span></span>
-<span id="cb8-127"><a href="#cb8-127"></a><span class="in">ggplot(weather) +</span></span>
-<span id="cb8-128"><a href="#cb8-128"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
-<span id="cb8-129"><a href="#cb8-129"></a><span class="in">    theme_classic()</span></span>
-<span id="cb8-130"><a href="#cb8-130"></a><span class="in">```</span></span>
-<span id="cb8-131"><a href="#cb8-131"></a></span>
-<span id="cb8-132"><a href="#cb8-132"></a>::: {.callout-tip title="Keyboard Shortcuts"}</span>
-<span id="cb8-133"><a href="#cb8-133"></a>As you work on this plot, try to use some new <span class="co">[</span><span class="ot">keyboard shortcuts</span><span class="co">](https://hash-mac.github.io/stat212site-f25/notes/keyboard.html)</span>. Focus on the following:</span>
-<span id="cb8-134"><a href="#cb8-134"></a></span>
-<span id="cb8-135"><a href="#cb8-135"></a><span class="ss">- </span>Insert code chunk: <span class="in">`Ctrl+Alt+I`</span> (Windows). <span class="in">`Option+Command+I`</span> (Mac).</span>
-<span id="cb8-136"><a href="#cb8-136"></a><span class="ss">- </span>Run current code chunk: <span class="in">`Ctrl+Shift+Enter`</span> (Windows). <span class="in">`Command+Shift+Return`</span> (Mac).</span>
-<span id="cb8-137"><a href="#cb8-137"></a><span class="ss">- </span>Run current line/currently selected lines: <span class="in">`Ctrl+Enter`</span> (Windows). <span class="in">`Command+Return`</span> (Mac).</span>
-<span id="cb8-138"><a href="#cb8-138"></a>:::</span>
-<span id="cb8-139"><a href="#cb8-139"></a></span>
-<span id="cb8-140"><a href="#cb8-140"></a></span>
-<span id="cb8-141"><a href="#cb8-141"></a></span>
-<span id="cb8-142"><a href="#cb8-142"></a></span>
-<span id="cb8-143"><a href="#cb8-143"></a></span>
-<span id="cb8-144"><a href="#cb8-144"></a><span class="fu">## Exercise 3</span></span>
-<span id="cb8-145"><a href="#cb8-145"></a></span>
-<span id="cb8-146"><a href="#cb8-146"></a>In your visualization, also display the usual temperatures (<span class="in">`NormalLow`</span> and <span class="in">`NormalHigh`</span>) and actual 2011 temperatures (<span class="in">`Low`</span> and <span class="in">`High`</span>). Your plot should look like the one below. The hex code of the color used for the usual temperatures is <span class="in">`"#C8B8BA"`</span> and for the color used for actual temperatures is <span class="in">`"#A90248"`</span>.</span>
-<span id="cb8-147"><a href="#cb8-147"></a></span>
-<span id="cb8-148"><a href="#cb8-148"></a><span class="al">![SFO observed, Average, and Record Daily Temperatures in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_second_graph.png)</span></span>
-<span id="cb8-149"><a href="#cb8-149"></a></span>
-<span id="cb8-150"><a href="#cb8-150"></a><span class="in">```{r weather_plot_temp_all}</span></span>
-<span id="cb8-151"><a href="#cb8-151"></a><span class="in">ggplot(weather) +</span></span>
-<span id="cb8-152"><a href="#cb8-152"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
-<span id="cb8-153"><a href="#cb8-153"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + </span></span>
-<span id="cb8-154"><a href="#cb8-154"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + </span></span>
-<span id="cb8-155"><a href="#cb8-155"></a><span class="in">  theme_classic() </span></span>
-<span id="cb8-156"><a href="#cb8-156"></a><span class="in">```</span></span>
-<span id="cb8-157"><a href="#cb8-157"></a></span>
-<span id="cb8-158"><a href="#cb8-158"></a></span>
-<span id="cb8-159"><a href="#cb8-159"></a>::: {.callout-tip title="Finer Control"}</span>
-<span id="cb8-160"><a href="#cb8-160"></a>If you'd like finer control of the width of these lines/rectangles, check out the <span class="co">[</span><span class="ot">`geom_rect` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_tile.html)</span>.</span>
-<span id="cb8-161"><a href="#cb8-161"></a>:::</span>
-<span id="cb8-162"><a href="#cb8-162"></a></span>
-<span id="cb8-163"><a href="#cb8-163"></a></span>
-<span id="cb8-164"><a href="#cb8-164"></a><span class="fu">## Exercise 4</span></span>
-<span id="cb8-165"><a href="#cb8-165"></a></span>
-<span id="cb8-166"><a href="#cb8-166"></a>Recreate the visual demarcations of the months by adding vertical lines separating the months.  Brainstorm how we might draw those vertical lines. What <span class="in">`geom`</span> might we use?  What subset of the data might we use in that <span class="in">`geom`</span> layer to draw lines only at the month divisions? </span>
-<span id="cb8-167"><a href="#cb8-167"></a></span>
-<span id="cb8-168"><a href="#cb8-168"></a><span class="in">```{r }</span></span>
-<span id="cb8-169"><a href="#cb8-169"></a><span class="in">#Small data set with end of the month for each month, </span></span>
-<span id="cb8-170"><a href="#cb8-170"></a><span class="in">Month_data &lt;- weather |&gt; </span></span>
-<span id="cb8-171"><a href="#cb8-171"></a><span class="in">  group_by(Month) |&gt; </span></span>
-<span id="cb8-172"><a href="#cb8-172"></a><span class="in">  filter(Day == max(Day)) |&gt; </span></span>
-<span id="cb8-173"><a href="#cb8-173"></a><span class="in">  ungroup()</span></span>
-<span id="cb8-174"><a href="#cb8-174"></a></span>
-<span id="cb8-175"><a href="#cb8-175"></a><span class="in">ggplot() +</span></span>
-<span id="cb8-176"><a href="#cb8-176"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
-<span id="cb8-177"><a href="#cb8-177"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + </span></span>
-<span id="cb8-178"><a href="#cb8-178"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + </span></span>
-<span id="cb8-179"><a href="#cb8-179"></a><span class="in">  #geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + </span></span>
-<span id="cb8-180"><a href="#cb8-180"></a><span class="in">  theme_classic() + </span></span>
-<span id="cb8-181"><a href="#cb8-181"></a><span class="in">  geom_vline(data = Month_data, aes(xintercept = dateInYear), linetype = "dotted")</span></span>
-<span id="cb8-182"><a href="#cb8-182"></a><span class="in">```</span></span>
-<span id="cb8-183"><a href="#cb8-183"></a></span>
-<span id="cb8-184"><a href="#cb8-184"></a></span>
-<span id="cb8-185"><a href="#cb8-185"></a></span>
-<span id="cb8-186"><a href="#cb8-186"></a><span class="fu">## Exercise 5</span></span>
-<span id="cb8-187"><a href="#cb8-187"></a></span>
-<span id="cb8-188"><a href="#cb8-188"></a>Change the x-axis labels so that the month names display in the center of each month's slice of the plot. </span>
-<span id="cb8-189"><a href="#cb8-189"></a></span>
-<span id="cb8-190"><a href="#cb8-190"></a>::: {.callout-tip title="Month Names"}</span>
-<span id="cb8-191"><a href="#cb8-191"></a>R has built-in variables called <span class="in">`month.abb`</span> and <span class="in">`month.name`</span> that contain abbreviated and full month names.</span>
-<span id="cb8-192"><a href="#cb8-192"></a>:::</span>
-<span id="cb8-193"><a href="#cb8-193"></a></span>
-<span id="cb8-196"><a href="#cb8-196"></a><span class="in">```{r}</span></span>
-<span id="cb8-197"><a href="#cb8-197"></a><span class="co">#Small data set with end of the month for each month, </span></span>
-<span id="cb8-198"><a href="#cb8-198"></a>Month_data <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
-<span id="cb8-199"><a href="#cb8-199"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span> </span>
-<span id="cb8-200"><a href="#cb8-200"></a>  <span class="fu">filter</span>(Day <span class="sc">==</span> <span class="fu">max</span>(Day)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-201"><a href="#cb8-201"></a>  <span class="fu">ungroup</span>() </span>
-<span id="cb8-202"><a href="#cb8-202"></a></span>
-<span id="cb8-203"><a href="#cb8-203"></a>Mid_month <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
-<span id="cb8-204"><a href="#cb8-204"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span> </span>
-<span id="cb8-205"><a href="#cb8-205"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb8-206"><a href="#cb8-206"></a></span>
-<span id="cb8-207"><a href="#cb8-207"></a>month_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(month, <span class="at">format =</span> <span class="st">"%U"</span>))</span>
-<span id="cb8-208"><a href="#cb8-208"></a>month_label <span class="ot">&lt;-</span> <span class="fu">format</span>(month, <span class="at">format =</span> <span class="st">"%b"</span>)</span>
-<span id="cb8-209"><a href="#cb8-209"></a></span>
-<span id="cb8-210"><a href="#cb8-210"></a><span class="fu">ggplot</span>(weather) <span class="sc">+</span></span>
-<span id="cb8-211"><a href="#cb8-211"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> RecordHigh, <span class="at">ymin =</span> RecordLow), <span class="at">color =</span> <span class="st">"#ECEBE3"</span> ) <span class="sc">+</span> </span>
-<span id="cb8-212"><a href="#cb8-212"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> NormalHigh, <span class="at">ymin =</span> NormalLow), <span class="at">color =</span> <span class="st">"#C8B8BA"</span>) <span class="sc">+</span> </span>
-<span id="cb8-213"><a href="#cb8-213"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> High, <span class="at">ymin=</span> Low), <span class="at">color =</span> <span class="st">"#A90248"</span>) <span class="sc">+</span> </span>
-<span id="cb8-214"><a href="#cb8-214"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> Mid_month<span class="sc">$</span>dateInYear, <span class="at">labels =</span> month.abb) <span class="sc">+</span> </span>
-<span id="cb8-215"><a href="#cb8-215"></a>  <span class="co">#geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + </span></span>
-<span id="cb8-216"><a href="#cb8-216"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb8-217"><a href="#cb8-217"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> Month_data, <span class="fu">aes</span>(<span class="at">xintercept =</span> dateInYear), <span class="at">linetype =</span> <span class="st">"dotted"</span>)</span>
-<span id="cb8-218"><a href="#cb8-218"></a><span class="in">```</span></span>
-<span id="cb8-219"><a href="#cb8-219"></a></span>
-<span id="cb8-220"><a href="#cb8-220"></a></span>
-<span id="cb8-221"><a href="#cb8-221"></a>Try to figuring out this new challenge using search engines and large language models:</span>
-<span id="cb8-222"><a href="#cb8-222"></a></span>
-<span id="cb8-223"><a href="#cb8-223"></a><span class="ss">- </span>**Search Engines.** Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.</span>
-<span id="cb8-224"><a href="#cb8-224"></a></span>
-<span id="cb8-225"><a href="#cb8-225"></a><span class="ss">- </span>**LLMs.** Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?</span>
-<span id="cb8-226"><a href="#cb8-226"></a></span>
-<span id="cb8-227"><a href="#cb8-227"></a><span class="fu">## Exercise 6 </span></span>
-<span id="cb8-228"><a href="#cb8-228"></a></span>
-<span id="cb8-229"><a href="#cb8-229"></a>Create a precipitation plot that looks like the following. Note that </span>
-<span id="cb8-230"><a href="#cb8-230"></a></span>
-<span id="cb8-231"><a href="#cb8-231"></a><span class="ss">- </span>The triangles point to precipitation records--refer to the data codebook above for the <span class="in">`RecordP`</span> variable.</span>
-<span id="cb8-232"><a href="#cb8-232"></a><span class="ss">- </span>The numbers on the plot indicate the total precipitation for the month--search the <span class="in">`hjust`</span> and <span class="in">`vjust`</span> options to adjust the alignment of the numbers.</span>
-<span id="cb8-233"><a href="#cb8-233"></a><span class="ss">- </span>The blue and tan colors hex codes are <span class="in">`"#32a3d8"`</span> and <span class="in">`"#ebeae2"`</span>, respectively.</span>
-<span id="cb8-234"><a href="#cb8-234"></a></span>
-<span id="cb8-235"><a href="#cb8-235"></a><span class="al">![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_third_graph.png)</span></span>
-<span id="cb8-236"><a href="#cb8-236"></a></span>
-<span id="cb8-237"><a href="#cb8-237"></a><span class="in">```{r weather_plot_precip}</span></span>
-<span id="cb8-238"><a href="#cb8-238"></a><span class="in">Month_average &lt;- weather |&gt; </span></span>
-<span id="cb8-239"><a href="#cb8-239"></a><span class="in">  group_by(Month) |&gt; </span></span>
-<span id="cb8-240"><a href="#cb8-240"></a><span class="in">  summarize(CulmPrec = max(CulmPrec), dateInYear = max(dateInYear))</span></span>
-<span id="cb8-241"><a href="#cb8-241"></a></span>
-<span id="cb8-242"><a href="#cb8-242"></a><span class="in">Record &lt;- weather |&gt; </span></span>
-<span id="cb8-243"><a href="#cb8-243"></a><span class="in">  filter(RecordP == TRUE) </span></span>
-<span id="cb8-244"><a href="#cb8-244"></a><span class="in">  </span></span>
-<span id="cb8-245"><a href="#cb8-245"></a></span>
-<span id="cb8-246"><a href="#cb8-246"></a><span class="in">ggplot(weather, aes(x = dateInYear, y = CulmPrec)) +</span></span>
-<span id="cb8-247"><a href="#cb8-247"></a><span class="in">  geom_area(fill = "#ebeae2", alpha = 0.5) +</span></span>
-<span id="cb8-248"><a href="#cb8-248"></a><span class="in">  geom_line(color = "#32a3d8", size = 0.5) +  </span></span>
-<span id="cb8-249"><a href="#cb8-249"></a><span class="in">  geom_text(data = Month_average, aes(label = round(CulmPrec, 2)), </span></span>
-<span id="cb8-250"><a href="#cb8-250"></a><span class="in">            vjust = -0.5, size = 3) +</span></span>
-<span id="cb8-251"><a href="#cb8-251"></a><span class="in">  geom_point(data = Record, aes(x = dateInYear, y = CulmPrec), </span></span>
-<span id="cb8-252"><a href="#cb8-252"></a><span class="in">             shape = 25, fill = "black", size = 2) + </span></span>
-<span id="cb8-253"><a href="#cb8-253"></a><span class="in">  theme_minimal() </span></span>
-<span id="cb8-254"><a href="#cb8-254"></a><span class="in">```</span></span>
-<span id="cb8-255"><a href="#cb8-255"></a></span>
-<span id="cb8-256"><a href="#cb8-256"></a><span class="fu">## Done!</span></span>
-<span id="cb8-257"><a href="#cb8-257"></a></span>
-<span id="cb8-258"><a href="#cb8-258"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "3 Advanced Data Viz"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">---</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">## 🧩 Learning Goals</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>By the end of this lesson, you should be able to:</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="ss">- </span>Navigate <span class="co">[</span><span class="ot">`ggplot2` reference page</span><span class="co">](https://ggplot2.tidyverse.org/reference/)</span> to find needed functions for a desired visualization</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="ss">- </span>Navigate the different sections of a function help page to construct desired plot features, in particular, </span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="ss">    - </span>Navigate the **Usage** section to identify arguments that must be set</span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="ss">    - </span>Navigate the **Arguments** section to understand how arguments work</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="ss">    - </span>Navigate the **Aesthetics** section to learn how plot appearance can be controlled</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="ss">    - </span>Navigate the **Examples** section for some usage examples</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="ss">- </span>Identify when to use different <span class="in">`data`</span> arguments within <span class="in">`ggplot()`</span> and <span class="in">`geom_()`</span> layers</span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="fu">## Introduction ^[The exercise in this lesson are inspired by an assignment from the Concepts in Computing with Data course at UC Berkeley taught by Dr. Deborah Nolan.]</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a>In this lesson, we are going to recreate <span class="co">[</span><span class="ot">NYTimes 2015 Temperature Visualization (html)</span><span class="co">](https://www.nytimes.com/interactive/2016/02/19/us/2015-year-in-weather-temperature-precipitation.html)</span> using data from San Francisco (SFO) in 2011.</span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="al">![Screenshot of NYTimes 2015 Temperature Visualization](https://hash-mac.github.io/stat212site-f25/images/sfo_nytimes.jpg)</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="fu">## Reading Data</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a>Run the code chunk below to load the <span class="in">`tidyverse`</span> package and read in the San Francisco weather data.</span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="in">```{r setup}</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="in">library(tidyverse)</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="in">weather &lt;- read_csv("https://mac-stat.github.io/data/sfo_weather.csv")</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="in">```</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="fu">## Understanding Data</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a></span>
+<span id="cb7-38"><a href="#cb7-38"></a>Below is the codebook of the data.  Familiarize yourself with the meaning of each variable.  Use the codebook as a reference when using the data.</span>
+<span id="cb7-39"><a href="#cb7-39"></a></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="ss">- </span><span class="in">`Month`</span>: Month of the year (1-12)</span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="ss">- </span><span class="in">`Day`</span>: Day within the month (1-31)</span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="ss">- </span><span class="in">`Low`</span>/<span class="in">`High`</span>: Low/high temperature this day</span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="ss">- </span><span class="in">`NormalLow`</span>/<span class="in">`NormalHigh`</span>: Typical low/high temperature for this day of the year</span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="ss">- </span><span class="in">`RecordLow`</span>/<span class="in">`RecordHigh`</span>: Record low/high temperature for this day of the year</span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="ss">- </span><span class="in">`LowYr`</span>/<span class="in">`HighYr`</span>: Year in which the record low/high was observed</span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="ss">- </span><span class="in">`Precip`</span>: Amount of precipitation (inches) this day</span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="ss">- </span><span class="in">`RecordPrecip`</span>: Record amount of precipitation for this day of the year</span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="ss">- </span><span class="in">`PrecipYr`</span>: Year in which the record precipitation was observed</span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="ss">- </span><span class="in">`date`</span>: The actual date in 2011 for this day in YYYY-MM-DD format</span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="ss">- </span><span class="in">`dateInYear`</span>: What day of the year is it? (1-365)</span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="ss">- </span><span class="in">`Record`</span>: Logical (TRUE/FALSE) indicating whether this day had a high temperature record</span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="ss">- </span><span class="in">`RecordText`</span>: Text that displays the record high for this day (<span class="in">`"Record high: ##"`</span>)</span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="ss">- </span><span class="in">`RecordP`</span>: Logical (TRUE/FALSE) indicating whether this day had a precipitation record</span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="ss">- </span><span class="in">`CulmPrec`</span>: Cumulative precipitation for the month up to this day</span>
+<span id="cb7-55"><a href="#cb7-55"></a></span>
+<span id="cb7-56"><a href="#cb7-56"></a></span>
+<span id="cb7-57"><a href="#cb7-57"></a></span>
+<span id="cb7-58"><a href="#cb7-58"></a><span class="fu">## Exercise 1</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a></span>
+<span id="cb7-60"><a href="#cb7-60"></a>Examine the <span class="co">[</span><span class="ot">NYTimes 2015 Temperature Visualization (html)</span><span class="co">](https://www.nytimes.com/interactive/2016/02/19/us/2015-year-in-weather-temperature-precipitation.html)</span> then answer the following questions.</span>
+<span id="cb7-61"><a href="#cb7-61"></a></span>
+<span id="cb7-62"><a href="#cb7-62"></a>**Data Storytelling** </span>
+<span id="cb7-63"><a href="#cb7-63"></a></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="ss">- </span>Relate the intro paragraph: "Scientists declared that 2015 was Earth’s hottest year on record..." to the *design* of the visualization.  In particular, based on the intro paragraph,</span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="ss">  - </span>What key message/claim does NYTimes want readers to be able to explore? </span>
+<span id="cb7-66"><a href="#cb7-66"></a>  NYT wants readers to explore their own cities and see how 2015 compares to the historical average temperature over the course of a year regardless of location. </span>
+<span id="cb7-67"><a href="#cb7-67"></a>  </span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="ss">  - </span>How did this goal inform what information is displayed in the visualization?</span>
+<span id="cb7-69"><a href="#cb7-69"></a>It means that there is a part that shows the historical average and then one that shows the daily average from 2025 overlayed on one another. Then it also provides the option to switch through cities to compare how they have changed easier. </span>
+<span id="cb7-70"><a href="#cb7-70"></a></span>
+<span id="cb7-71"><a href="#cb7-71"></a>**Aesthetic Mapping** </span>
+<span id="cb7-72"><a href="#cb7-72"></a></span>
+<span id="cb7-73"><a href="#cb7-73"></a><span class="ss">- </span>What specific variables (from the data codebook) underlie the visualization?</span>
+<span id="cb7-74"><a href="#cb7-74"></a><span class="ss">- </span>How do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?</span>
+<span id="cb7-75"><a href="#cb7-75"></a></span>
+<span id="cb7-76"><a href="#cb7-76"></a>For x most likely the dateInYear or date variable, for y it is the Record Low/High overlayed with NormalHigh/NormalLow. Depending on the city there is RecordPrecip. Date in year makes up the x axis and is spkit into months very nicely, which each day making a small rectangular box. The record High and low are a redish pink cover overlayed on the grey to allow for comparison. The high and low make up either end of the box or each day, so longer boxes have more of a range of temperatures. Grey tends to take a more even slope/change as it are historical averages. They move from city to city up or down normally situating around a certain average temperature. </span>
+<span id="cb7-77"><a href="#cb7-77"></a></span>
+<span id="cb7-78"><a href="#cb7-78"></a></span>
+<span id="cb7-79"><a href="#cb7-79"></a><span class="fu">## Exercise 2</span></span>
+<span id="cb7-80"><a href="#cb7-80"></a></span>
+<span id="cb7-81"><a href="#cb7-81"></a>Navigate the **Geoms** section of the <span class="co">[</span><span class="ot">ggplot2 reference page</span><span class="co">](https://ggplot2.tidyverse.org/reference/)</span> to find a <span class="in">`geom`</span> that corresponds to the visual elements in the temperature plot.  Using both the small thumbnail visuals on the right and the names of the <span class="in">`geom`</span>'s, brainstorm some possibilities for <span class="in">`geom`</span>'s you might use to recreate the temperature visualization.</span>
+<span id="cb7-82"><a href="#cb7-82"></a></span>
+<span id="cb7-83"><a href="#cb7-83"></a></span>
+<span id="cb7-84"><a href="#cb7-84"></a>::: {.callout-note title="Navigating Documentation / Reference Pages"}</span>
+<span id="cb7-85"><a href="#cb7-85"></a>You need to navigate the <span class="in">`geom`</span>s further by opening up their reference pages to understand if a particular <span class="in">`geom`</span> is suitable for our task. Let's look at the  <span class="co">[</span><span class="ot">`geom_point` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_point.html)</span> to learn how to read a documentation page..</span>
+<span id="cb7-86"><a href="#cb7-86"></a></span>
+<span id="cb7-87"><a href="#cb7-87"></a>The **Usage** section shows all of the possible inputs (arguments) to the <span class="in">`geom`</span>.  These are all of the ways that a <span class="in">`geom`</span> can be customized. Just looking at the argument names can help give a hint as to what arguments might fit our needs.</span>
+<span id="cb7-88"><a href="#cb7-88"></a></span>
+<span id="cb7-89"><a href="#cb7-89"></a></span>
+<span id="cb7-90"><a href="#cb7-90"></a>The **Arguments** section, on the other hand, explains in detail what each argument does and the possible values the argument can take. The <span class="in">`mapping`</span>, <span class="in">`data`</span>, and <span class="in">`...`</span> arguments will be the most commonly used by far.</span>
+<span id="cb7-91"><a href="#cb7-91"></a></span>
+<span id="cb7-92"><a href="#cb7-92"></a><span class="ss">- </span><span class="in">`mapping`</span> is the argument that is being used when we specify which variables should link or map to the plot <span class="in">`aes`</span>thetics (the code inside <span class="in">`aes()`</span>).</span>
+<span id="cb7-93"><a href="#cb7-93"></a><span class="ss">- </span><span class="in">`data`</span> is the argument where we specify the dataset containing the variables that the <span class="in">`geom`</span> is using.</span>
+<span id="cb7-94"><a href="#cb7-94"></a><span class="ss">- </span><span class="in">`...`</span> is used for fixed aesthetics (ones that don't correspond to a variable), eg, to set the color of all points, we use <span class="in">`color = "red"`</span> and to set the size of all points, we use <span class="in">`size = 3`</span>.</span>
+<span id="cb7-95"><a href="#cb7-95"></a></span>
+<span id="cb7-96"><a href="#cb7-96"></a>The **Aesthetics** section of a <span class="in">`geom`</span> documentation page gives information on how the visual elements of the <span class="in">`geom`</span> correspond to data. For example, the <span class="co">[</span><span class="ot">`geom_point` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_point.html)</span> shows that <span class="in">`x`</span> and <span class="in">`y`</span> aesthetics are available. It also shows some new aesthetics like <span class="in">`stroke`</span>.</span>
+<span id="cb7-97"><a href="#cb7-97"></a>:::</span>
+<span id="cb7-98"><a href="#cb7-98"></a></span>
+<span id="cb7-99"><a href="#cb7-99"></a>::: {.callout-note title="<span class="in">`data`</span> Argument"}</span>
+<span id="cb7-100"><a href="#cb7-100"></a>Previously you have used one dataset per plot by specifying that as the first argument of <span class="in">`ggplot()`</span>. However, multiple data sets can be passed into ggplot as shown in the example below.</span>
+<span id="cb7-101"><a href="#cb7-101"></a></span>
+<span id="cb7-102"><a href="#cb7-102"></a><span class="in">```{r diamonds_scatter}</span></span>
+<span id="cb7-103"><a href="#cb7-103"></a><span class="in">data(diamonds)</span></span>
+<span id="cb7-104"><a href="#cb7-104"></a></span>
+<span id="cb7-105"><a href="#cb7-105"></a><span class="in">diamonds_avg_price &lt;- diamonds |&gt;</span></span>
+<span id="cb7-106"><a href="#cb7-106"></a><span class="in">  group_by(carat) |&gt;</span></span>
+<span id="cb7-107"><a href="#cb7-107"></a><span class="in">  summarize(avg_price = mean(price)) |&gt;</span></span>
+<span id="cb7-108"><a href="#cb7-108"></a><span class="in">  arrange(carat)</span></span>
+<span id="cb7-109"><a href="#cb7-109"></a><span class="in">diamonds_avg_price &lt;- diamonds_avg_price[seq(1, nrow(diamonds_avg_price), 3), ]</span></span>
+<span id="cb7-110"><a href="#cb7-110"></a></span>
+<span id="cb7-111"><a href="#cb7-111"></a><span class="in">ggplot(diamonds, aes(x = carat, y = price)) +</span></span>
+<span id="cb7-112"><a href="#cb7-112"></a><span class="in">  geom_point() +</span></span>
+<span id="cb7-113"><a href="#cb7-113"></a><span class="in">  geom_point(</span></span>
+<span id="cb7-114"><a href="#cb7-114"></a><span class="in">    data = diamonds_avg_price,</span></span>
+<span id="cb7-115"><a href="#cb7-115"></a><span class="in">    aes(x = carat, y = avg_price),</span></span>
+<span id="cb7-116"><a href="#cb7-116"></a><span class="in">    color = "deepskyblue",</span></span>
+<span id="cb7-117"><a href="#cb7-117"></a><span class="in">    size = 3</span></span>
+<span id="cb7-118"><a href="#cb7-118"></a><span class="in">  )</span></span>
+<span id="cb7-119"><a href="#cb7-119"></a><span class="in">```</span></span>
+<span id="cb7-120"><a href="#cb7-120"></a>:::</span>
+<span id="cb7-121"><a href="#cb7-121"></a></span>
+<span id="cb7-122"><a href="#cb7-122"></a></span>
+<span id="cb7-123"><a href="#cb7-123"></a>Look at the <span class="co">[</span><span class="ot">`geom_linerange` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_linerange.html)</span> and start off your temperature visualization with the record lows and highs.  Your plot should look like the one below.  The hex code of the used light tan color is <span class="in">`#ECEBE3`</span>.</span>
+<span id="cb7-124"><a href="#cb7-124"></a></span>
+<span id="cb7-125"><a href="#cb7-125"></a><span class="al">![SFO Weather Records in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_first_graph.png)</span></span>
+<span id="cb7-126"><a href="#cb7-126"></a></span>
+<span id="cb7-127"><a href="#cb7-127"></a><span class="in">```{r weather_plot_temp_records}</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a><span class="in">ggplot(weather) +</span></span>
+<span id="cb7-129"><a href="#cb7-129"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
+<span id="cb7-130"><a href="#cb7-130"></a><span class="in">    theme_classic()</span></span>
+<span id="cb7-131"><a href="#cb7-131"></a><span class="in">```</span></span>
+<span id="cb7-132"><a href="#cb7-132"></a></span>
+<span id="cb7-133"><a href="#cb7-133"></a>::: {.callout-tip title="Keyboard Shortcuts"}</span>
+<span id="cb7-134"><a href="#cb7-134"></a>As you work on this plot, try to use some new <span class="co">[</span><span class="ot">keyboard shortcuts</span><span class="co">](https://hash-mac.github.io/stat212site-f25/notes/keyboard.html)</span>. Focus on the following:</span>
+<span id="cb7-135"><a href="#cb7-135"></a></span>
+<span id="cb7-136"><a href="#cb7-136"></a><span class="ss">- </span>Insert code chunk: <span class="in">`Ctrl+Alt+I`</span> (Windows). <span class="in">`Option+Command+I`</span> (Mac).</span>
+<span id="cb7-137"><a href="#cb7-137"></a><span class="ss">- </span>Run current code chunk: <span class="in">`Ctrl+Shift+Enter`</span> (Windows). <span class="in">`Command+Shift+Return`</span> (Mac).</span>
+<span id="cb7-138"><a href="#cb7-138"></a><span class="ss">- </span>Run current line/currently selected lines: <span class="in">`Ctrl+Enter`</span> (Windows). <span class="in">`Command+Return`</span> (Mac).</span>
+<span id="cb7-139"><a href="#cb7-139"></a>:::</span>
+<span id="cb7-140"><a href="#cb7-140"></a></span>
+<span id="cb7-141"><a href="#cb7-141"></a></span>
+<span id="cb7-142"><a href="#cb7-142"></a></span>
+<span id="cb7-143"><a href="#cb7-143"></a></span>
+<span id="cb7-144"><a href="#cb7-144"></a></span>
+<span id="cb7-145"><a href="#cb7-145"></a><span class="fu">## Exercise 3</span></span>
+<span id="cb7-146"><a href="#cb7-146"></a></span>
+<span id="cb7-147"><a href="#cb7-147"></a>In your visualization, also display the usual temperatures (<span class="in">`NormalLow`</span> and <span class="in">`NormalHigh`</span>) and actual 2011 temperatures (<span class="in">`Low`</span> and <span class="in">`High`</span>). Your plot should look like the one below. The hex code of the color used for the usual temperatures is <span class="in">`"#C8B8BA"`</span> and for the color used for actual temperatures is <span class="in">`"#A90248"`</span>.</span>
+<span id="cb7-148"><a href="#cb7-148"></a></span>
+<span id="cb7-149"><a href="#cb7-149"></a><span class="al">![SFO observed, Average, and Record Daily Temperatures in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_second_graph.png)</span></span>
+<span id="cb7-150"><a href="#cb7-150"></a></span>
+<span id="cb7-151"><a href="#cb7-151"></a><span class="in">```{r weather_plot_temp_all}</span></span>
+<span id="cb7-152"><a href="#cb7-152"></a><span class="in">ggplot(weather) +</span></span>
+<span id="cb7-153"><a href="#cb7-153"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
+<span id="cb7-154"><a href="#cb7-154"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + </span></span>
+<span id="cb7-155"><a href="#cb7-155"></a><span class="in">  geom_linerange(aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + </span></span>
+<span id="cb7-156"><a href="#cb7-156"></a><span class="in">  theme_classic() </span></span>
+<span id="cb7-157"><a href="#cb7-157"></a><span class="in">```</span></span>
+<span id="cb7-158"><a href="#cb7-158"></a></span>
+<span id="cb7-159"><a href="#cb7-159"></a></span>
+<span id="cb7-160"><a href="#cb7-160"></a>::: {.callout-tip title="Finer Control"}</span>
+<span id="cb7-161"><a href="#cb7-161"></a>If you'd like finer control of the width of these lines/rectangles, check out the <span class="co">[</span><span class="ot">`geom_rect` documentation page</span><span class="co">](https://ggplot2.tidyverse.org/reference/geom_tile.html)</span>.</span>
+<span id="cb7-162"><a href="#cb7-162"></a>:::</span>
+<span id="cb7-163"><a href="#cb7-163"></a></span>
+<span id="cb7-164"><a href="#cb7-164"></a></span>
+<span id="cb7-165"><a href="#cb7-165"></a><span class="fu">## Exercise 4</span></span>
+<span id="cb7-166"><a href="#cb7-166"></a></span>
+<span id="cb7-167"><a href="#cb7-167"></a>Recreate the visual demarcations of the months by adding vertical lines separating the months.  Brainstorm how we might draw those vertical lines. What <span class="in">`geom`</span> might we use?  What subset of the data might we use in that <span class="in">`geom`</span> layer to draw lines only at the month divisions? </span>
+<span id="cb7-168"><a href="#cb7-168"></a></span>
+<span id="cb7-169"><a href="#cb7-169"></a><span class="in">```{r }</span></span>
+<span id="cb7-170"><a href="#cb7-170"></a><span class="in">#Small data set with end of the month for each month, </span></span>
+<span id="cb7-171"><a href="#cb7-171"></a><span class="in">Month_data &lt;- weather |&gt; </span></span>
+<span id="cb7-172"><a href="#cb7-172"></a><span class="in">  group_by(Month) |&gt; </span></span>
+<span id="cb7-173"><a href="#cb7-173"></a><span class="in">  filter(Day == max(Day)) |&gt; </span></span>
+<span id="cb7-174"><a href="#cb7-174"></a><span class="in">  ungroup()</span></span>
+<span id="cb7-175"><a href="#cb7-175"></a></span>
+<span id="cb7-176"><a href="#cb7-176"></a><span class="in">ggplot() +</span></span>
+<span id="cb7-177"><a href="#cb7-177"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = RecordHigh, ymin = RecordLow), color = "#ECEBE3" ) + </span></span>
+<span id="cb7-178"><a href="#cb7-178"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = NormalHigh, ymin = NormalLow), color = "#C8B8BA") + </span></span>
+<span id="cb7-179"><a href="#cb7-179"></a><span class="in">  geom_linerange(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), color = "#A90248") + </span></span>
+<span id="cb7-180"><a href="#cb7-180"></a><span class="in">  #geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + </span></span>
+<span id="cb7-181"><a href="#cb7-181"></a><span class="in">  theme_classic() + </span></span>
+<span id="cb7-182"><a href="#cb7-182"></a><span class="in">  geom_vline(data = Month_data, aes(xintercept = dateInYear), linetype = "dotted")</span></span>
+<span id="cb7-183"><a href="#cb7-183"></a><span class="in">```</span></span>
+<span id="cb7-184"><a href="#cb7-184"></a></span>
+<span id="cb7-185"><a href="#cb7-185"></a></span>
+<span id="cb7-186"><a href="#cb7-186"></a></span>
+<span id="cb7-187"><a href="#cb7-187"></a><span class="fu">## Exercise 5</span></span>
+<span id="cb7-188"><a href="#cb7-188"></a></span>
+<span id="cb7-189"><a href="#cb7-189"></a>Change the x-axis labels so that the month names display in the center of each month's slice of the plot. </span>
+<span id="cb7-190"><a href="#cb7-190"></a></span>
+<span id="cb7-191"><a href="#cb7-191"></a>::: {.callout-tip title="Month Names"}</span>
+<span id="cb7-192"><a href="#cb7-192"></a>R has built-in variables called <span class="in">`month.abb`</span> and <span class="in">`month.name`</span> that contain abbreviated and full month names.</span>
+<span id="cb7-193"><a href="#cb7-193"></a>:::</span>
+<span id="cb7-194"><a href="#cb7-194"></a></span>
+<span id="cb7-197"><a href="#cb7-197"></a><span class="in">```{r}</span></span>
+<span id="cb7-198"><a href="#cb7-198"></a><span class="co">#Small data set with end of the month for each month, </span></span>
+<span id="cb7-199"><a href="#cb7-199"></a>Month_data <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
+<span id="cb7-200"><a href="#cb7-200"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span> </span>
+<span id="cb7-201"><a href="#cb7-201"></a>  <span class="fu">filter</span>(Day <span class="sc">==</span> <span class="fu">max</span>(Day)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-202"><a href="#cb7-202"></a>  <span class="fu">ungroup</span>() </span>
+<span id="cb7-203"><a href="#cb7-203"></a></span>
+<span id="cb7-204"><a href="#cb7-204"></a>Mid_month <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span> </span>
+<span id="cb7-205"><a href="#cb7-205"></a>  <span class="fu">group_by</span>(Month) <span class="sc">|&gt;</span> </span>
+<span id="cb7-206"><a href="#cb7-206"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb7-207"><a href="#cb7-207"></a></span>
+<span id="cb7-208"><a href="#cb7-208"></a>month_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(month, <span class="at">format =</span> <span class="st">"%U"</span>))</span>
+<span id="cb7-209"><a href="#cb7-209"></a>month_label <span class="ot">&lt;-</span> <span class="fu">format</span>(month, <span class="at">format =</span> <span class="st">"%b"</span>)</span>
+<span id="cb7-210"><a href="#cb7-210"></a></span>
+<span id="cb7-211"><a href="#cb7-211"></a><span class="fu">ggplot</span>(weather) <span class="sc">+</span></span>
+<span id="cb7-212"><a href="#cb7-212"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> RecordHigh, <span class="at">ymin =</span> RecordLow), <span class="at">color =</span> <span class="st">"#ECEBE3"</span> ) <span class="sc">+</span> </span>
+<span id="cb7-213"><a href="#cb7-213"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> NormalHigh, <span class="at">ymin =</span> NormalLow), <span class="at">color =</span> <span class="st">"#C8B8BA"</span>) <span class="sc">+</span> </span>
+<span id="cb7-214"><a href="#cb7-214"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">x =</span> dateInYear, <span class="at">ymax =</span> High, <span class="at">ymin=</span> Low), <span class="at">color =</span> <span class="st">"#A90248"</span>) <span class="sc">+</span> </span>
+<span id="cb7-215"><a href="#cb7-215"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> Mid_month<span class="sc">$</span>dateInYear, <span class="at">labels =</span> month.abb) <span class="sc">+</span> </span>
+<span id="cb7-216"><a href="#cb7-216"></a>  <span class="co">#geom_rect(data = weather, aes(x = dateInYear, ymax = High, ymin= Low), fill = "#A90248",alpha = 0.3, inherit.aes = FALSE) + </span></span>
+<span id="cb7-217"><a href="#cb7-217"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb7-218"><a href="#cb7-218"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> Month_data, <span class="fu">aes</span>(<span class="at">xintercept =</span> dateInYear), <span class="at">linetype =</span> <span class="st">"dotted"</span>)</span>
+<span id="cb7-219"><a href="#cb7-219"></a><span class="in">```</span></span>
+<span id="cb7-220"><a href="#cb7-220"></a></span>
+<span id="cb7-221"><a href="#cb7-221"></a></span>
+<span id="cb7-222"><a href="#cb7-222"></a>Try to figuring out this new challenge using search engines and large language models:</span>
+<span id="cb7-223"><a href="#cb7-223"></a><span class="ss">- </span>**Search Engines.** Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.</span>
+<span id="cb7-224"><a href="#cb7-224"></a></span>
+<span id="cb7-225"><a href="#cb7-225"></a><span class="ss">- </span>**LLMs.** Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?</span>
+<span id="cb7-226"><a href="#cb7-226"></a></span>
+<span id="cb7-227"><a href="#cb7-227"></a><span class="fu">## Exercise 6 </span></span>
+<span id="cb7-228"><a href="#cb7-228"></a></span>
+<span id="cb7-229"><a href="#cb7-229"></a>Create a precipitation plot that looks like the following. Note that </span>
+<span id="cb7-230"><a href="#cb7-230"></a></span>
+<span id="cb7-231"><a href="#cb7-231"></a><span class="ss">- </span>The triangles point to precipitation records--refer to the data codebook above for the <span class="in">`RecordP`</span> variable.</span>
+<span id="cb7-232"><a href="#cb7-232"></a><span class="ss">- </span>The numbers on the plot indicate the total precipitation for the month--search the <span class="in">`hjust`</span> and <span class="in">`vjust`</span> options to adjust the alignment of the numbers.</span>
+<span id="cb7-233"><a href="#cb7-233"></a><span class="ss">- </span>The blue and tan colors hex codes are <span class="in">`"#32a3d8"`</span> and <span class="in">`"#ebeae2"`</span>, respectively.</span>
+<span id="cb7-234"><a href="#cb7-234"></a></span>
+<span id="cb7-235"><a href="#cb7-235"></a><span class="al">![SFO Precipitation in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_third_graph.png)</span></span>
+<span id="cb7-236"><a href="#cb7-236"></a></span>
+<span id="cb7-237"><a href="#cb7-237"></a><span class="in">```{r weather_plot_precip}</span></span>
+<span id="cb7-238"><a href="#cb7-238"></a></span>
+<span id="cb7-239"><a href="#cb7-239"></a><span class="in">```</span></span>
+<span id="cb7-240"><a href="#cb7-240"></a></span>
+<span id="cb7-241"><a href="#cb7-241"></a><span class="fu">## Done!</span></span>
+<span id="cb7-242"><a href="#cb7-242"></a></span>
+<span id="cb7-243"><a href="#cb7-243"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
