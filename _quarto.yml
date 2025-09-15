@@ -67,7 +67,7 @@ book:
     - part: "TidyTuesday"
       chapters:
       - src/tt/hw01-tt.qmd
-      - src/tt/2025-07-15.qmd
+      - src/tt/hw02-tt.qmd
 
     - part: "In-Class Activities"
       chapters:
