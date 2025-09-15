@@ -214,7 +214,8 @@ st_crs(mn_water)
 st_crs(mn_counties)
 
 #transforming mn_counties to match
-mn_counties_transfored <- mn_counties |> st_transform(crs = st_crs(mn_cities))
+mn_counties <- mn_counties |> 
+  st_transform(crs = st_crs(mn_cities))
 ```
 
 
@@ -284,8 +285,15 @@ Build on our existing map by adding a raster layer for elevation as the backgrou
 - Add in the layers from the map above to show the largest cities and the county outlines. To remove a background color, use `fill = NA`.
 
 ```{r}
-
-
+ggplot() +
+    geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) + 
+    scale_fill_gradient(high = "white", low = "darkgreen") + 
+    geom_sf(data = mn_counties, fill = "NA") + 
+    geom_sf(data = mn_cities |> filter(Population >= 10000), mapping = aes(color = Population, size = Population)) + # cities layer
+    scale_color_viridis_c() + # continuous (gradient) color scale
+    labs(title = "Minnesota Cities with Population >= 10,000") + 
+    ggthemes::theme_map() +
+    theme(legend.position = "bottom")  # move legend 
 ```
 
 
@@ -330,8 +338,18 @@ ggplot() +
 Let's add to the above code chunk to save the map above to an image file called `tc_map_zoom.png` in the `figures` folder. The code example below shows a general template for saving a plot to file. Choose a reasonable width and height. (There are also `jpeg()` and `pdf()` functions for writing images.)
 
 ```{r save_plot_example, eval=FALSE}
-png("relative path to image", width = width_in_pixels, height = height_in_pixels)
-# Code for creating plot
+png("../figures/tc_map_zoom.png", width = 500, height = 500)
+ggplot() +
+    geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) + 
+    geom_sf(data = mn_counties, fill = NA, color = "black") + # county boundary layer
+    geom_sf(data = mn_water, fill = "lightsteelblue1", color = "lightsteelblue1") + # NEW: river/lake layer
+    geom_sf(data = mn_cities |> filter(Population >= 10000), mapping = aes(color = Population, size = Population)) + # cities layer
+    scale_color_viridis_c(option = "magma") + # continuous (gradient) color scale
+    scale_fill_gradient(low = "darkgreen", high = "white") + # continuous (gradient) fill scale
+    coord_sf(xlim = seven_countyarea[c("xmin", "xmax")], ylim = seven_countyarea[c("ymin", "ymax")]) + # NEW: crop map to Twin Cities bounding box
+    labs(title = "Twin Cities with Population >= 10,000") + 
+    ggthemes::theme_map() +
+    theme(legend.position = "none") 
 dev.off()
 ```
 
