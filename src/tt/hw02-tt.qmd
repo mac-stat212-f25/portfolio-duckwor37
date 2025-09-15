@@ -64,7 +64,7 @@ In this table we can see that that Europe has the best overall mean rank for its
 
 In order to get a better idea on how these trends have changed overtime I created the following visualizations. 
 
-```{r, alt.text = line graph showing the average number of countries a passport can enter without a visa per region over time. We can clearly see that Europe has the most passports that can visit the most counties without visas, followed by the Americas, and despite rising overtime they have not changed position. Following behind them is the caribbean followed by oceania, which are now about the same level in recent years. Then passports from Asia, the Middle east and Africa follow. There is a line marking 2013 as that is when there seems to be a global shift in the trend of allowing more visa free travel, going from a steady about 45 degree angle incline to plataueing for a year, followed by a much slower climb.}
+```{r}
 region <- country_expanded |> 
   mutate(visa_free_count = as.numeric(visa_free_count)) |> 
   group_by(region, year) |> 
@@ -85,11 +85,12 @@ region |>
    scale_color_viridis_d() + 
   labs(title = "Average number of visa free entries over time", subtitle = "per region of the world", x = "Year", y = "Mean Visa Free Count", color = "Region", caption = "Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25") + 
   geom_vline(aes(xintercept = 2013), linetype = "dotted", color = "gray50") + 
-  geom_text(aes(x = 2014, y = 200, label = "2013"), color = "gray50", size = 4)
+  geom_text(aes(x = 2014, y = 200, label = "2013"), color = "gray50", size = 4) + 
+  labs(alt = "alt.text = line graph showing the average number of countries a passport can enter without a visa per region over time. We can clearly see that Europe has the most passports that can visit the most counties without visas, followed by the Americas, and despite rising overtime they have not changed position. Following behind them is the caribbean followed by oceania, which are now about the same level in recent years. Then passports from Asia, the Middle east and Africa follow. There is a line marking 2013 as that is when there seems to be a global shift in the trend of allowing more visa free travel, going from a steady about 45 degree angle incline to plataueing for a year, followed by a much slower climb")
 ```
 In this visualization we can clearly see that the mean number of countries each region's passports allow people into without visas has increase overtime. In fact they were all following a similar slope until 2013 where there was a significant bump and then most regions plateaued before steadily rising a lot slower. It is unclear what global event could have caused this stalling in the rise of freedom to travel, but the pace has not quite recovered. 
 
-```{r alt.text = This graph shows 8 European countries who have all been ranked number one at some point from 2006-2025.  Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. There is a lot of fluctiation between countries and over time.}
+```{r}
 Best_passport <- country_expanded |> 
   filter(region == "EUROPE") |> 
   mutate(rank = as.numeric(rank)) |> 
@@ -111,15 +112,17 @@ Best_passport |>
   ) + 
    scale_color_viridis_d() + 
   labs(title = "Best Passport Overtime", subtitle = "from Europe", x = "Year", y = "Rank", color = "Country", caption = "Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25") + 
-  scale_y_reverse()
+  scale_y_reverse() + 
+  labs(alt = "This graph shows 8 European countries who have all been ranked number one at some point from 2006-2025.  Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. There is a lot of fluctiation between countries and over time.")
 ```
 By looking at this graph, it seems that Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. However, while this graph shows the changes it doesn't give us a definitive answer, which I do in the following short table. 
 
-```{r alt.text = a table showing the average ranking of the 8 top ranked European passports. Germany has a mean rank of 2.2 coming in first, followed by Finland, then Denmark, then Sweden, then Italy, then Spain, then France and finally the UK with an average rank of 4.15.}
+```{r}
+#| fig.alt: "a table showing the average ranking of the 8 top ranked European passports. Germany has a mean rank of 2.2 coming in first, followed by Finland, then Denmark, then Sweden, then Italy, then Spain, then France and finally the UK with an average rank of 4.15."
 Best_passport |> 
   group_by(country) |> 
   summarise(Mean_rank = mean(rank)) |> 
-  arrange(Mean_rank)
+  arrange(Mean_rank) 
 ```
 Through this we can in fact see that Germany has been most consistently the top rated passport. However Finland and Denmark are not far behind. Despite one time taking the first place spot, the UK is last of the 8 European countries in terms of consistent rank. 
 
