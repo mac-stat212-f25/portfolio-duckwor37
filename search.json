@@ -23,100 +23,100 @@
   {
     "objectID": "src/tt/hw01-tt.html",
     "href": "src/tt/hw01-tt.html",
-    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "title": "TidyTuesday 09/02/2025",
     "section": "",
     "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCode#Necessary Libraries\n#| include: false\n#| echo: false\n\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(hrbrthemes)\nlibrary(viridis)",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>TidyTuesday 09/02/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw01-tt.html#importing-data",
     "href": "src/tt/hw01-tt.html#importing-data",
-    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "title": "TidyTuesday 09/02/2025",
     "section": "Importing Data",
     "text": "Importing Data\nReading in the data both about the families and genus of the frogs as well as individual frog ID events. The individual observation events were recorded frog calls by citizen scientists in Australia. The frogs were then identified via their calls by experts.\n\nCodeFrog_ID &lt;- read.csv(\"tidytuesday/data/2025/2025-09-02/frogID_data.csv\")\nFrog_names &lt;- read.csv(\"tidytuesday/data/2025/2025-09-02/frog_names.csv\")\n\n\nResearch Question: What subfamilies are the most abundant in Australia, and when are they the most abundant?",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>TidyTuesday 09/02/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw01-tt.html#exploring-the-data",
     "href": "src/tt/hw01-tt.html#exploring-the-data",
-    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "title": "TidyTuesday 09/02/2025",
     "section": "Exploring the Data",
     "text": "Exploring the Data\nIn order to create visualizations and have subfamilies corresponding to each observation I had to join the two different data sets by their scientific name.\n\nCode#Joining data sets together via scientific name and getting month of the observations\nFrog_expanded &lt;- \n  left_join(Frog_ID, Frog_names, by = \"scientificName\") |&gt; \n  mutate(eventDate = as.Date(eventDate)) |&gt; \n  mutate(month = format(eventDate, \"%b\")) \n\n\nI then created a table that shows the counts of each subfamily of frog for each month over the year of 2023 in order to get an idea of what family was most abundant and when.\n\nCode#Demonstrating the count of each subfamily for each month\nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt; #omiting observations that do not have a subfamily, excludes &gt;9000 observations\n  count(month, subfamily) |&gt; \n  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |&gt; \n  arrange(month)\n\n   month     subfamily     n\n1    Jan         Hylid  8664\n2    Jan  Microhylidae   155\n3    Jan  Myobatrachid  7021\n4    Jan         Ranid    12\n5    Jan          Toad   282\n6    Feb         Hylid  3675\n7    Feb  Microhylidae   103\n8    Feb  Myobatrachid  4735\n9    Feb         Ranid     5\n10   Feb          Toad   201\n11   Mar         Hylid  1516\n12   Mar  Microhylidae    53\n13   Mar  Myobatrachid  4697\n14   Mar         Ranid    15\n15   Mar          Toad   112\n16   Apr         Hylid   883\n17   Apr  Microhylidae    21\n18   Apr  Myobatrachid  5810\n19   Apr         Ranid    22\n20   Apr          Toad    36\n21   May         Hylid   630\n22   May  Microhylidae     7\n23   May  Myobatrachid  3270\n24   May         Ranid    13\n25   May          Toad     9\n26   Jun         Hylid  1291\n27   Jun  Microhylidae    30\n28   Jun  Myobatrachid  5002\n29   Jun         Ranid    13\n30   Jun          Toad    12\n31   Jul         Hylid  1476\n32   Jul  Microhylidae    60\n33   Jul  Myobatrachid  7471\n34   Jul         Ranid    21\n35   Jul          Toad    36\n36   Aug         Hylid  2634\n37   Aug  Microhylidae    24\n38   Aug  Myobatrachid 12016\n39   Aug         Ranid    18\n40   Aug          Toad    18\n41   Sep         Hylid  5992\n42   Sep  Microhylidae    48\n43   Sep  Myobatrachid 12323\n44   Sep         Ranid    12\n45   Sep          Toad    74\n46   Oct         Hylid  6851\n47   Oct  Microhylidae    28\n48   Oct  Myobatrachid  8677\n49   Oct         Ranid    11\n50   Oct          Toad    59\n51   Nov         Hylid 11195\n52   Nov  Microhylidae    38\n53   Nov  Myobatrachid  9862\n54   Nov         Ranid    19\n55   Nov          Toad   209\n\n\nIt is important to note that in this case there are no observations for the month of December, so we cannot make a blanket statement saying the months Nov-Jan for example, as strickly speaking it is not true.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>TidyTuesday 09/02/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw01-tt.html#visualizations",
     "href": "src/tt/hw01-tt.html#visualizations",
-    "title": "Homework 01 – TidyTuesday 09/02/2025",
+    "title": "TidyTuesday 09/02/2025",
     "section": "Visualizations",
     "text": "Visualizations\nIn order to get a better idea of the abundance of each family in comparison to the overall density for each month I created the following visualization.\n\nCode#Shows the overall amount of frogs over the year compared to the \nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt;\n  ggplot(aes(x = eventDate)) + \n  geom_density(aes(fill = subfamily), alpha = 0.5) +\n  geom_histogram(aes(y = after_stat(density)), binwidth = 29, alpha = 0.5) + \n  theme_minimal() + \n  scale_fill_viridis_d() + \n  labs(x = \"Date\", y = \"Density\", title = \"Density of Frogs and their Subfamilies over Time\", subtitle = \"2023\", fill = \"Subfamily\")\n\n\n\n\n\n\n\nAs we can see in above visualization is that frog calls tend to be more abundant October to January which is spring to summer in Australia. Toads most abundant around January-Febuary, late season. In comparison, Hylids are most abundant in December and January, mid to late season. Myobatrachid peaked in October as well as November. Ranid stay pretty consistent throughout the year. However the visuals layering of all the different subfamilies make it difficult to pull out exact measurements. For example, no trends for Microhylidae can be distinguished. The follow visualization splits all the different subfamiles so that they can be better compared against one another rather than the general trend.\n\nCode#Shows the distribution of each subfamily over the course of a year\nFrog_expanded |&gt; \n  na.omit(subfamily) |&gt;\n  ggplot(aes(x = eventDate, fill = subfamily)) +\n  geom_density() +\n  facet_wrap(~subfamily) + \n  labs(title = \"Distribution of Subfamilies\", subtitle = \"2023\", x = \"Date\", y = \"Probability Density\", fill = \"Subfamily\") + \n  theme_minimal() + \n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nFrom this we can tell much more distinctly that Frogs that fall under the Microhylidae family tend to peak in January-Feburary while staying relatively consistent the rest of the year. However while this visual allows you to compare the density of each species relative to the total of each species not the total number of frogs or count. The following visualization addresses this issue.\n\nCode# Function to hide every other label\nevery_other_label &lt;- function(x) {\n      labels &lt;- as.character(x)\n      labels[seq(2, length(labels), 2)] &lt;- \"\"\n      return(labels)}\n\n#Shows the proportion of the different frog families over the course of the year \nFrog_expanded |&gt;\n  na.omit(subfamily) |&gt;\n  mutate(month = factor(month, levels = month.abb, ordered = TRUE)) |&gt; \n  ggplot(aes(x = month, , fill = subfamily)) + \n  geom_bar() + \n  facet_wrap(~subfamily) + \n  scale_fill_viridis_d() + \n  scale_x_discrete(labels = every_other_label) + \n  labs(x = \"Month\", y = \"Number of Frogs\", title = \"The Number of Frogs of each Subfamily per Month\", subtitle = \"2023\", fill = \"Subfamily\")\n\n\n\n\n\n\n\nThrough this visual we can clearly see that the Myobatrachid of frogs are the most abundant year round and make up most of the frogs that were documented in Australia in 2023. Hylids are the second most common subfamily, followed by Toad and Microhylidae and lastly Ranid. However because the last 3 categories are all significantly smaller than Hylids and Myobatrachid it is difficult to compare them.\nNevertheless we have answered the research question that Myobatrachids are the most abundant Frog subfamily in Australia and are more relatively abundant during the months of August to November.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Homework 01 -- TidyTuesday 09/02/2025</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>TidyTuesday 09/02/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw02-tt.html",
     "href": "src/tt/hw02-tt.html",
-    "title": "Homework 02",
+    "title": "Tidy Tuesday 09/09/2025",
     "section": "",
     "text": "TidyTuesday Section (optional)\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCode#Necessary Libraries\n#| include: false\n#| echo: false\n\nlibrary(readxl)\nlibrary(dplyr)\nlibrary(tidyverse)\nlibrary(hrbrthemes)\nlibrary(viridis)\nlibrary(tidytuesdayR)",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 02</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Tidy Tuesday 09/09/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw02-tt.html#tidytuesday-section-optional",
     "href": "src/tt/hw02-tt.html#tidytuesday-section-optional",
-    "title": "Homework 02",
+    "title": "Tidy Tuesday 09/09/2025",
     "section": "",
     "text": "Instructions\n\n\n\nYou can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 02</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Tidy Tuesday 09/09/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw02-tt.html#importing-data",
     "href": "src/tt/hw02-tt.html#importing-data",
-    "title": "Homework 02",
+    "title": "Tidy Tuesday 09/09/2025",
     "section": "Importing Data",
     "text": "Importing Data\nReading in the data about individual countries as well as their rank by year. In this case they were scored based on the number of destinations that passport could travel to with no visa requried. This plays into the rank of the passport which is essentially its travel power.\n\nCodett_data &lt;- tt_load(\"2025-09-09\")\ncountry &lt;- tt_data$country_lists\nyear &lt;- tt_data$rank_by_year\n\n\nResearch Question: How has the power of different regions passports shifted over time? What is the most powerful passport?",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 02</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Tidy Tuesday 09/09/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw02-tt.html#exploring-the-data",
     "href": "src/tt/hw02-tt.html#exploring-the-data",
-    "title": "Homework 02",
+    "title": "Tidy Tuesday 09/09/2025",
     "section": "Exploring the Data",
     "text": "Exploring the Data\n\nCode#Joining the \ncountry_expanded &lt;- \n  full_join(country, year)\n\n\n\nCodecountry_expanded |&gt; \n  mutate(visa_free_count = as.numeric(visa_free_count)) |&gt; \n  group_by(region) |&gt; \n  summarise(Mean_Visa = mean(visa_free_count), Mean_rank = mean(rank))\n\n# A tibble: 7 × 3\n  region      Mean_Visa Mean_rank\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;\n1 AFRICA           49.7      77.5\n2 AMERICAS        109.       36.0\n3 ASIA             68.4      65.6\n4 CARIBBEAN        95.7      45.8\n5 EUROPE          131.       22.4\n6 MIDDLE EAST      57.0      74.0\n7 OCEANIA          92.6      45.2\n\n\nIn this table we can see that that Europe has the best overall mean rank for its countries and that passports from Europe tend to be let into a lot more countries. This is then followed by passports from the Americas, then the Caribbean. In last place is Africa.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 02</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Tidy Tuesday 09/09/2025</span>"
     ]
   },
   {
     "objectID": "src/tt/hw02-tt.html#visualizations",
     "href": "src/tt/hw02-tt.html#visualizations",
-    "title": "Homework 02",
+    "title": "Tidy Tuesday 09/09/2025",
     "section": "Visualizations",
     "text": "Visualizations\nIn order to get a better idea on how these trends have changed overtime I created the following visualizations.\n\nCoderegion &lt;- country_expanded |&gt; \n  mutate(visa_free_count = as.numeric(visa_free_count)) |&gt; \n  group_by(region, year) |&gt; \n  summarise(Mean_Visa = mean(visa_free_count), Mean_rank = mean(rank))\n\nregion |&gt; \n  ggplot() + \n  geom_line(aes(x = year, y = Mean_Visa, color = region), stat = \"smooth\", size = 2) + \n  theme_classic(base_size = 13) +  \n  scale_y_continuous(limits = c(0,200), breaks = seq(0, 200, by = 50)) + \n  scale_x_continuous(limits = c(2006,2025), expand = c(0,0)) + \n  theme(\n      panel.grid.minor = element_blank(),\n      axis.ticks.x = element_blank(),\n      plot.title = element_text(face = \"bold\", size = 15),\n      plot.title.position = \"plot\", \n  ) + \n   scale_color_viridis_d() + \n  labs(title = \"Average number of visa free entries over time\", subtitle = \"per region of the world\", x = \"Year\", y = \"Mean Visa Free Count\", color = \"Region\", caption = \"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25\") + \n  geom_vline(aes(xintercept = 2013), linetype = \"dotted\", color = \"gray50\") + \n  geom_text(aes(x = 2014, y = 200, label = \"2013\"), color = \"gray50\", size = 4) + \n  labs(alt = \"alt.text = line graph showing the average number of countries a passport can enter without a visa per region over time. We can clearly see that Europe has the most passports that can visit the most counties without visas, followed by the Americas, and despite rising overtime they have not changed position. Following behind them is the caribbean followed by oceania, which are now about the same level in recent years. Then passports from Asia, the Middle east and Africa follow. There is a line marking 2013 as that is when there seems to be a global shift in the trend of allowing more visa free travel, going from a steady about 45 degree angle incline to plataueing for a year, followed by a much slower climb\")\n\n\n\n\n\n\n\nIn this visualization we can clearly see that the mean number of countries each region’s passports allow people into without visas has increase overtime. In fact they were all following a similar slope until 2013 where there was a significant bump and then most regions plateaued before steadily rising a lot slower. It is unclear what global event could have caused this stalling in the rise of freedom to travel, but the pace has not quite recovered.\n\nCodeBest_passport &lt;- country_expanded |&gt; \n  filter(region == \"EUROPE\") |&gt; \n  mutate(rank = as.numeric(rank)) |&gt; \n  group_by(country) |&gt; \n  filter(any(rank == 1)) |&gt; \n  ungroup()\n  \nBest_passport |&gt;   \n  ggplot() +\n  geom_line(aes(x = year, y = rank, color = country), stat = \"smooth\", size = 2) + \n  theme_classic(base_size = 13) +  \n  scale_y_continuous(limits = c(0,7), breaks = seq(0, 7, by = 2)) + \n  scale_x_continuous(limits = c(2006,2025), expand = c(0,0)) + \n  theme(\n      panel.grid.minor = element_blank(),\n      axis.ticks.x = element_blank(),\n      plot.title = element_text(face = \"bold\", size = 15),\n      plot.title.position = \"plot\", \n  ) + \n   scale_color_viridis_d() + \n  labs(title = \"Best Passport Overtime\", subtitle = \"from Europe\", x = \"Year\", y = \"Rank\", color = \"Country\", caption = \"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25\") + \n  scale_y_reverse() + \n  labs(alt = \"This graph shows 8 European countries who have all been ranked number one at some point from 2006-2025.  Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. There is a lot of fluctiation between countries and over time.\")\n\n\n\n\n\n\n\nBy looking at this graph, it seems that Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. However, while this graph shows the changes it doesn’t give us a definitive answer, which I do in the following short table.\n\nCodeBest_passport |&gt; \n  group_by(country) |&gt; \n  summarise(Mean_rank = mean(rank)) |&gt; \n  arrange(Mean_rank) \n\n# A tibble: 8 × 2\n  country        Mean_rank\n  &lt;chr&gt;              &lt;dbl&gt;\n1 Germany             2.2 \n2 Finland             2.4 \n3 Denmark             2.65\n4 Sweden              2.9 \n5 Italy               3.3 \n6 Spain               3.65\n7 France              3.95\n8 United Kingdom      4.15\n\n\nThrough this we can in fact see that Germany has been most consistently the top rated passport. However Finland and Denmark are not far behind. Despite one time taking the first place spot, the UK is last of the 8 European countries in terms of consistent rank.\nAll in all these visualizations tell us that the rate of the number of countries each passport can get a holder in somewhere has slowed down compared to the early 2000s, although still is increasing. Individiuals from Europes passports on average get them into many more countries without a visa, around 131 to be exact, while if your are a German passport holder you have the ultimate travel power.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 02</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Tidy Tuesday 09/09/2025</span>"
     ]
   },
   {
@@ -410,7 +410,7 @@
     "href": "mm/mm.html#creativity",
     "title": "Appendix C — Mind Maps",
     "section": "",
-    "text": "0808-mind_map_example.jpg\n\n\n\n\n\n0905-Review_mind_map.jpeg\n\n\n\n\n\n0908-Data_Visualization.jpeg\n\n\n\n\n\n0910-Advanced_spatial_data_viz.jpeg",
+    "text": "0808-mind_map_example.jpg\n\n\n\n\n\n0905-Review_mind_map.jpeg\n\n\n\n\n\n0908-Data_Visualization.jpeg\n\n\n\n\n\n0910-Advanced_spatial_data_viz.jpeg\n\n\n\n\n\n0916-Adv_Data_wrangling_P1.jpeg",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>C</span>  <span class='chapter-title'>Mind Maps</span>"
