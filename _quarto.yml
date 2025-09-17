@@ -74,6 +74,7 @@ book:
       - src/ica/Review.qmd
       - src/ica/Advanced_data_viz.qmd
       - src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.qmd
+      - src/ica/Advanced_data_wrangling_P1.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd
