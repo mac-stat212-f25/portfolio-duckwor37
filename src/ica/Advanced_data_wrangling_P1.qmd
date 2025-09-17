@@ -1,5 +1,5 @@
 ---
-title: "6 Adv Data wrangling P1"
+title: "Adv Data Wrangling P1"
 ---
 
 
