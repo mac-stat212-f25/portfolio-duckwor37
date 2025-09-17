@@ -1,5 +1,5 @@
 ---
-title: "Homework 01 -- TidyTuesday 09/02/2025"
+title: "TidyTuesday 09/02/2025"
 ---
 
 
