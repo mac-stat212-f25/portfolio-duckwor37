@@ -291,7 +291,7 @@ str_view(words, "[^aeiou]y[^aeiou]")
 
 ```{r ex_regex_classes}
 # Your code
-
+str_view(words, "[aeiou][aeiou]m")
 ```
 
 
@@ -308,7 +308,7 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_alternation}
 # Your code
-
+str_view(fruit, "aa|ee|ii|oo|uu")
 ```
 
 
@@ -322,8 +322,8 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_start_end_group}
 # Your code
-
-
+str_view(words, "^y")
+str_view(words, "^(?!Y).*$")
 ```
 
 
@@ -353,7 +353,12 @@ The following are core `stringr` functions that use regular expressions:
 **Exercise:** Starting from `str_count()`, explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the `posts` data.
 
 ```{r}
-
+str_count(posts, "sex")
+str_detect(posts, "taboo")
+str_subset(posts, "odd")
+str_extract_all(posts, "alone")
+str_replace_all(posts, "beautiful", "stunning")
+str_remove_all(posts, "Abby")
 ```
 
 ## Done!
