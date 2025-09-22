@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>6 Adv Data Wrangling P1 – COMP/STAT212 Portfolio</title>
+<title>Adv Data Wrangling P1 – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,9 +18,8 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,20 +63,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.html" rel="prev">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5c3a6d2a25238f373e9093014fa3b5df.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-988ea1941520f085a68ecd70cc215186.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-5c3a6d2a25238f373e9093014fa3b5df.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-463f7e572b85bff0cfe833e89a202fa4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-2b27489b1280a247593da265a4955406.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -121,176 +117,14 @@ cookieconsent.run({
 </script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../../style/custom.css">
 </head>
-<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ica/Review.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../../src/ica/Advanced_data_wrangling_P1.html"><span class="chapter-title">6 Adv Data Wrangling P1</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ica/Review.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../../src/ica/Advanced_data_wrangling_P1.html"><span class="chapter-title">Adv Data Wrangling P1</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -301,7 +135,7 @@ cookieconsent.run({
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../../assets/sidebar-logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Tori Duckworth</a> 
         <div class="sidebar-tools-main">
@@ -390,7 +224,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/ica/Advanced_data_wrangling_P1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">6 Adv Data Wrangling P1</span></a>
+  <a href="../../src/ica/Advanced_data_wrangling_P1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Adv Data Wrangling P1</span></a>
   </div>
 </li>
       </ul>
@@ -464,8 +298,8 @@ cookieconsent.run({
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ica/Review.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../../src/ica/Advanced_data_wrangling_P1.html"><span class="chapter-title">6 Adv Data Wrangling P1</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">6 Adv Data Wrangling P1</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/ica/Review.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../../src/ica/Advanced_data_wrangling_P1.html"><span class="chapter-title">Adv Data Wrangling P1</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Adv Data Wrangling P1</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -779,7 +613,7 @@ Examples
 [217] 20670 20671 20672 20673 20674 20675 20676 20677 20678 20679 20680 20681
 [229] 20682 20683 20684 20685 20686 20687 20688 20689 20690 20691 20692 20693
 [241] 20694 20695 20696 20697 20698 20699 20700 20701 20702 20703 20704 20705
-[253] 20706 20707 20708 20709 20710 20711 20712 20713 20714 20715 20716 20717
+[253] 20706 20707 20708 20709 20710 20711 20712 20348 20349 20350 20351 20352
 [265] 20353 20354 20355 20356 20357 20358 20359 20360 20361 20362 20363 20364
 [277] 20365 20366 20367 20368 20369 20370 20371 20372 20373 20374 20375 20376
 [289] 20377 20378 20379 20380 20381 20382 20383 20384 20385 20386 20387 20388
@@ -843,8 +677,8 @@ Examples
 [241] "2026-08-29" "2026-08-30" "2026-08-31" "2026-09-01" "2026-09-02"
 [246] "2026-09-03" "2026-09-04" "2026-09-05" "2026-09-06" "2026-09-07"
 [251] "2026-09-08" "2026-09-09" "2026-09-10" "2026-09-11" "2026-09-12"
-[256] "2026-09-13" "2026-09-14" "2026-09-15" "2026-09-16" "2026-09-17"
-[261] "2026-09-18" "2026-09-19" "2026-09-20" "2026-09-21" "2025-09-22"
+[256] "2026-09-13" "2026-09-14" "2026-09-15" "2026-09-16" "2025-09-17"
+[261] "2025-09-18" "2025-09-19" "2025-09-20" "2025-09-21" "2025-09-22"
 [266] "2025-09-23" "2025-09-24" "2025-09-25" "2025-09-26" "2025-09-27"
 [271] "2025-09-28" "2025-09-29" "2025-09-30" "2025-10-01" "2025-10-02"
 [276] "2025-10-03" "2025-10-04" "2025-10-05" "2025-10-06" "2025-10-07"
@@ -1392,311 +1226,436 @@ Levels: Low Medium High</code></pre>
 <!-- -->
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
     }
-    setColorSchemeToggle(hasAlternateSentinel())
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
         }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
       }
       return false;
     }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
-    const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
           }
-        }
-        return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
-    });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
       }
     }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
     }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
     }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-            // target, if specified
-            link.setAttribute("target", "_blank");
-            if (link.getAttribute("rel") === null) {
-              link.setAttribute("rel", "noopener");
-            }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
     }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
       } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
         }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
       }
     }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
           }
         } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
+          // See if we can fetch this
+          fetch(url.split('#')[0])
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
+            const note = htmlDoc.getElementById(id);
             if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
+              const html = processXRef(id, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1704,161 +1663,185 @@ Levels: Low Medium High</code></pre>
             instance.show();
           });
         }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
       } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
             }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
         });
       }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
     }
-  });
-  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
       <a href="../../src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.html" class="pagination-link" aria-label="4 Advanced Spatial Viz P1">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4 Advanced Spatial Viz P1</span></span>
       </a>          
@@ -1870,7 +1853,7 @@ Levels: Low Medium High</code></pre>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb117" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb117-1"><a href="#cb117-1"></a><span class="co">---</span></span>
-<span id="cb117-2"><a href="#cb117-2"></a><span class="an">title:</span><span class="co"> "6 Adv Data Wrangling P1"</span></span>
+<span id="cb117-2"><a href="#cb117-2"></a><span class="an">title:</span><span class="co"> "Adv Data Wrangling P1"</span></span>
 <span id="cb117-3"><a href="#cb117-3"></a><span class="co">---</span></span>
 <span id="cb117-4"><a href="#cb117-4"></a></span>
 <span id="cb117-5"><a href="#cb117-5"></a></span>
@@ -1913,9 +1896,9 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-42"><a href="#cb117-42"></a></span>
 <span id="cb117-43"><a href="#cb117-43"></a></span>
 <span id="cb117-44"><a href="#cb117-44"></a><span class="in">```{r doc_setup}</span></span>
-<span id="cb117-45"><a href="#cb117-45"></a><span class="co">#| include: false</span></span>
+<span id="cb117-45"><a href="#cb117-45"></a><span class="in">#| include: false</span></span>
 <span id="cb117-46"><a href="#cb117-46"></a></span>
-<span id="cb117-47"><a href="#cb117-47"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb117-47"><a href="#cb117-47"></a><span class="in">library(tidyverse)</span></span>
 <span id="cb117-48"><a href="#cb117-48"></a><span class="in">```</span></span>
 <span id="cb117-49"><a href="#cb117-49"></a></span>
 <span id="cb117-50"><a href="#cb117-50"></a></span>
@@ -1954,9 +1937,9 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-83"><a href="#cb117-83"></a><span class="ss">- </span><span class="in">`dataset |&gt; pull(variable) |&gt; unique()`</span>: taking one column out of a dataset and finding unique values</span>
 <span id="cb117-84"><a href="#cb117-84"></a></span>
 <span id="cb117-85"><a href="#cb117-85"></a><span class="in">```{r create_vec_examples}</span></span>
-<span id="cb117-86"><a href="#cb117-86"></a><span class="fu">c</span>(<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>)</span>
+<span id="cb117-86"><a href="#cb117-86"></a><span class="in">c("Fair", "Good", "Very Good", "Premium", "Ideal")</span></span>
 <span id="cb117-87"><a href="#cb117-87"></a></span>
-<span id="cb117-88"><a href="#cb117-88"></a>diamonds <span class="sc">|&gt;</span> <span class="fu">pull</span>(cut) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb117-88"><a href="#cb117-88"></a><span class="in">diamonds |&gt; pull(cut) |&gt; unique()</span></span>
 <span id="cb117-89"><a href="#cb117-89"></a><span class="in">```</span></span>
 <span id="cb117-90"><a href="#cb117-90"></a></span>
 <span id="cb117-91"><a href="#cb117-91"></a></span>
@@ -1969,32 +1952,32 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-98"><a href="#cb117-98"></a>What does a logical vector look like?</span>
 <span id="cb117-99"><a href="#cb117-99"></a></span>
 <span id="cb117-100"><a href="#cb117-100"></a><span class="in">```{r logicals}</span></span>
-<span id="cb117-101"><a href="#cb117-101"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
-<span id="cb117-102"><a href="#cb117-102"></a>x</span>
-<span id="cb117-103"><a href="#cb117-103"></a><span class="fu">class</span>(x)</span>
+<span id="cb117-101"><a href="#cb117-101"></a><span class="in">x &lt;- c(TRUE, FALSE, NA)</span></span>
+<span id="cb117-102"><a href="#cb117-102"></a><span class="in">x</span></span>
+<span id="cb117-103"><a href="#cb117-103"></a><span class="in">class(x)</span></span>
 <span id="cb117-104"><a href="#cb117-104"></a><span class="in">```</span></span>
 <span id="cb117-105"><a href="#cb117-105"></a></span>
 <span id="cb117-106"><a href="#cb117-106"></a>You will often create logical vectors with comparison operators: <span class="in">`&gt;`</span>, <span class="in">`&lt;`</span>, <span class="in">`&lt;=`</span>, <span class="in">`&gt;=`</span>, <span class="in">`==`</span>, <span class="in">`!=`</span>.</span>
 <span id="cb117-107"><a href="#cb117-107"></a></span>
 <span id="cb117-108"><a href="#cb117-108"></a><span class="in">```{r comparison_operators}</span></span>
-<span id="cb117-109"><a href="#cb117-109"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">12</span>)</span>
-<span id="cb117-110"><a href="#cb117-110"></a>x <span class="sc">&lt;</span> <span class="dv">2</span></span>
-<span id="cb117-111"><a href="#cb117-111"></a>x <span class="sc">&lt;=</span> <span class="dv">2</span></span>
-<span id="cb117-112"><a href="#cb117-112"></a>x <span class="sc">&gt;</span> <span class="dv">9</span></span>
-<span id="cb117-113"><a href="#cb117-113"></a>x <span class="sc">&gt;=</span> <span class="dv">9</span></span>
-<span id="cb117-114"><a href="#cb117-114"></a>x <span class="sc">==</span> <span class="dv">12</span></span>
-<span id="cb117-115"><a href="#cb117-115"></a>x <span class="sc">!=</span> <span class="dv">12</span></span>
+<span id="cb117-109"><a href="#cb117-109"></a><span class="in">x &lt;- c(1, 2, 9, 12)</span></span>
+<span id="cb117-110"><a href="#cb117-110"></a><span class="in">x &lt; 2</span></span>
+<span id="cb117-111"><a href="#cb117-111"></a><span class="in">x &lt;= 2</span></span>
+<span id="cb117-112"><a href="#cb117-112"></a><span class="in">x &gt; 9</span></span>
+<span id="cb117-113"><a href="#cb117-113"></a><span class="in">x &gt;= 9</span></span>
+<span id="cb117-114"><a href="#cb117-114"></a><span class="in">x == 12</span></span>
+<span id="cb117-115"><a href="#cb117-115"></a><span class="in">x != 12</span></span>
 <span id="cb117-116"><a href="#cb117-116"></a><span class="in">```</span></span>
 <span id="cb117-117"><a href="#cb117-117"></a></span>
 <span id="cb117-118"><a href="#cb117-118"></a></span>
 <span id="cb117-119"><a href="#cb117-119"></a>When you want to check for set containment, the <span class="in">`%in%`</span> operator is the correct way to do this (as opposed to <span class="in">`==`</span>).</span>
 <span id="cb117-120"><a href="#cb117-120"></a></span>
 <span id="cb117-121"><a href="#cb117-121"></a><span class="in">```{r in_operator}</span></span>
-<span id="cb117-122"><a href="#cb117-122"></a><span class="co">#| warning: true</span></span>
+<span id="cb117-122"><a href="#cb117-122"></a><span class="in">#| warning: true</span></span>
 <span id="cb117-123"><a href="#cb117-123"></a></span>
-<span id="cb117-124"><a href="#cb117-124"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
-<span id="cb117-125"><a href="#cb117-125"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
-<span id="cb117-126"><a href="#cb117-126"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb117-124"><a href="#cb117-124"></a><span class="in">x &lt;- c(1, 2, 9, 4)</span></span>
+<span id="cb117-125"><a href="#cb117-125"></a><span class="in">x == c(1, 2, 4)</span></span>
+<span id="cb117-126"><a href="#cb117-126"></a><span class="in">x %in% c(1, 2, 4)</span></span>
 <span id="cb117-127"><a href="#cb117-127"></a><span class="in">```</span></span>
 <span id="cb117-128"><a href="#cb117-128"></a></span>
 <span id="cb117-129"><a href="#cb117-129"></a>The <span class="in">`Warning: longer object length is not a multiple of shorter object length`</span> is a manifestation of **vector recycling**. </span>
@@ -2002,27 +1985,27 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-131"><a href="#cb117-131"></a>In R, if two vectors are being combined or compared, the shorter one will be repeated to match the length of the longer one--even if longer object length isn't a multiple of the shorter object length. We can see the exact recycling that happens below:</span>
 <span id="cb117-132"><a href="#cb117-132"></a></span>
 <span id="cb117-133"><a href="#cb117-133"></a><span class="in">```{r recycling}</span></span>
-<span id="cb117-134"><a href="#cb117-134"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
-<span id="cb117-135"><a href="#cb117-135"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
-<span id="cb117-136"><a href="#cb117-136"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="co"># This line demonstrates the recycling that happens on the previous line</span></span>
+<span id="cb117-134"><a href="#cb117-134"></a><span class="in">x &lt;- c(1, 2, 9, 4)</span></span>
+<span id="cb117-135"><a href="#cb117-135"></a><span class="in">x == c(1, 2, 4)</span></span>
+<span id="cb117-136"><a href="#cb117-136"></a><span class="in">x == c(1, 2, 4, 1) # This line demonstrates the recycling that happens on the previous line</span></span>
 <span id="cb117-137"><a href="#cb117-137"></a><span class="in">```</span></span>
 <span id="cb117-138"><a href="#cb117-138"></a></span>
 <span id="cb117-139"><a href="#cb117-139"></a>Logical vectors can also be created with functions. <span class="in">`is.na()`</span> is one useful example:</span>
 <span id="cb117-140"><a href="#cb117-140"></a></span>
 <span id="cb117-141"><a href="#cb117-141"></a><span class="in">```{r is_na}</span></span>
-<span id="cb117-142"><a href="#cb117-142"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="cn">NA</span>)</span>
-<span id="cb117-143"><a href="#cb117-143"></a>x <span class="sc">==</span> <span class="cn">NA</span></span>
-<span id="cb117-144"><a href="#cb117-144"></a><span class="fu">is.na</span>(x)</span>
+<span id="cb117-142"><a href="#cb117-142"></a><span class="in">x &lt;- c(1, 4, 9, NA)</span></span>
+<span id="cb117-143"><a href="#cb117-143"></a><span class="in">x == NA</span></span>
+<span id="cb117-144"><a href="#cb117-144"></a><span class="in">is.na(x)</span></span>
 <span id="cb117-145"><a href="#cb117-145"></a><span class="in">```</span></span>
 <span id="cb117-146"><a href="#cb117-146"></a></span>
 <span id="cb117-147"><a href="#cb117-147"></a></span>
 <span id="cb117-148"><a href="#cb117-148"></a>We can negate a logical object with <span class="in">`!`</span>. We can combine logical objects with <span class="in">`&amp;`</span> (and) and  <span class="in">`|`</span> (or).</span>
 <span id="cb117-149"><a href="#cb117-149"></a></span>
 <span id="cb117-150"><a href="#cb117-150"></a><span class="in">```{r negate_and_or}</span></span>
-<span id="cb117-151"><a href="#cb117-151"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
-<span id="cb117-152"><a href="#cb117-152"></a>x <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">5</span></span>
-<span id="cb117-153"><a href="#cb117-153"></a><span class="sc">!</span>(x <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">5</span>)</span>
-<span id="cb117-154"><a href="#cb117-154"></a>x <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">8</span></span>
+<span id="cb117-151"><a href="#cb117-151"></a><span class="in">x &lt;- c(1, 2, 4, 9)</span></span>
+<span id="cb117-152"><a href="#cb117-152"></a><span class="in">x &gt; 1 &amp; x &lt; 5</span></span>
+<span id="cb117-153"><a href="#cb117-153"></a><span class="in">!(x &gt; 1 &amp; x &lt; 5)</span></span>
+<span id="cb117-154"><a href="#cb117-154"></a><span class="in">x &lt; 2 | x &gt; 8</span></span>
 <span id="cb117-155"><a href="#cb117-155"></a><span class="in">```</span></span>
 <span id="cb117-156"><a href="#cb117-156"></a></span>
 <span id="cb117-157"><a href="#cb117-157"></a></span>
@@ -2034,11 +2017,11 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-163"><a href="#cb117-163"></a><span class="ss">- </span><span class="in">`mean()`</span>: What fraction of the values are <span class="in">`TRUE`</span>?</span>
 <span id="cb117-164"><a href="#cb117-164"></a></span>
 <span id="cb117-165"><a href="#cb117-165"></a><span class="in">```{r summarize_logical}</span></span>
-<span id="cb117-166"><a href="#cb117-166"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
-<span id="cb117-167"><a href="#cb117-167"></a><span class="fu">any</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb117-168"><a href="#cb117-168"></a><span class="fu">all</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>)</span>
-<span id="cb117-169"><a href="#cb117-169"></a><span class="fu">sum</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb117-170"><a href="#cb117-170"></a><span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb117-166"><a href="#cb117-166"></a><span class="in">x &lt;- c(1, 2, 4, 9)</span></span>
+<span id="cb117-167"><a href="#cb117-167"></a><span class="in">any(x == 1)</span></span>
+<span id="cb117-168"><a href="#cb117-168"></a><span class="in">all(x &lt; 10)</span></span>
+<span id="cb117-169"><a href="#cb117-169"></a><span class="in">sum(x == 1)</span></span>
+<span id="cb117-170"><a href="#cb117-170"></a><span class="in">mean(x == 1)</span></span>
 <span id="cb117-171"><a href="#cb117-171"></a><span class="in">```</span></span>
 <span id="cb117-172"><a href="#cb117-172"></a></span>
 <span id="cb117-173"><a href="#cb117-173"></a><span class="in">`if_else()`</span> and <span class="in">`case_when()`</span> are functions that allow you to return values depending on the value of a logical vector. You'll explore the documentation for these in the following exercises.</span>
@@ -2051,8 +2034,8 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-180"><a href="#cb117-180"></a><span class="ss">- </span>Can explicitly handle missing values</span>
 <span id="cb117-181"><a href="#cb117-181"></a><span class="ss">- </span>Keeps dates as dates</span>
 <span id="cb117-182"><a href="#cb117-182"></a></span>
-<span id="cb117-183"><a href="#cb117-183"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb117-184"><a href="#cb117-184"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>Examples<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb117-183"><a href="#cb117-183"></a>&lt;details&gt;</span>
+<span id="cb117-184"><a href="#cb117-184"></a>&lt;summary&gt;Examples&lt;/summary&gt;</span>
 <span id="cb117-187"><a href="#cb117-187"></a><span class="in">```{r}</span></span>
 <span id="cb117-188"><a href="#cb117-188"></a><span class="co">#| error: true</span></span>
 <span id="cb117-189"><a href="#cb117-189"></a></span>
@@ -2071,7 +2054,7 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-202"><a href="#cb117-202"></a><span class="fu">ifelse</span>(fun_dates <span class="sc">&lt;</span> <span class="fu">today</span>(), fun_dates <span class="sc">+</span> <span class="fu">years</span>(), fun_dates) <span class="co"># Bad: converts dates to integers</span></span>
 <span id="cb117-203"><a href="#cb117-203"></a><span class="fu">if_else</span>(fun_dates <span class="sc">&lt;</span> <span class="fu">today</span>(), fun_dates <span class="sc">+</span> <span class="fu">years</span>(), fun_dates) <span class="co"># Good: keeps dates as dates</span></span>
 <span id="cb117-204"><a href="#cb117-204"></a><span class="in">```</span></span>
-<span id="cb117-205"><a href="#cb117-205"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb117-205"><a href="#cb117-205"></a>&lt;/details&gt;</span>
 <span id="cb117-206"><a href="#cb117-206"></a>:::</span>
 <span id="cb117-207"><a href="#cb117-207"></a></span>
 <span id="cb117-208"><a href="#cb117-208"></a><span class="fu">### Exercises </span></span>
@@ -2079,9 +2062,9 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-210"><a href="#cb117-210"></a>Load the diamonds dataset, and filter to the first 1000 diamonds.</span>
 <span id="cb117-211"><a href="#cb117-211"></a></span>
 <span id="cb117-212"><a href="#cb117-212"></a><span class="in">```{r diamonds_prep}</span></span>
-<span id="cb117-213"><a href="#cb117-213"></a><span class="fu">data</span>(diamonds)</span>
-<span id="cb117-214"><a href="#cb117-214"></a>diamonds <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
-<span id="cb117-215"><a href="#cb117-215"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="cb117-213"><a href="#cb117-213"></a><span class="in">data(diamonds)</span></span>
+<span id="cb117-214"><a href="#cb117-214"></a><span class="in">diamonds &lt;- diamonds |&gt; </span></span>
+<span id="cb117-215"><a href="#cb117-215"></a><span class="in">    slice_head(n = 1000)</span></span>
 <span id="cb117-216"><a href="#cb117-216"></a><span class="in">```</span></span>
 <span id="cb117-217"><a href="#cb117-217"></a></span>
 <span id="cb117-218"><a href="#cb117-218"></a>Using <span class="in">`tidyverse`</span> functions, complete the following:</span>
@@ -2140,13 +2123,13 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-273"><a href="#cb117-273"></a>Numerical data can be of class <span class="in">`integer`</span> or <span class="in">`numeric`</span> (representing real numbers).</span>
 <span id="cb117-274"><a href="#cb117-274"></a></span>
 <span id="cb117-275"><a href="#cb117-275"></a><span class="in">```{r numerical_classes}</span></span>
-<span id="cb117-276"><a href="#cb117-276"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb117-277"><a href="#cb117-277"></a>x</span>
-<span id="cb117-278"><a href="#cb117-278"></a><span class="fu">class</span>(x)</span>
+<span id="cb117-276"><a href="#cb117-276"></a><span class="in">x &lt;- 1:3</span></span>
+<span id="cb117-277"><a href="#cb117-277"></a><span class="in">x</span></span>
+<span id="cb117-278"><a href="#cb117-278"></a><span class="in">class(x)</span></span>
 <span id="cb117-279"><a href="#cb117-279"></a></span>
-<span id="cb117-280"><a href="#cb117-280"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="fl">+1e-9</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb117-281"><a href="#cb117-281"></a>x</span>
-<span id="cb117-282"><a href="#cb117-282"></a><span class="fu">class</span>(x)</span>
+<span id="cb117-280"><a href="#cb117-280"></a><span class="in">x &lt;- c(1+1e-9, 2, 3)</span></span>
+<span id="cb117-281"><a href="#cb117-281"></a><span class="in">x</span></span>
+<span id="cb117-282"><a href="#cb117-282"></a><span class="in">class(x)</span></span>
 <span id="cb117-283"><a href="#cb117-283"></a><span class="in">```</span></span>
 <span id="cb117-284"><a href="#cb117-284"></a></span>
 <span id="cb117-285"><a href="#cb117-285"></a></span>
@@ -2186,43 +2169,43 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-319"><a href="#cb117-319"></a>We'll use the <span class="in">`lakers`</span> dataset in the <span class="in">`lubridate`</span> package to illustrate some examples.</span>
 <span id="cb117-320"><a href="#cb117-320"></a></span>
 <span id="cb117-321"><a href="#cb117-321"></a><span class="in">```{r load_lakers}</span></span>
-<span id="cb117-322"><a href="#cb117-322"></a>lakers <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(lakers)</span>
-<span id="cb117-323"><a href="#cb117-323"></a><span class="fu">head</span>(lakers)</span>
+<span id="cb117-322"><a href="#cb117-322"></a><span class="in">lakers &lt;- as_tibble(lakers)</span></span>
+<span id="cb117-323"><a href="#cb117-323"></a><span class="in">head(lakers)</span></span>
 <span id="cb117-324"><a href="#cb117-324"></a><span class="in">```</span></span>
 <span id="cb117-325"><a href="#cb117-325"></a></span>
 <span id="cb117-326"><a href="#cb117-326"></a></span>
 <span id="cb117-327"><a href="#cb117-327"></a>Below we use date-time <span class="co">[</span><span class="ot">parsing functions</span><span class="co">](https://lubridate.tidyverse.org/reference/index.html#date-time-parsing)</span> to represent the <span class="in">`date`</span> and <span class="in">`time`</span> variables with date-time classes:</span>
 <span id="cb117-328"><a href="#cb117-328"></a></span>
 <span id="cb117-329"><a href="#cb117-329"></a><span class="in">```{r parse_date_time}</span></span>
-<span id="cb117-330"><a href="#cb117-330"></a>lakers <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
-<span id="cb117-331"><a href="#cb117-331"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-332"><a href="#cb117-332"></a>        <span class="at">date =</span> <span class="fu">ymd</span>(date),</span>
-<span id="cb117-333"><a href="#cb117-333"></a>        <span class="at">time =</span> <span class="fu">ms</span>(time)</span>
-<span id="cb117-334"><a href="#cb117-334"></a>    )</span>
+<span id="cb117-330"><a href="#cb117-330"></a><span class="in">lakers &lt;- lakers |&gt;</span></span>
+<span id="cb117-331"><a href="#cb117-331"></a><span class="in">    mutate(</span></span>
+<span id="cb117-332"><a href="#cb117-332"></a><span class="in">        date = ymd(date),</span></span>
+<span id="cb117-333"><a href="#cb117-333"></a><span class="in">        time = ms(time)</span></span>
+<span id="cb117-334"><a href="#cb117-334"></a><span class="in">    )</span></span>
 <span id="cb117-335"><a href="#cb117-335"></a><span class="in">```</span></span>
 <span id="cb117-336"><a href="#cb117-336"></a></span>
 <span id="cb117-337"><a href="#cb117-337"></a></span>
 <span id="cb117-338"><a href="#cb117-338"></a>Below we use <span class="co">[</span><span class="ot">extraction functions</span><span class="co">](https://lubridate.tidyverse.org/reference/index.html#setting-getting-and-rounding)</span> to get components of the date-time objects:</span>
 <span id="cb117-339"><a href="#cb117-339"></a></span>
 <span id="cb117-340"><a href="#cb117-340"></a><span class="in">```{r lakers_extract}</span></span>
-<span id="cb117-341"><a href="#cb117-341"></a>lakers_clean <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
-<span id="cb117-342"><a href="#cb117-342"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-343"><a href="#cb117-343"></a>        <span class="at">year =</span> <span class="fu">year</span>(date),</span>
-<span id="cb117-344"><a href="#cb117-344"></a>        <span class="at">month =</span> <span class="fu">month</span>(date),</span>
-<span id="cb117-345"><a href="#cb117-345"></a>        <span class="at">day =</span> <span class="fu">day</span>(date),</span>
-<span id="cb117-346"><a href="#cb117-346"></a>        <span class="at">day_of_week =</span> <span class="fu">wday</span>(date, <span class="at">label =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb117-347"><a href="#cb117-347"></a>        <span class="at">minute =</span> <span class="fu">minute</span>(time),</span>
-<span id="cb117-348"><a href="#cb117-348"></a>        <span class="at">second =</span> <span class="fu">second</span>(time)</span>
-<span id="cb117-349"><a href="#cb117-349"></a>    )</span>
-<span id="cb117-350"><a href="#cb117-350"></a>lakers_clean <span class="sc">|&gt;</span> <span class="fu">select</span>(year<span class="sc">:</span>second)</span>
+<span id="cb117-341"><a href="#cb117-341"></a><span class="in">lakers_clean &lt;- lakers |&gt;</span></span>
+<span id="cb117-342"><a href="#cb117-342"></a><span class="in">    mutate(</span></span>
+<span id="cb117-343"><a href="#cb117-343"></a><span class="in">        year = year(date),</span></span>
+<span id="cb117-344"><a href="#cb117-344"></a><span class="in">        month = month(date),</span></span>
+<span id="cb117-345"><a href="#cb117-345"></a><span class="in">        day = day(date),</span></span>
+<span id="cb117-346"><a href="#cb117-346"></a><span class="in">        day_of_week = wday(date, label = TRUE),</span></span>
+<span id="cb117-347"><a href="#cb117-347"></a><span class="in">        minute = minute(time),</span></span>
+<span id="cb117-348"><a href="#cb117-348"></a><span class="in">        second = second(time)</span></span>
+<span id="cb117-349"><a href="#cb117-349"></a><span class="in">    )</span></span>
+<span id="cb117-350"><a href="#cb117-350"></a><span class="in">lakers_clean |&gt; select(year:second)</span></span>
 <span id="cb117-351"><a href="#cb117-351"></a></span>
-<span id="cb117-352"><a href="#cb117-352"></a>lakers_clean <span class="ot">&lt;-</span> lakers_clean <span class="sc">|&gt;</span></span>
-<span id="cb117-353"><a href="#cb117-353"></a>    <span class="fu">group_by</span>(date, opponent, period) <span class="sc">|&gt;</span></span>
-<span id="cb117-354"><a href="#cb117-354"></a>    <span class="fu">arrange</span>(date, opponent, period, <span class="fu">desc</span>(time)) <span class="sc">|&gt;</span></span>
-<span id="cb117-355"><a href="#cb117-355"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-356"><a href="#cb117-356"></a>        <span class="at">diff_btw_plays_sec =</span> <span class="fu">as.numeric</span>(time <span class="sc">-</span> <span class="fu">lag</span>(time, <span class="dv">1</span>))</span>
-<span id="cb117-357"><a href="#cb117-357"></a>    )</span>
-<span id="cb117-358"><a href="#cb117-358"></a>lakers_clean <span class="sc">|&gt;</span> <span class="fu">select</span>(date, opponent, time, period, diff_btw_plays_sec)</span>
+<span id="cb117-352"><a href="#cb117-352"></a><span class="in">lakers_clean &lt;- lakers_clean |&gt;</span></span>
+<span id="cb117-353"><a href="#cb117-353"></a><span class="in">    group_by(date, opponent, period) |&gt;</span></span>
+<span id="cb117-354"><a href="#cb117-354"></a><span class="in">    arrange(date, opponent, period, desc(time)) |&gt;</span></span>
+<span id="cb117-355"><a href="#cb117-355"></a><span class="in">    mutate(</span></span>
+<span id="cb117-356"><a href="#cb117-356"></a><span class="in">        diff_btw_plays_sec = as.numeric(time - lag(time, 1))</span></span>
+<span id="cb117-357"><a href="#cb117-357"></a><span class="in">    )</span></span>
+<span id="cb117-358"><a href="#cb117-358"></a><span class="in">lakers_clean |&gt; select(date, opponent, time, period, diff_btw_plays_sec)</span></span>
 <span id="cb117-359"><a href="#cb117-359"></a><span class="in">```</span></span>
 <span id="cb117-360"><a href="#cb117-360"></a></span>
 <span id="cb117-361"><a href="#cb117-361"></a><span class="fu">### Exercises  </span></span>
@@ -2239,41 +2222,41 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-372"><a href="#cb117-372"></a>In R, factors are made up of two components: the **actual values** of the data and the possible **levels** within the factor. Creating a factor requires supplying both pieces of information.</span>
 <span id="cb117-373"><a href="#cb117-373"></a></span>
 <span id="cb117-374"><a href="#cb117-374"></a><span class="in">```{r months_char_vec}</span></span>
-<span id="cb117-375"><a href="#cb117-375"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mar"</span>, <span class="st">"Dec"</span>, <span class="st">"Jan"</span>,  <span class="st">"Apr"</span>, <span class="st">"Jul"</span>)</span>
+<span id="cb117-375"><a href="#cb117-375"></a><span class="in">months &lt;- c("Mar", "Dec", "Jan",  "Apr", "Jul")</span></span>
 <span id="cb117-376"><a href="#cb117-376"></a><span class="in">```</span></span>
 <span id="cb117-377"><a href="#cb117-377"></a></span>
 <span id="cb117-378"><a href="#cb117-378"></a></span>
 <span id="cb117-379"><a href="#cb117-379"></a>However, if we were to sort this vector, R would sort this vector alphabetically.</span>
 <span id="cb117-380"><a href="#cb117-380"></a></span>
 <span id="cb117-381"><a href="#cb117-381"></a><span class="in">```{r sort_months_abs}</span></span>
-<span id="cb117-382"><a href="#cb117-382"></a><span class="co"># alphabetical sort</span></span>
-<span id="cb117-383"><a href="#cb117-383"></a><span class="fu">sort</span>(months)</span>
+<span id="cb117-382"><a href="#cb117-382"></a><span class="in"># alphabetical sort</span></span>
+<span id="cb117-383"><a href="#cb117-383"></a><span class="in">sort(months)</span></span>
 <span id="cb117-384"><a href="#cb117-384"></a><span class="in">```</span></span>
 <span id="cb117-385"><a href="#cb117-385"></a></span>
 <span id="cb117-386"><a href="#cb117-386"></a></span>
 <span id="cb117-387"><a href="#cb117-387"></a>We can fix this sorting by creating a factor version of <span class="in">`months`</span>. The <span class="in">`levels`</span> argument is a character vector that specifies the unique values that the factor can take. The order of the values in <span class="in">`levels`</span> defines the sorting of the factor.</span>
 <span id="cb117-388"><a href="#cb117-388"></a></span>
 <span id="cb117-389"><a href="#cb117-389"></a><span class="in">```{r create_months_fct}</span></span>
-<span id="cb117-390"><a href="#cb117-390"></a>months_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(months, <span class="at">levels =</span> month.abb) <span class="co"># month.abb is a built-in variable</span></span>
-<span id="cb117-391"><a href="#cb117-391"></a>months_fct</span>
-<span id="cb117-392"><a href="#cb117-392"></a><span class="fu">sort</span>(months_fct)</span>
+<span id="cb117-390"><a href="#cb117-390"></a><span class="in">months_fct &lt;- factor(months, levels = month.abb) # month.abb is a built-in variable</span></span>
+<span id="cb117-391"><a href="#cb117-391"></a><span class="in">months_fct</span></span>
+<span id="cb117-392"><a href="#cb117-392"></a><span class="in">sort(months_fct)</span></span>
 <span id="cb117-393"><a href="#cb117-393"></a><span class="in">```</span></span>
 <span id="cb117-394"><a href="#cb117-394"></a></span>
 <span id="cb117-395"><a href="#cb117-395"></a></span>
 <span id="cb117-396"><a href="#cb117-396"></a>What if we try to create a factor with values that aren't in the levels? (e.g., a typo in a month name)</span>
 <span id="cb117-397"><a href="#cb117-397"></a></span>
 <span id="cb117-398"><a href="#cb117-398"></a><span class="in">```{r months_typo}</span></span>
-<span id="cb117-399"><a href="#cb117-399"></a>months2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jna"</span>, <span class="st">"Mar"</span>)</span>
-<span id="cb117-400"><a href="#cb117-400"></a><span class="fu">factor</span>(months2, <span class="at">levels =</span> month.abb)</span>
+<span id="cb117-399"><a href="#cb117-399"></a><span class="in">months2 &lt;- c("Jna", "Mar")</span></span>
+<span id="cb117-400"><a href="#cb117-400"></a><span class="in">factor(months2, levels = month.abb)</span></span>
 <span id="cb117-401"><a href="#cb117-401"></a><span class="in">```</span></span>
 <span id="cb117-402"><a href="#cb117-402"></a></span>
 <span id="cb117-403"><a href="#cb117-403"></a></span>
 <span id="cb117-404"><a href="#cb117-404"></a>Because the <span class="in">`NA`</span> is introduced silently (without any error or warnings), this can be dangerous. It might be better to use the <span class="in">`fct()`</span> function in the <span class="in">`forcats`</span> package instead:</span>
 <span id="cb117-405"><a href="#cb117-405"></a></span>
 <span id="cb117-406"><a href="#cb117-406"></a><span class="in">```{r fct_forcats}</span></span>
-<span id="cb117-407"><a href="#cb117-407"></a><span class="co">#| error: true</span></span>
+<span id="cb117-407"><a href="#cb117-407"></a><span class="in">#| error: true</span></span>
 <span id="cb117-408"><a href="#cb117-408"></a></span>
-<span id="cb117-409"><a href="#cb117-409"></a><span class="fu">fct</span>(months2, <span class="at">levels =</span> month.abb)</span>
+<span id="cb117-409"><a href="#cb117-409"></a><span class="in">fct(months2, levels = month.abb)</span></span>
 <span id="cb117-410"><a href="#cb117-410"></a><span class="in">```</span></span>
 <span id="cb117-411"><a href="#cb117-411"></a></span>
 <span id="cb117-412"><a href="#cb117-412"></a></span>
@@ -2284,24 +2267,24 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-417"><a href="#cb117-417"></a>We'll use a subset of the General Social Survey (GSS) dataset available in the <span class="in">`forcats`</span> pacakges.</span>
 <span id="cb117-418"><a href="#cb117-418"></a></span>
 <span id="cb117-419"><a href="#cb117-419"></a><span class="in">```{r load_gss}</span></span>
-<span id="cb117-420"><a href="#cb117-420"></a><span class="fu">data</span>(gss_cat)</span>
-<span id="cb117-421"><a href="#cb117-421"></a><span class="fu">head</span>(gss_cat)</span>
+<span id="cb117-420"><a href="#cb117-420"></a><span class="in">data(gss_cat)</span></span>
+<span id="cb117-421"><a href="#cb117-421"></a><span class="in">head(gss_cat)</span></span>
 <span id="cb117-422"><a href="#cb117-422"></a><span class="in">```</span></span>
 <span id="cb117-423"><a href="#cb117-423"></a></span>
 <span id="cb117-424"><a href="#cb117-424"></a></span>
 <span id="cb117-425"><a href="#cb117-425"></a>Reordering the levels of a factor can be useful in plotting when categories would benefit from being sorted in a particular way:</span>
 <span id="cb117-426"><a href="#cb117-426"></a></span>
 <span id="cb117-427"><a href="#cb117-427"></a><span class="in">```{r reorder_factors_motivation}</span></span>
-<span id="cb117-428"><a href="#cb117-428"></a>relig_summary <span class="ot">&lt;-</span> gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-429"><a href="#cb117-429"></a>    <span class="fu">group_by</span>(relig) <span class="sc">|&gt;</span></span>
-<span id="cb117-430"><a href="#cb117-430"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb117-431"><a href="#cb117-431"></a>        <span class="at">tvhours =</span> <span class="fu">mean</span>(tvhours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb117-432"><a href="#cb117-432"></a>        <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb117-433"><a href="#cb117-433"></a>    )</span>
+<span id="cb117-428"><a href="#cb117-428"></a><span class="in">relig_summary &lt;- gss_cat |&gt;</span></span>
+<span id="cb117-429"><a href="#cb117-429"></a><span class="in">    group_by(relig) |&gt;</span></span>
+<span id="cb117-430"><a href="#cb117-430"></a><span class="in">    summarize(</span></span>
+<span id="cb117-431"><a href="#cb117-431"></a><span class="in">        tvhours = mean(tvhours, na.rm = TRUE),</span></span>
+<span id="cb117-432"><a href="#cb117-432"></a><span class="in">        n = n()</span></span>
+<span id="cb117-433"><a href="#cb117-433"></a><span class="in">    )</span></span>
 <span id="cb117-434"><a href="#cb117-434"></a></span>
-<span id="cb117-435"><a href="#cb117-435"></a><span class="fu">ggplot</span>(relig_summary, <span class="fu">aes</span>(<span class="at">x =</span> tvhours, <span class="at">y =</span> relig)) <span class="sc">+</span> </span>
-<span id="cb117-436"><a href="#cb117-436"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb117-437"><a href="#cb117-437"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb117-435"><a href="#cb117-435"></a><span class="in">ggplot(relig_summary, aes(x = tvhours, y = relig)) + </span></span>
+<span id="cb117-436"><a href="#cb117-436"></a><span class="in">    geom_point() +</span></span>
+<span id="cb117-437"><a href="#cb117-437"></a><span class="in">    theme_classic()</span></span>
 <span id="cb117-438"><a href="#cb117-438"></a><span class="in">```</span></span>
 <span id="cb117-439"><a href="#cb117-439"></a></span>
 <span id="cb117-440"><a href="#cb117-440"></a></span>
@@ -2311,25 +2294,25 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-444"><a href="#cb117-444"></a><span class="ss">- </span>The second argument determines how the factor is sorted (analogous to what you put inside <span class="in">`arrange()`</span> when sorting the rows of a data frame.)</span>
 <span id="cb117-445"><a href="#cb117-445"></a></span>
 <span id="cb117-446"><a href="#cb117-446"></a><span class="in">```{r fct_reorder}</span></span>
-<span id="cb117-447"><a href="#cb117-447"></a><span class="fu">ggplot</span>(relig_summary, <span class="fu">aes</span>(<span class="at">x =</span> tvhours, <span class="at">y =</span> <span class="fu">fct_reorder</span>(relig, tvhours))) <span class="sc">+</span></span>
-<span id="cb117-448"><a href="#cb117-448"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb117-449"><a href="#cb117-449"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb117-447"><a href="#cb117-447"></a><span class="in">ggplot(relig_summary, aes(x = tvhours, y = fct_reorder(relig, tvhours))) +</span></span>
+<span id="cb117-448"><a href="#cb117-448"></a><span class="in">    geom_point() +</span></span>
+<span id="cb117-449"><a href="#cb117-449"></a><span class="in">    theme_classic()</span></span>
 <span id="cb117-450"><a href="#cb117-450"></a><span class="in">```</span></span>
 <span id="cb117-451"><a href="#cb117-451"></a></span>
 <span id="cb117-452"><a href="#cb117-452"></a></span>
 <span id="cb117-453"><a href="#cb117-453"></a>For bar plots, we can use <span class="in">`fct_infreq()`</span> to reorder levels from most to least common. This can be combined with <span class="in">`fct_rev()`</span> to reverse the order (least to most common):</span>
 <span id="cb117-454"><a href="#cb117-454"></a></span>
 <span id="cb117-455"><a href="#cb117-455"></a><span class="in">```{r fct_infreq_rev}</span></span>
-<span id="cb117-456"><a href="#cb117-456"></a>gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-457"><a href="#cb117-457"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital)) <span class="sc">+</span></span>
-<span id="cb117-458"><a href="#cb117-458"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb117-459"><a href="#cb117-459"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb117-456"><a href="#cb117-456"></a><span class="in">gss_cat |&gt;</span></span>
+<span id="cb117-457"><a href="#cb117-457"></a><span class="in">    ggplot(aes(x = marital)) +</span></span>
+<span id="cb117-458"><a href="#cb117-458"></a><span class="in">    geom_bar() +</span></span>
+<span id="cb117-459"><a href="#cb117-459"></a><span class="in">    theme_classic()</span></span>
 <span id="cb117-460"><a href="#cb117-460"></a></span>
-<span id="cb117-461"><a href="#cb117-461"></a>gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-462"><a href="#cb117-462"></a>    <span class="fu">mutate</span>(<span class="at">marital =</span> marital <span class="sc">|&gt;</span> <span class="fu">fct_infreq</span>() <span class="sc">|&gt;</span> <span class="fu">fct_rev</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb117-463"><a href="#cb117-463"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital)) <span class="sc">+</span></span>
-<span id="cb117-464"><a href="#cb117-464"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb117-465"><a href="#cb117-465"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb117-461"><a href="#cb117-461"></a><span class="in">gss_cat |&gt;</span></span>
+<span id="cb117-462"><a href="#cb117-462"></a><span class="in">    mutate(marital = marital |&gt; fct_infreq() |&gt; fct_rev()) |&gt;</span></span>
+<span id="cb117-463"><a href="#cb117-463"></a><span class="in">    ggplot(aes(x = marital)) +</span></span>
+<span id="cb117-464"><a href="#cb117-464"></a><span class="in">    geom_bar() +</span></span>
+<span id="cb117-465"><a href="#cb117-465"></a><span class="in">    theme_classic()</span></span>
 <span id="cb117-466"><a href="#cb117-466"></a><span class="in">```</span></span>
 <span id="cb117-467"><a href="#cb117-467"></a></span>
 <span id="cb117-468"><a href="#cb117-468"></a></span>
@@ -2340,61 +2323,61 @@ Levels: Low Medium High</code></pre>
 <span id="cb117-473"><a href="#cb117-473"></a>For example, the names of the political parties in the GSS could use elaboration ("str" isn't a great label for "strong") and clean up:</span>
 <span id="cb117-474"><a href="#cb117-474"></a></span>
 <span id="cb117-475"><a href="#cb117-475"></a><span class="in">```{r gss_messy_party}</span></span>
-<span id="cb117-476"><a href="#cb117-476"></a>gss_cat <span class="sc">|&gt;</span> <span class="fu">count</span>(partyid)</span>
+<span id="cb117-476"><a href="#cb117-476"></a><span class="in">gss_cat |&gt; count(partyid)</span></span>
 <span id="cb117-477"><a href="#cb117-477"></a><span class="in">```</span></span>
 <span id="cb117-478"><a href="#cb117-478"></a></span>
 <span id="cb117-479"><a href="#cb117-479"></a></span>
 <span id="cb117-480"><a href="#cb117-480"></a>We can use <span class="in">`fct_recode()`</span> on <span class="in">`partyid`</span> with the new level names going on the left and the old levels on the right. Any levels that aren't mentioned explicitly (i.e., "Don't know" and "Other party") will be left as is:</span>
 <span id="cb117-481"><a href="#cb117-481"></a></span>
 <span id="cb117-482"><a href="#cb117-482"></a><span class="in">```{r fct_recode}</span></span>
-<span id="cb117-483"><a href="#cb117-483"></a>gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-484"><a href="#cb117-484"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-485"><a href="#cb117-485"></a>        <span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
-<span id="cb117-486"><a href="#cb117-486"></a>            <span class="st">"Republican, strong"</span>    <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
-<span id="cb117-487"><a href="#cb117-487"></a>            <span class="st">"Republican, weak"</span>      <span class="ot">=</span> <span class="st">"Not str republican"</span>,</span>
-<span id="cb117-488"><a href="#cb117-488"></a>            <span class="st">"Independent, near rep"</span> <span class="ot">=</span> <span class="st">"Ind,near rep"</span>,</span>
-<span id="cb117-489"><a href="#cb117-489"></a>            <span class="st">"Independent, near dem"</span> <span class="ot">=</span> <span class="st">"Ind,near dem"</span>,</span>
-<span id="cb117-490"><a href="#cb117-490"></a>            <span class="st">"Democrat, weak"</span>        <span class="ot">=</span> <span class="st">"Not str democrat"</span>,</span>
-<span id="cb117-491"><a href="#cb117-491"></a>            <span class="st">"Democrat, strong"</span>      <span class="ot">=</span> <span class="st">"Strong democrat"</span></span>
-<span id="cb117-492"><a href="#cb117-492"></a>        )</span>
-<span id="cb117-493"><a href="#cb117-493"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb117-494"><a href="#cb117-494"></a>    <span class="fu">count</span>(partyid)</span>
+<span id="cb117-483"><a href="#cb117-483"></a><span class="in">gss_cat |&gt;</span></span>
+<span id="cb117-484"><a href="#cb117-484"></a><span class="in">    mutate(</span></span>
+<span id="cb117-485"><a href="#cb117-485"></a><span class="in">        partyid = fct_recode(partyid,</span></span>
+<span id="cb117-486"><a href="#cb117-486"></a><span class="in">            "Republican, strong"    = "Strong republican",</span></span>
+<span id="cb117-487"><a href="#cb117-487"></a><span class="in">            "Republican, weak"      = "Not str republican",</span></span>
+<span id="cb117-488"><a href="#cb117-488"></a><span class="in">            "Independent, near rep" = "Ind,near rep",</span></span>
+<span id="cb117-489"><a href="#cb117-489"></a><span class="in">            "Independent, near dem" = "Ind,near dem",</span></span>
+<span id="cb117-490"><a href="#cb117-490"></a><span class="in">            "Democrat, weak"        = "Not str democrat",</span></span>
+<span id="cb117-491"><a href="#cb117-491"></a><span class="in">            "Democrat, strong"      = "Strong democrat"</span></span>
+<span id="cb117-492"><a href="#cb117-492"></a><span class="in">        )</span></span>
+<span id="cb117-493"><a href="#cb117-493"></a><span class="in">    ) |&gt;</span></span>
+<span id="cb117-494"><a href="#cb117-494"></a><span class="in">    count(partyid)</span></span>
 <span id="cb117-495"><a href="#cb117-495"></a><span class="in">```</span></span>
 <span id="cb117-496"><a href="#cb117-496"></a></span>
 <span id="cb117-497"><a href="#cb117-497"></a></span>
 <span id="cb117-498"><a href="#cb117-498"></a>To combine groups, we can assign multiple old levels to the same new level ("Other" maps to "No answer", "Don't know", and "Other party"):</span>
 <span id="cb117-499"><a href="#cb117-499"></a></span>
 <span id="cb117-500"><a href="#cb117-500"></a><span class="in">```{r fct_recode2}</span></span>
-<span id="cb117-501"><a href="#cb117-501"></a>gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-502"><a href="#cb117-502"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-503"><a href="#cb117-503"></a>        <span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
-<span id="cb117-504"><a href="#cb117-504"></a>            <span class="st">"Republican, strong"</span>    <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
-<span id="cb117-505"><a href="#cb117-505"></a>            <span class="st">"Republican, weak"</span>      <span class="ot">=</span> <span class="st">"Not str republican"</span>,</span>
-<span id="cb117-506"><a href="#cb117-506"></a>            <span class="st">"Independent, near rep"</span> <span class="ot">=</span> <span class="st">"Ind,near rep"</span>,</span>
-<span id="cb117-507"><a href="#cb117-507"></a>            <span class="st">"Independent, near dem"</span> <span class="ot">=</span> <span class="st">"Ind,near dem"</span>,</span>
-<span id="cb117-508"><a href="#cb117-508"></a>            <span class="st">"Democrat, weak"</span>        <span class="ot">=</span> <span class="st">"Not str democrat"</span>,</span>
-<span id="cb117-509"><a href="#cb117-509"></a>            <span class="st">"Democrat, strong"</span>      <span class="ot">=</span> <span class="st">"Strong democrat"</span>,</span>
-<span id="cb117-510"><a href="#cb117-510"></a>            <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"No answer"</span>,</span>
-<span id="cb117-511"><a href="#cb117-511"></a>            <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"Don't know"</span>,</span>
-<span id="cb117-512"><a href="#cb117-512"></a>            <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"Other party"</span></span>
-<span id="cb117-513"><a href="#cb117-513"></a>        )</span>
-<span id="cb117-514"><a href="#cb117-514"></a>    )</span>
+<span id="cb117-501"><a href="#cb117-501"></a><span class="in">gss_cat |&gt;</span></span>
+<span id="cb117-502"><a href="#cb117-502"></a><span class="in">    mutate(</span></span>
+<span id="cb117-503"><a href="#cb117-503"></a><span class="in">        partyid = fct_recode(partyid,</span></span>
+<span id="cb117-504"><a href="#cb117-504"></a><span class="in">            "Republican, strong"    = "Strong republican",</span></span>
+<span id="cb117-505"><a href="#cb117-505"></a><span class="in">            "Republican, weak"      = "Not str republican",</span></span>
+<span id="cb117-506"><a href="#cb117-506"></a><span class="in">            "Independent, near rep" = "Ind,near rep",</span></span>
+<span id="cb117-507"><a href="#cb117-507"></a><span class="in">            "Independent, near dem" = "Ind,near dem",</span></span>
+<span id="cb117-508"><a href="#cb117-508"></a><span class="in">            "Democrat, weak"        = "Not str democrat",</span></span>
+<span id="cb117-509"><a href="#cb117-509"></a><span class="in">            "Democrat, strong"      = "Strong democrat",</span></span>
+<span id="cb117-510"><a href="#cb117-510"></a><span class="in">            "Other"                 = "No answer",</span></span>
+<span id="cb117-511"><a href="#cb117-511"></a><span class="in">            "Other"                 = "Don't know",</span></span>
+<span id="cb117-512"><a href="#cb117-512"></a><span class="in">            "Other"                 = "Other party"</span></span>
+<span id="cb117-513"><a href="#cb117-513"></a><span class="in">        )</span></span>
+<span id="cb117-514"><a href="#cb117-514"></a><span class="in">    )</span></span>
 <span id="cb117-515"><a href="#cb117-515"></a><span class="in">```</span></span>
 <span id="cb117-516"><a href="#cb117-516"></a></span>
 <span id="cb117-517"><a href="#cb117-517"></a></span>
 <span id="cb117-518"><a href="#cb117-518"></a>We can use <span class="in">`fct_collapse()`</span> to collapse many levels:</span>
 <span id="cb117-519"><a href="#cb117-519"></a></span>
 <span id="cb117-520"><a href="#cb117-520"></a><span class="in">```{r fct_collapse}</span></span>
-<span id="cb117-521"><a href="#cb117-521"></a>gss_cat <span class="sc">|&gt;</span></span>
-<span id="cb117-522"><a href="#cb117-522"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb117-523"><a href="#cb117-523"></a>        <span class="at">partyid =</span> <span class="fu">fct_collapse</span>(partyid,</span>
-<span id="cb117-524"><a href="#cb117-524"></a>            <span class="st">"Other"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"No answer"</span>, <span class="st">"Don't know"</span>, <span class="st">"Other party"</span>),</span>
-<span id="cb117-525"><a href="#cb117-525"></a>            <span class="st">"Republican"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Strong republican"</span>, <span class="st">"Not str republican"</span>),</span>
-<span id="cb117-526"><a href="#cb117-526"></a>            <span class="st">"Independent"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Ind,near rep"</span>, <span class="st">"Independent"</span>, <span class="st">"Ind,near dem"</span>),</span>
-<span id="cb117-527"><a href="#cb117-527"></a>            <span class="st">"Democrat"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Not str democrat"</span>, <span class="st">"Strong democrat"</span>)</span>
-<span id="cb117-528"><a href="#cb117-528"></a>        )</span>
-<span id="cb117-529"><a href="#cb117-529"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb117-530"><a href="#cb117-530"></a>    <span class="fu">count</span>(partyid)</span>
+<span id="cb117-521"><a href="#cb117-521"></a><span class="in">gss_cat |&gt;</span></span>
+<span id="cb117-522"><a href="#cb117-522"></a><span class="in">    mutate(</span></span>
+<span id="cb117-523"><a href="#cb117-523"></a><span class="in">        partyid = fct_collapse(partyid,</span></span>
+<span id="cb117-524"><a href="#cb117-524"></a><span class="in">            "Other" = c("No answer", "Don't know", "Other party"),</span></span>
+<span id="cb117-525"><a href="#cb117-525"></a><span class="in">            "Republican" = c("Strong republican", "Not str republican"),</span></span>
+<span id="cb117-526"><a href="#cb117-526"></a><span class="in">            "Independent" = c("Ind,near rep", "Independent", "Ind,near dem"),</span></span>
+<span id="cb117-527"><a href="#cb117-527"></a><span class="in">            "Democrat" = c("Not str democrat", "Strong democrat")</span></span>
+<span id="cb117-528"><a href="#cb117-528"></a><span class="in">        )</span></span>
+<span id="cb117-529"><a href="#cb117-529"></a><span class="in">    ) |&gt;</span></span>
+<span id="cb117-530"><a href="#cb117-530"></a><span class="in">    count(partyid)</span></span>
 <span id="cb117-531"><a href="#cb117-531"></a><span class="in">```</span></span>
 <span id="cb117-532"><a href="#cb117-532"></a></span>
 <span id="cb117-533"><a href="#cb117-533"></a></span>
