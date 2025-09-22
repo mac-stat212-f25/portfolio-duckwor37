@@ -472,6 +472,116 @@
     ]
   },
   {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html",
+    "href": "src/ica/Advanced_data_wrangling_P2.html",
+    "title": "7 Adv Data wrangling P2",
+    "section": "",
+    "text": "🧩 Learning Goals\nBy the end of this lesson, you should be able to:",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#learning-goals",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#learning-goals",
+    "title": "7 Adv Data wrangling P2",
+    "section": "",
+    "text": "Manipulate and explore strings using the stringr package\nConstruct regular expressions to find patterns in strings",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#helpful-cheatsheets",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#helpful-cheatsheets",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Helpful Cheatsheets",
+    "text": "Helpful Cheatsheets\nThe stringr cheatsheet (HTML, PDF) will be useful to have open and reference.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#motivation-30-years-of-american-anxieties",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#motivation-30-years-of-american-anxieties",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Motivation: 30 Years of American Anxieties",
+    "text": "Motivation: 30 Years of American Anxieties\nIn 2018 the data journalism organization The Pudding featured a story called 30 Years of American Anxieties about themes in 30 years of posts to the Dear Abby column (an American advice column).\nOne way to understand themes in text data is to conduct a qualitative analysis, a methodology in which multiple readers read through instances of text several times to reach a consensus about themes.\nAnother way to understand themes in text data is computational text analysis.\n\nThis is what we will explore today.\n\nBoth qualitative analysis and computational tools can be used in tandem. Often, using computational tools can help focus a close reading of select texts, which parallels the spirit of a qualitative analysis.\nTo prepare ourselves for a computational analysis, let’s learn about strings.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#strings",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#strings",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Strings",
+    "text": "Strings\nStrings are objects of the character class (abbreviated as &lt;chr&gt; in tibbles).\nWhen you print out strings, they display with double quotes:\n\nCodesome_string &lt;- \"banana\"\nsome_string\n\n[1] \"banana\"\n\n\nWorking with strings generally will involve the use of regular expressions, a tool for finding patterns in strings.\nRegular expressions (regex, for short) look like the following:\n\"^the\" (Strings that start with \"the\")\n\"end$\" (Strings that end with \"end\")\nBefore getting to regular expressions, let’s go over some fundamentals about working with strings. The stringr package (available within tidyverse) is great for working with strings.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#creating-strings",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#creating-strings",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Creating strings",
+    "text": "Creating strings\nCreating strings by hand is useful for testing out regular expressions.\nTo create a string, type any text in either double quotes (\") or single quotes '. Using double or single quotes doesn’t matter unless your string itself has single or double quotes.\n\nCodestring1 &lt;- \"This is a string\"\nstring2 &lt;- 'If I want to include a \"quote\" inside a string, I use single quotes'\nstring3 &lt;- c(string1, string2) # string / character vector (of greater than length 1)\n\n\nclass(string1)\n\n[1] \"character\"\n\nCodeclass(string2)\n\n[1] \"character\"\n\nCodeclass(string3)\n\n[1] \"character\"\n\nCodelength(string1)\n\n[1] 1\n\nCodelength(string2)\n\n[1] 1\n\nCodelength(string3)\n\n[1] 2\n\n\nWe can view these strings “naturally” (without the opening and closing quotes) with str_view():\n\nCodestr_view(string1)\n\n[1] │ This is a string\n\nCodestr_view(string2)\n\n[1] │ If I want to include a \"quote\" inside a string, I use single quotes\n\nCodestr_view(string3)\n\n[1] │ This is a string\n[2] │ If I want to include a \"quote\" inside a string, I use single quotes\n\n\nExercise: Create the string It's Thursday. What happens if you put the string inside single quotes? Double quotes?\n\nCode# Your code\nstring4 &lt;- \"It's Thursday\"\nstring5 &lt;- 'It\\'s Thursday'\n\nstr_view(string4)\n\n[1] │ It's Thursday\n\nCodestr_view(string5)\n\n[1] │ It's Thursday\n\n\nBecause \" and ' are special characters in the creation of strings, R offers another way to put them inside a string. We can escape these special characters by putting a \\ in front of them:\n\nCodestring1 &lt;- \"This is a string with \\\"double quotes\\\"\"\nstring2 &lt;- \"This is a string with \\'single quotes\\'\"\nstr_view(string1)\n\n[1] │ This is a string with \"double quotes\"\n\nCodestr_view(string2)\n\n[1] │ This is a string with 'single quotes'\n\n\nGiven that \\ is a special character, how can we put the \\ character in strings? We have to escape it with \\\\.\nExercise: Create the string C:\\Users. What happens when you don’t escape the \\?\n\nCode# Your code\nstring7 &lt;- \"(:\\\\Users\"\n\n\nIf you don’t put in the double it gets an error because it is trying to read s a special reference that needs a hex code.\nOther special characters include:\n\n\n\\t (Creates a tab)\n\n\\n (Creates a newline)\n\nBoth can be useful in plots to more neatly arrange text.\n\nCodestring1 &lt;- \"Record temp:\\t102\"\nstring2 &lt;- \"Record temp:\\n102\"\n\nstr_view(string1)\n\n[1] │ Record temp:{\\t}102\n\nCodestr_view(string2)\n\n[1] │ Record temp:\n    │ 102\n\n\nCan we get str_view() to show the tab instead of {\\t}? We can use the html argument to have the string displayed as if on a webpage:\n\nCodestr_view(string1, html = TRUE)\n\n\nOften we will want to create new strings within data frames. We can use str_c() or str_glue(), both of which are vectorized functions (meaning they take vectors as inputs and provide vectors as outputs - can be used within mutate()):\n\nWith str_c() the strings to be combined are all separate arguments separated by commas.\nWith str_glue() the desired string is written as a template with variable names inside curly braces {}.\n\n\nCodedf &lt;- tibble(\n    first_name = c(\"Arya\", \"Olenna\", \"Tyrion\", \"Melisandre\"),\n    last_name = c(\"Stark\", \"Tyrell\", \"Lannister\", NA)\n)\ndf\n\n# A tibble: 4 × 2\n  first_name last_name\n  &lt;chr&gt;      &lt;chr&gt;    \n1 Arya       Stark    \n2 Olenna     Tyrell   \n3 Tyrion     Lannister\n4 Melisandre &lt;NA&gt;     \n\nCodedf |&gt;\n    mutate(\n        full_name1 = str_c(first_name, \" \", last_name),\n        full_name2 = str_glue(\"{first_name} {last_name}\")\n    )\n\n# A tibble: 4 × 4\n  first_name last_name full_name1       full_name2      \n  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            &lt;glue&gt;          \n1 Arya       Stark     Arya Stark       Arya Stark      \n2 Olenna     Tyrell    Olenna Tyrell    Olenna Tyrell   \n3 Tyrion     Lannister Tyrion Lannister Tyrion Lannister\n4 Melisandre &lt;NA&gt;      &lt;NA&gt;             Melisandre NA   \n\n\nExercise: In the following data frame, create a full date string in month-day-year format using both str_c() and str_glue().\n\nCodedf_dates &lt;- tibble(\n    year = c(2000, 2001, 2002),\n    month = c(\"Jan\", \"Feb\", \"Mar\"),\n    day = c(3, 4, 5)\n)\n\ndf_dates |&gt; \n  mutate(\n    full_date1 = str_c(month, \"-\", day, \"-\", year),\n    full_date2 = str_glue(\"{month}-{day}-{year}\")\n  )\n\n# A tibble: 3 × 5\n   year month   day full_date1 full_date2\n  &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;glue&gt;    \n1  2000 Jan       3 Jan-3-2000 Jan-3-2000\n2  2001 Feb       4 Feb-4-2001 Feb-4-2001\n3  2002 Mar       5 Mar-5-2002 Mar-5-2002",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#extracting-information-from-strings",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#extracting-information-from-strings",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Extracting information from strings",
+    "text": "Extracting information from strings\nThe str_length() counts the number of characters in a string.\n\nCodecomments &lt;- tibble(\n    name = c(\"Alice\", \"Bob\"),\n    comment = c(\"The essay was well organized around the core message and had good transitions.\", \"Good job!\")\n)\n\ncomments |&gt;\n    mutate(\n        comment_length = str_length(comment)\n    )\n\n# A tibble: 2 × 3\n  name  comment                                                   comment_length\n  &lt;chr&gt; &lt;chr&gt;                                                              &lt;int&gt;\n1 Alice The essay was well organized around the core message and…             78\n2 Bob   Good job!                                                              9\n\n\nThe str_sub() function gets a substring of a string. The 2nd and 3rd arguments indicate the beginning and ending position to extract.\n\nNegative positions indicate the position from the end of the word. (e.g., -3 indicates “3rd letter from the end”)\nSpecifying a position that goes beyond the word won’t result in an error. str_sub() will just go as far as possible.\n\n\nCodex &lt;- c(\"Apple\", \"Banana\", \"Pear\")\n\nstr_sub(x, start = 1, end = 3)\n\n[1] \"App\" \"Ban\" \"Pea\"\n\nCodestr_sub(x, start = -3, end = -1)\n\n[1] \"ple\" \"ana\" \"ear\"\n\nCodestr_sub(x, start = 2, end = -1)\n\n[1] \"pple\"  \"anana\" \"ear\"  \n\nCodestr_sub(\"a\", start = 1, end = 15)\n\n[1] \"a\"\n\n\nExercise: Using str_sub(), create a new variable with only the middle letter of each word in the data frame below. (Challenge: How would you handle words with an even number of letters?)\n\nCodedf &lt;- tibble(\n    word_id = 1:3,\n    word = c(\"replace\", \"match\", \"pattern\")\n)\n\ndf |&gt; \n  mutate(\n    mid_letter = str_sub(word, start = ((str_length(word) + 1)/ 2), end = ((str_length(word) + 1) / 2))\n  )\n\n# A tibble: 3 × 3\n  word_id word    mid_letter\n    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;     \n1       1 replace l         \n2       2 match   t         \n3       3 pattern t",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#finding-patterns-in-strings-with-regular-expressions",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#finding-patterns-in-strings-with-regular-expressions",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Finding patterns in strings with regular expressions",
+    "text": "Finding patterns in strings with regular expressions\nSuppose that you’re exploring text data looking for places where people describe happiness. There are many ways to search. We could search for the word “happy” but that excludes “happiness” so we might search for “happi”.\nRegular expressions (regex) are a powerful language for describing patterns within strings.\n. . .\n\nCodedata(fruit)\ndata(words)\ndata(sentences)\n\n\nWe can use str_view() with the pattern argument to see what parts of a string match the regex supplied in the pattern argument. (Matches are enclosed in &lt;&gt;.)\n\nCodestr_view(fruit, \"berry\")\n\n [6] │ bil&lt;berry&gt;\n [7] │ black&lt;berry&gt;\n[10] │ blue&lt;berry&gt;\n[11] │ boysen&lt;berry&gt;\n[19] │ cloud&lt;berry&gt;\n[21] │ cran&lt;berry&gt;\n[29] │ elder&lt;berry&gt;\n[32] │ goji &lt;berry&gt;\n[33] │ goose&lt;berry&gt;\n[38] │ huckle&lt;berry&gt;\n[50] │ mul&lt;berry&gt;\n[70] │ rasp&lt;berry&gt;\n[73] │ salal &lt;berry&gt;\n[76] │ straw&lt;berry&gt;\n\n\nEssentials of forming a regex\n\nLetters and numbers in a regex are matched exactly and are called literal characters.\nMost punctuation characters, like ., +, *, [, ], and ?, have special meanings and are called metacharacters.\n\nQuantifiers come after a regex and control how many times a pattern can match:\n\n\n?: match the preceding pattern 0 or 1 times\n\n+: match the preceding pattern at least once\n\n*: match the preceding pattern at least 0 times (any number of times)\n\n\n\n. . .\nExercise: Before running the code below, predict what matches will be made. Run the code to check your guesses. Note that in all regex’s below the ?, +, * applies to the b only (not the a).\n\nCodestr_view(c(\"a\", \"ab\", \"abb\"), \"ab?\")\nstr_view(c(\"a\", \"ab\", \"abb\"), \"ab+\")\nstr_view(c(\"a\", \"ab\", \"abb\"), \"ab*\")\n\n\n\nWe can match any of a set of characters with [] (called a character class), e.g., [abcd] matches “a”, “b”, “c”, or “d”.\n\nWe can invert the match by starting with ^: [^abcd] matches anything except “a”, “b”, “c”, or “d”.\n\n\n\n\nCode# Match words that have vowel-x-vowel\nstr_view(words, \"[aeiou]x[aeiou]\")\n\n[284] │ &lt;exa&gt;ct\n[285] │ &lt;exa&gt;mple\n[288] │ &lt;exe&gt;rcise\n[289] │ &lt;exi&gt;st\n\nCode# Match words that have not_vowel-y-not_vowel\nstr_view(words, \"[^aeiou]y[^aeiou]\")\n\n[836] │ &lt;sys&gt;tem\n[901] │ &lt;typ&gt;e\n\n\nExercise Using the words data, find words that have two vowels in a row followed by an “m”.\n\nCode# Your code\nstr_view(words, \"[aeiou][aeiou]m\")\n\n[154] │ cl&lt;aim&gt;\n[714] │ r&lt;oom&gt;\n[735] │ s&lt;eem&gt;\n[844] │ t&lt;eam&gt;\n\n\n\nThe alternation operator | can be read just like the logical operator | (“OR”) to pick between one or more alternative patterns. e.g., apple|banana searches for “apple” or “banana”.\n\n\nCodestr_view(fruit, \"apple|melon|nut\")\n\n [1] │ &lt;apple&gt;\n[13] │ canary &lt;melon&gt;\n[20] │ coco&lt;nut&gt;\n[52] │ &lt;nut&gt;\n[62] │ pine&lt;apple&gt;\n[72] │ rock &lt;melon&gt;\n[80] │ water&lt;melon&gt;\n\n\nExercise: Using the fruit data, find fruits that have a repeated vowel (“aa”, “ee”, “ii”, “oo”, or “uu”.)\n\nCode# Your code\nstr_view(fruit, \"aa|ee|ii|oo|uu\")\n\n [9] │ bl&lt;oo&gt;d orange\n[33] │ g&lt;oo&gt;seberry\n[47] │ lych&lt;ee&gt;\n[66] │ purple mangost&lt;ee&gt;n\n\n\n\nThe ^ operator indicates the beginning of a string, and the $ operator indicates the end of a string. e.g., ^a matches strings that start with “a”, and a$ matches words that end with “a”.\nParentheses group together parts of a regular expression that should be taken as a bundle. (Much like parentheses in arithmetic statements.)\n\ne.g., ab+ is a little confusing. Does it match “ab” one or more times? Or does it match “a” first, then just “b” one or more times? (The latter, as we saw in an earlier example.) We can be very explicit and use a(b)+.\n\n\n\nExercise: Using the words data, find (1) words that start with “y” and (2) words that don’t start with “y”.\n\nCode# Your code\nstr_view(words, \"^y\")\n\n[975] │ &lt;y&gt;ear\n[976] │ &lt;y&gt;es\n[977] │ &lt;y&gt;esterday\n[978] │ &lt;y&gt;et\n[979] │ &lt;y&gt;ou\n[980] │ &lt;y&gt;oung\n\nCodestr_view(words, \"^(?!Y).*$\")\n\n [1] │ &lt;a&gt;\n [2] │ &lt;able&gt;\n [3] │ &lt;about&gt;\n [4] │ &lt;absolute&gt;\n [5] │ &lt;accept&gt;\n [6] │ &lt;account&gt;\n [7] │ &lt;achieve&gt;\n [8] │ &lt;across&gt;\n [9] │ &lt;act&gt;\n[10] │ &lt;active&gt;\n[11] │ &lt;actual&gt;\n[12] │ &lt;add&gt;\n[13] │ &lt;address&gt;\n[14] │ &lt;admit&gt;\n[15] │ &lt;advertise&gt;\n[16] │ &lt;affect&gt;\n[17] │ &lt;afford&gt;\n[18] │ &lt;after&gt;\n[19] │ &lt;afternoon&gt;\n[20] │ &lt;again&gt;\n... and 960 more",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#exploring-stringr-functions",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#exploring-stringr-functions",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Exploring stringr functions",
+    "text": "Exploring stringr functions\nRead in the “Dear Abby” data underlying The Pudding’s 30 Years of American Anxieties article.\n\nCodeposts &lt;- read_csv(\"https://raw.githubusercontent.com/the-pudding/data/master/dearabby/raw_da_qs.csv\")\n\n\nTake a couple minutes to scroll through the 30 Years of American Anxieties article to get ideas for themes that you might want to search for using regular expressions.\n\nThe following are core stringr functions that use regular expressions:\n\n\nstr_view() - View the first occurrence in a string that matches the regex\n\nstr_count() - Count the number of times a regex matches within a string\n\nstr_detect() - Determine if (TRUE/FALSE) the regex is found within string\n\nstr_subset() - Return subset of strings that match the regex\n\nstr_extract(), str_extract_all() - Return portion of each string that matches the regex. str_extract() extracts the first instance of the match. str_extract_all() extracts all matches.\n\nstr_replace(), str_replace_all() - Replace portion of string that matches the regex with something else. str_replace() replaces the first instance of the match. str_replace_all() replaces all instances of the match.\n\nstr_remove(), str_remove_all() - Removes the portion of the string that matches the pattern. Equivalent to str_replace(x, \"THE REGEX PATTERN\", \"\")\n\n\nExercise: Starting from str_count(), explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the posts data.\n\nCode#I turned these into comments because my website was taking longer than 15min to publish. \n#str_count(posts, \"sex\")\n#str_detect(posts, \"taboo\")\n#str_subset(posts, \"strange\")\n#str_extract(posts, \"dating\")\n#str_replace(posts, \"beautiful\", \"stunning\")\n#str_remove(posts, \"anxiety\")",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
+    "objectID": "src/ica/Advanced_data_wrangling_P2.html#done",
+    "href": "src/ica/Advanced_data_wrangling_P2.html#done",
+    "title": "7 Adv Data wrangling P2",
+    "section": "Done!",
+    "text": "Done!\n\nCheck the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>7 Adv Data wrangling P2</span>"
+    ]
+  },
+  {
     "objectID": "src/appx/appx-sample1.html",
     "href": "src/appx/appx-sample1.html",
     "title": "Appendix A — Appendix Sample 1",
