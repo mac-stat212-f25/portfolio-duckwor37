@@ -353,12 +353,13 @@ The following are core `stringr` functions that use regular expressions:
 **Exercise:** Starting from `str_count()`, explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the `posts` data.
 
 ```{r}
-str_count(posts, "sex")
-str_detect(posts, "taboo")
-str_subset(posts, "odd")
-str_extract_all(posts, "alone")
-str_replace_all(posts, "beautiful", "stunning")
-str_remove_all(posts, "Abby")
+#I turned these into comments because my website was taking longer than 15min to publish. 
+#str_count(posts, "sex")
+#str_detect(posts, "taboo")
+#str_subset(posts, "strange")
+#str_extract(posts, "dating")
+#str_replace(posts, "beautiful", "stunning")
+#str_remove(posts, "anxiety")
 ```
 
 ## Done!
