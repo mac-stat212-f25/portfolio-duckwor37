@@ -68,6 +68,7 @@ book:
       chapters:
       - src/tt/hw01-tt.qmd
       - src/tt/hw02-tt.qmd
+      - src/tt/hw03-tt.qmd
 
     - part: "In-Class Activities"
       chapters:
