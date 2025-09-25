@@ -1,0 +1,100 @@
+---
+title: "Homework 03"
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r}
+#Necessary Libraries
+#| include: false
+#| echo: false
+
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+library(tidytuesdayR)
+```
+
+##Importing the Data 
+
+Reading in the Tidytuesday data for last week, which takes a look at recipes gathered Allrecipes.com. The first data set -- all_recipes -- has a collection of regular recipes and the second data set -- cuisines -- contains recipes organized by their country of origin, and has fewer data points than the all_recipies data set. 
+
+```{r}
+#| include: true
+#| echo: true
+
+tt_data <- tt_load("2025-09-16")
+all_recipes <- tt_data$all_recipes
+cuisines <- tt_data$cuisines
+```
+
+Research Questions: What recipe takes the longest and what is the fastest? Does a certain cuisine take longer than others, how much of it is prep vs cook time? 
+
+## Exploring the Data
+
+```{r}
+#Joining the Data 
+recipes_expanded <- full_join(all_recipes, cuisines)
+```
+
+#Finding recipe with longest total time
+```{r}
+recipes_expanded |> 
+  slice_max(total_time, with_ties = TRUE)
+```
+The recipe that takes the longest is homemade wine, which funnily enough has only 5 min prep time and 0 cook time but needs to ferment for about 42 days. It does make 32 servings though, probably for a wine tasting party. 
+
+#Finding recipe with shortest total time
+```{r}
+recipes_expanded |> 
+  filter(total_time == 1) #over 300 had cooking times of zero, which was most likely put in place because no time was given, which is why I started with == to 1.
+```
+The 4 recipies that take the "shortest" amount of time are all sauces/spice mixes. Pumpkin pie spice and 3 ingredient Potsticker dip, do sound like they would take minimal prep time which is why their authors have most likely just marked the time as 1 minute. However teriyaki sauce and sauteed oyster mushrooms in garlic butter sound like they might take more time in reality. Since these are user entered -- volunteer data -- there doens't have to be accuracy for reporting, which is most likely why these recipes show up here. It is important to then understand that user error might be a serious bias skewing or limited analysis. 
+
+#Cusine with longest average time
+```{r}
+cuisines |> 
+  group_by(country) |> 
+  summarise(Mean_time = mean(total_time)) |> 
+  arrange(desc(Mean_time))
+```
+It appears Amish and Mennonite food takes the longest to make, most likely because they do things more traditionally and preserve a lot of food which takes time. In comparison on average Colombian food takes the least average amount of time. A lot of the mean times however are quite long because they are most likely being skewed by a few large data points or recipes that take a long time. 
+
+## Visualizations 
+
+#Prepping the Data for the Visualization
+```{r}
+Mean_times_cuisines <-  cuisines |> 
+  mutate(other_time = (total_time - (prep_time + cook_time))) |> 
+  group_by(country) |> 
+  summarise(mean_prep_time = mean(prep_time), mean_cook_time = mean(cook_time), mean_other_time = mean(other_time)) |> 
+  pivot_longer(
+    cols = c(mean_prep_time, mean_cook_time, mean_other_time),
+    names_to = "work_type", 
+    values_to = "time_dedicated"
+  )
+```
+
+#Vizualization 
+```{r}
+Mean_times_cuisines |> 
+  ggplot(aes(x = "", y = time_dedicated, group = work_type, colour = work_type, fill = work_type)) + 
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y", start=0) + 
+  facet_grid(.~country) +
+  theme_void()
+```
+
+
