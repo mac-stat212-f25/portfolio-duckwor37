@@ -637,6 +637,39 @@
     ]
   },
   {
+    "objectID": "src/exams/exam_1/exam_1.html",
+    "href": "src/exams/exam_1/exam_1.html",
+    "title": "Exam 1: Exploring Compound CRSs",
+    "section": "",
+    "text": "Setup\nCodelibrary(tidyverse)\nlibrary(sf) # tools for working with spatial vector data (GIS functionality, mapping)\nlibrary(elevatr) # access to raster elevation maps\nlibrary(terra)\nlibrary(stars)\nlibrary(tidycensus) # spatial data for the US with census information\nlibrary(USAboundaries) # access to boundaries for US states, counties, zip codes, and congressional districts\nCompound Coordinate Reference systems combine two or more single non-compound coordinate reference systems to represent locations, typically a horizontal and vertical CRS. The two systems have different datum and projections but are organized into an ordered tuple. They help to ensure a more accurate and consistent representation across different systems and applications, create complex referencing and describe 3D locations.",
+    "crumbs": [
+      "Exams",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exam 1: Exploring Compound CRSs</span>"
+    ]
+  },
+  {
+    "objectID": "src/exams/exam_1/exam_1.html#creating-a-compound-crs",
+    "href": "src/exams/exam_1/exam_1.html#creating-a-compound-crs",
+    "title": "Exam 1: Exploring Compound CRSs",
+    "section": "Creating a Compound CRS",
+    "text": "Creating a Compound CRS\nYou first have to define the two different maping components, the vertical and the horizontal CRS. EPSGs or WKT (well-known text) both work just fine as references. In the example below I just plugged two different CRS’s in and saved them, but you would want to specify which horizontal and which vertical systems you wanted to use for your data. Horizontal normally comes with 2 dimensions latitude and longitude while vertical comes with one dimension elevation. The CS variable of the CRS should tell you what type of model and dimensions it is using. For example NAD83 is ellipsoidal, 2, while NAVD88 height or EPSG:5703 is vertical, 1.\n\nCodehorizontal &lt;- st_crs(\"NAD83\")\n\nvertical &lt;- st_crs(5703)\n\n\nYou would then combine the two different CRS’s using their WKT into a compound CRS manually. To do so you need to paste “COMPOUNDCRS[” that tells the system it is a compound CRS, then the two different WKT of the CRS’s you wish to use sperated by a comma. In order to get the WKT of each of those CRS’s you can use st_as_text(). Then end the string with ”]” and seperate with ““. Then turn the string into an actual CRS by using st_crs.\n\nCodecompound_wkt &lt;- paste(\"COMPOUNDCRS[\",\n                      st_as_text(horizontal), \",\",\n                      st_as_text(vertical),\n                      \"]\", sep = \"\")\n\ncompound_crs &lt;- st_crs(compound_wkt)\n\n\nYou can then use this CRS to define the coordinate system for an sf object with coordinates in 3 dimensions (x,y,z); you can assign the compound CRS using st_set_crs(). For example below I created a small data frame and turned the drame into a sf object using st_as_sf. I then assigned the CRS object to the sf data, and you can see in the call that it has 3 dimensions and calls on my compound CRS.\n\nCodecrs_data &lt;- data.frame(\n  x = 2560, 7000, \n  y = 735, 100, \n  z = 53, 10\n)\n\nsf_point &lt;- st_as_sf(crs_data, coords = c(\"x\", \"y\", \"z\"))\n\nst_crs(sf_point) &lt;- compound_crs\n\nsf_point\n\nSimple feature collection with 1 feature and 3 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 2560 ymin: 735 xmax: 2560 ymax: 735\nGeodetic CRS:  GEOGCS\n  X7000 X100 X10              geometry\n1  7000  100  10 POINT Z (2560 735 53)\n\n\nYou can then use the compound CRS to create a map\n\nCodeggplot() + \n  geom_sf(data = sf_point) +\n  ggtitle(\"3D Point Mapped with a Compound CRS\")\n\n\n\n\n\n\n\nIt looks 2D because, well a computer is 2D. However if you are thinking about certain locations where height is a factor that needs to be considered such as surveying it increases the accuracy and gives more comprehensive descriptios of features as they are more spatially and/or temporally consistent.",
+    "crumbs": [
+      "Exams",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exam 1: Exploring Compound CRSs</span>"
+    ]
+  },
+  {
+    "objectID": "src/exams/exam_1/exam_1.html#transforming-compound-crs-data",
+    "href": "src/exams/exam_1/exam_1.html#transforming-compound-crs-data",
+    "title": "Exam 1: Exploring Compound CRSs",
+    "section": "Transforming Compound CRS data",
+    "text": "Transforming Compound CRS data\nIf you have data that does have 3 dimensions using sf_transform() you can change it to your compound CRS. In this case I used 4979, which is WGS 84, but you would put your data in where the number is to extract its CRS. This also works if it only has a horizontal component and you want to add a vertical CRS, which is called reprojecting the data.\n\nCode#source_crs &lt;- st_crs(4979)\n#transformed_data &lt;- st_transform(source_crs, crs = compound_crs)\n\n\nsf_transform() will attempt to preserve the vertical component if your a transforming your data into a compound CRS with one, but vertical data is lost if you translate to a 2D CRS. st_transform often works if you only need to transform the horizontal part of the of the compound CRS, but if your two vertical components don’t match up that becomes a little more tricky. Often times it requires specialized tools beyond the scope of sf.",
+    "crumbs": [
+      "Exams",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exam 1: Exploring Compound CRSs</span>"
+    ]
+  },
+  {
     "objectID": "src/appx/appx-sample1.html",
     "href": "src/appx/appx-sample1.html",
     "title": "Appendix A — Appendix Sample 1",
