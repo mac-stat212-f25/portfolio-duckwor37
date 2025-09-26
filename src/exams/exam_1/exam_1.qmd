@@ -1,5 +1,5 @@
 ---
-title: "exam_1"
+title: "Exam 1: Exploring CRS"
 format: html
 ---
 
