@@ -4,3 +4,12 @@
 
 ![0808-mind_map_example.jpg](0808-mind_map_example.jpg)
 
+![0905-Review_mind_map.jpeg](0905-Review_mind_map.jpeg)
+
+![0908-Data_Visualization.jpeg](0908-Data_visualization.jpeg)
+
+![0910-Advanced_spatial_data_viz.jpeg](0910-Advanced_spatial_data_viz.jpeg)
+
+![0916-Adv_Data_wrangling_P1.jpeg](0916-Adv_Data_wrangling_P1.jpeg)
+
+![0922-Adv_Data_wrangling_P2.jpeg](0922-Adv_Data_wrangling_P2.jpeg)
