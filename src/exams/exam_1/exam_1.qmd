@@ -75,8 +75,8 @@ It looks 2D because, well a computer is 2D. However if you are thinking about ce
 If you have data that does have 3 dimensions using sf_transform() you can change it to your compound CRS. In this case I used 4979, which is WGS 84, but you would put your data in where the number is to extract its CRS. This also works if it only has a horizontal component and you want to add a vertical CRS, which is called reprojecting the data. 
 
 ```{r}
-source_crs <- st_crs(4979)
-transformed_data <- st_transform(source_crs, crs = compound_crs)
+#source_crs <- st_crs(4979)
+#transformed_data <- st_transform(source_crs, crs = compound_crs)
 ```
 
 
