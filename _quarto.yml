@@ -78,6 +78,11 @@ book:
       - src/ica/Advanced_data_wrangling_P1.qmd
       - src/ica/Advanced_data_wrangling_P2.qmd
 
+    - part: "Exams"
+      chapters: 
+      -src/exams/Exam_summary_sheets.md
+      -src/exams/exam_1/exam.qmd
+
   appendices:
   - src/appx/appx-sample1.qmd
   - src/appx/appx-sample2.qmd
