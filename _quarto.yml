@@ -80,8 +80,8 @@ book:
 
     - part: "Exams"
       chapters: 
-      -src/exams/Exam_summary_sheets.md
-      -src/exams/exam_1/exam.qmd
+      - src/exams/Exam_summary_sheets.md
+      - src/exams/exam_1/exam.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd
