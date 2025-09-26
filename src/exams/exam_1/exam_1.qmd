@@ -1,5 +1,86 @@
 ---
-title: "Exam 1: Exploring CRS"
+title: "Exam 1: Exploring Compound CRSs"
 format: html
 ---
+
+```{r doc_setup, echo=FALSE, message=FALSE}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+knitr::opts_chunk$set(fig.align = "center", warning = FALSE, message = FALSE)
+```
+
+## Setup 
+
+```{r}
+library(tidyverse)
+library(sf) # tools for working with spatial vector data (GIS functionality, mapping)
+library(elevatr) # access to raster elevation maps
+library(terra)
+library(stars)
+library(tidycensus) # spatial data for the US with census information
+library(USAboundaries) # access to boundaries for US states, counties, zip codes, and congressional districts 
+```
+
+Compound Coordinate Reference systems combine two or more single non-compound coordinate reference systems to represent locations, typically a horizontal and vertical CRS. The two systems have different datum and projections but are organized into an ordered tuple. They help to ensure a more accurate and consistent representation across different systems and applications, create complex referencing and describe 3D locations.  
+
+## Creating a Compound CRS 
+
+You first have to define the two different maping components, the vertical and the horizontal CRS. EPSGs or WKT (well-known text) both work just fine as references. In the example below I just plugged two different CRS's in and saved them, but you would want to specify which horizontal and which vertical systems you wanted to use for your data. Horizontal normally comes with 2 dimensions latitude and longitude while vertical comes with one dimension elevation. The CS variable of the CRS should tell you what type of model and dimensions it is using. For example NAD83 is ellipsoidal, 2, while NAVD88 height or EPSG:5703 is vertical, 1. 
+
+```{r}
+horizontal <- st_crs("NAD83")
+
+vertical <- st_crs(5703)
+```
+
+You would then combine the two different CRS's using their WKT into a compound CRS manually. To do so you need to paste "COMPOUNDCRS[" that tells the system it is a compound CRS, then the two different WKT of the CRS's you wish to use sperated by a comma. In order to get the WKT of each of those CRS's you can use st_as_text(). Then end the string with "]" and seperate with "". Then turn the string into an actual CRS by using st_crs. 
+
+```{r}
+compound_wkt <- paste("COMPOUNDCRS[",
+                      st_as_text(horizontal), ",",
+                      st_as_text(vertical),
+                      "]", sep = "")
+
+compound_crs <- st_crs(compound_wkt)
+```
+
+You can then use this CRS to define the coordinate system for an sf object with coordinates in 3 dimensions (x,y,z); you can assign the compound CRS using st_set_crs(). For example below I created a small data frame and turned the drame into a sf object using st_as_sf. I then assigned the CRS object to the sf data, and you can see in the call that it has 3 dimensions and calls on my compound CRS. 
+
+```{r}
+crs_data <- data.frame(
+  x = 2560, 7000, 
+  y = 735, 100, 
+  z = 53, 10
+)
+
+sf_point <- st_as_sf(crs_data, coords = c("x", "y", "z"))
+
+st_crs(sf_point) <- compound_crs
+
+sf_point
+```
+You can then use the compound CRS to create a map
+
+```{r}
+ggplot() + 
+  geom_sf(data = sf_point) +
+  ggtitle("3D Point Mapped with a Compound CRS")
+```
+It looks 2D because, well a computer is 2D. However if you are thinking about certain locations where height is a factor that needs to be considered such as surveying it increases the accuracy and gives more comprehensive descriptios of features as they are more spatially and/or temporally consistent. 
+
+## Transforming Compound CRS data
+
+If you have data that does have 3 dimensions using sf_transform() you can change it to your compound CRS. In this case I used 4979, which is WGS 84, but you would put your data in where the number is to extract its CRS. This also works if it only has a horizontal component and you want to add a vertical CRS, which is called reprojecting the data. 
+
+```{r}
+source_crs <- st_crs(4979)
+transformed_data <- st_transform(source_crs, crs = compound_crs)
+```
+
+
+sf_transform() will attempt to preserve the vertical component if your a transforming your data into a compound CRS with one, but vertical data is lost if you translate to a 2D CRS. st_transform often works if you only need to transform the horizontal part of the of the compound CRS, but if your two vertical components don't match up that becomes a little more tricky. Often times it requires specialized tools beyond the scope of sf. 
+
+
 
