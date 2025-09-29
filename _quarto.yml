@@ -77,6 +77,7 @@ book:
       - src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.qmd
       - src/ica/Advanced_data_wrangling_P1.qmd
       - src/ica/Advanced_data_wrangling_P2.qmd
+      - src/ica/08-missing-data-notes.qmd
 
     - part: "Exams"
       chapters: 
