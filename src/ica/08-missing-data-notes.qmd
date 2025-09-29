@@ -1,0 +1,374 @@
+---
+title: "8 Missing Data"
+---
+
+
+```{r doc_setup_08, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(naniar)
+library(mice)
+```
+
+## 🧩 Learning Goals
+
+By the end of this lesson, you should be able to:
+
+- Go through a data quality checklist when data wrangling
+- Explain the difference between MCAR, MAR, and MNAR missing data mechanisms
+- Assess what missing data mechanisms might be at play in a given dataset
+- Use visualizations to explore missing data patterns
+- Explain why multiple imputation is preferred to single imputation
+- Explain how a simulation study can be used to investigate properties of statistical methods
+
+
+## Data Quality Checklist 
+
+When wrangling / cleaning data, make sure to check the assumptions you make about the data to ensure you don't lose data quality.
+
+
+:::{.incremental}
+**Data Parsing** (reading data into a different data format)
+
+- Always keep the original, raw data (don't manually change it).
+- Use Test Cases: Find rows or write test cases to double check the wrangling works as expected
+- DATES: When using `lubridate` to parse dates and times, ensure the strings are consistently ordered and formatted correctly, eg,  mm/dd/yy vs. dd/mm/yy. 
+- STRINGS: When using `stringr` to parse strings with regular expressions, check example rows to ensure that the pattern captured all of the examples you want and excluded the patterns you don't want.
+- Always check for missing values to see if the missing ones are expected given the original data.
+
+:::
+
+**Data Joining**
+
+:::{.incremental}
+
+- Identify missing values in the key variables and decide how to handle them before the merge process (e.g., omitting rows with missing values, imputing missing values).
+- Decide on the correct join type (left, right, inner, full, etc.) OR if the data structure is the same use `list_rbind()` to bind rows or `list_cbind()` to bind columns.
+- If doing a join, make sure that the key variables (`by`) have the same meaning in both datasets and are represented in the same way (e.g., id = 1 to 20 in first dataset will match id = 1 - 20 in undesirable ways)
+- Predict the number of rows that will result from the join and double check the `anti_join()` to see which rows did not find a match.
+- Check for duplicate records within each dataset and ensure they are handled appropriately before merging.
+- Verify that the merged dataset maintains consistency with the original datasets in terms of data values, variable names, and variable types.
+- Perform some preliminary analysis or validation checks on the merged dataset to ensure that it meets the requirements of your analysis.
+
+:::
+
+
+**Sanity Check: Visualize your data!!!**
+
+:::{.incremental}
+- Do the right number of points appear?
+- Do the values seem reasonable?
+:::
+
+## Explicit v. Implicit Missing Data 
+
+**Explicit missing data** is data that is explicitly marked as missing. In R, this is done with `NA`.
+
+
+**Implicit missing data** is data that is missing but not explicitly marked as such. 
+
+- This can happen when an entire row is missing from a dataset. 
+    - For example, if a study participant doesn't attend a follow-up visit. It maybe not even be recorded in the data.
+
+We need to **make implicit missingness explicit** before we can work with the data. 
+
+- Consider the combinations of variables that you'd expect to be fully present in a complete dataset. 
+    - If a combination is missing, you can create a new row with explicit missing values. 
+      - For example, if you expect every participant (each has a unique `pid`) to have an observation for each `visit`, you could use the function `complete()` to create that new row and plug in values of `NA` for the missing data.
+
+```
+study_data_full <- study_data |> 
+  complete(pid, visit)
+```
+
+## Dealing with missing data 
+
+If you have **explicit** missing data, there are 3 main ways of proceeding:
+
+::: {.incremental}
+
+1. Drop the cases or rows with any missing data from the analysis--a **complete case analysis**
+    -  Pro: Easy to implement
+    -  Con: reduces sample size, introduces bias if the missing data is not "missing completely at random" 
+    
+2. Create a category for missing values.
+    - Example: The survey question "What is your gender?" might only provide two possible responses: "male" and "female". Missing values for this could indicate that the respondent uses a non-binary designation. Instead of dropping these cases, treating the missing data as its own category ("Does not wish to answer") would be more appropriate.
+    - Pros: Maintains sample size, may help us if data is "missing not at random"
+    - Cons: Not directly applicable to continuous outcomes (could include interactions with a categorical version in models to account for it)
+    
+3. **Impute** (or fill in values for) the missing data using imputation algorithms.
+    - Imputation algorithms can be as simple as replacing missing values with the mean of the non-missing values (very simplistic).
+    - Regression imputation algorithms use models to predict missing values as a function of other variables in the data.
+    - Pros: Maintains sample size, multiple regression imputation minimizes bias if "missing at random" 
+    - Cons: Computationally intensive
+:::
+
+
+Deciding between these options and proceeding with choosing finer details within an option requires an understanding of the **mechanism** by which data become missing.
+
+
+
+## Missing Data Mechanisms 
+
+The reasons for which a variable might have missing data are divided into 3 mechanisms: MCAR, MAR, and MNAR. 
+
+Within a dataset, multiple mechanisms may be present--we need to consider the missingness mechanism for each variable individually.
+
+::: {.incremental}
+- **Missing completely at random (MCAR)**:
+    - The probability of missing data for a variable is the same for all cases. Implies that causes of the missing data are unrelated to the data. (<https://stefvanbuuren.name/fimd/sec-MCAR.html>)
+    - Examples:
+        - Measurement device that runs out of batteries causes the remainder of observations for the day to be missing.
+        - Data entry software requires a particular field to be typo-free, and missing values are introduced when there are typos.
+    - Implications for downstream work:
+        - If a variable has MCAR missingness, a complete case analysis will be unbiased (still valid).
+        - However, with a lot of missing observations, a complete case analysis will suffer from loss of statistical power (ability to detect a real difference), and imputation will be useful to retain the original sample size.
+
+- **Missing at random (MAR):**
+    - The probability of missing data is related to **observed** variables but unrelated to unobserved information.
+    - Examples:
+        - Blood pressure measurements tend to be missing in patients in worse health. (Those in worse health are more likely to miss clinic visits.) Better and worse health can be measured by a variety of indicators in their health record.
+        - In a survey, older people are more likely to report their income than younger people. Missingness is related to the observed age variable, but not to unobserved information.
+    - Implications for downstream work:
+        - Try to use imputation methods that predict the value of the missing variables from other observed variables. Assessing whether this can be done accurately takes some exploration--we'll explore this shortly.
+
+- **Missing not at random (MNAR):**
+    - The probability of missing data is related to **unobserved** variables (and probably observed variables too).
+    - Examples:
+        - Blood pressure measurements are more likely to be missing for those with the highest blood pressure. This is MNAR rather than MAR because the missing data on blood pressure is related to the unobserved values themselves.
+        - High-income individuals may be less likely to report their income.
+    - Implications for downstream work:
+        - Ideally, we would learn more about the causes for the missingness. This could allow us to use more informed imputation models.
+            - Example: Biological measurements that tend to be missing because of concentrations that are too low (a phenomenon known as left-censoring). Imputation methods specifically suited to left-censoring are useful here.
+        - We can use imputation methods with different assumptions about the missing data and try out a variety of assumptions. This lets us see how sensitive the results are under various scenarios.
+            - Example: If higher incomes are more likely to be missing, we can make different assumptions about what "high" could be to fill in the missing values and see how our results change under these different assumptions.
+
+:::
+
+## Exercise 
+
+1. **Missing data mechanism** For each of the following situations, propose what missing data mechanism you think is most likely at play. 
+  a. In a clinical trial, some patients dropped out before the end of the study. Their reasons for dropping out were not recorded.
+  b. A weather station records temperature, humidity, and wind speed every hour. Some of the recorded values are missing.
+  c. A social media platform collects data on user interactions, such as likes, comments, and shares. Some interactions are not recorded due to bugs in the code.
+
+
+
+## Exploring Missing Data 
+
+**Guiding question:** How can we use visualizations and tabulations to explore what missing data mechanisms may be at play?
+
+We'll look at the `airquality` dataset available in base R, which gives daily air quality measurements in New York from May to September 1973. You can pull up the codebook with `?airquality` in the Console.
+
+```{r load_airqual}
+#| eval: true
+data(airquality)
+```
+
+## Missingness by Variable 
+
+We can explore how much missingness there is for each variable with the following functions:
+
+```{r miss_by_var}
+#| eval: true
+summary(airquality) # Summary statistics in addition to number of NA's
+naniar::vis_miss(airquality) # Where are NA's located?
+naniar::miss_var_summary(airquality) # Information from vis_miss() in table form
+```
+
+## Missingness by Case 
+
+We can explore how much missingness there is for each case with `naniar::miss_case_summary()`. 
+For each case, this function calculates the number and percentage of variables with a missing value. 
+
+
+**Impact of Information:** If the `pct_miss` column is large for a case, we likely won't be able to impute any of its missing values because there just isn't enough known information--this case will have to be dropped from the analysis.
+
+```{r miss_by_case}
+#| eval: true
+naniar::miss_case_summary(airquality)
+```
+
+## Exploring Missingness Mechanisms 
+
+Assessing missingness mechanisms involves checking if missingness in a variable is related to other variables. 
+
+Note: Through our available data, we are really only able to explore the potential for MCAR or MAR mechanisms. 
+
+
+
+**Impact of Information:** There is always the chance that unobserved information (unobserved other variables or unobserved values of the variables we do have) is related to missingness for our variables, so to think through the potential for MNAR, more contextual information is necessary.
+
+
+
+To explore these relationships, we can create TRUE/FALSE indicators of whether a variable is missing. In the plots below, we use `is.na(Ozone)` to explore whether cases with missing ozone values are noticeably different from cases with observed ozone values in terms of `Solar.R`.
+
+```{r miss_box_dens}
+#| eval: true
+ggplot(airquality, aes(x = is.na(Ozone), y = Solar.R)) + 
+    geom_boxplot()
+ggplot(airquality, aes(x = Solar.R, color = is.na(Ozone))) + 
+    geom_density()
+```
+
+The above boxplots and density plots suggest that missing ozone is not strongly related to solar radiation levels. 
+
+
+We still should check if ozone missingness is related to the `Wind`, `Temp`, `Month`, and `Day` variables (to be done in Exercises).
+
+
+
+In addition to checking if the *chance* of ozone missingness is related to `Solar.R`, we should check if the *values* of ozone could be predicted by `Solar.R`. 
+
+
+In the scaterrplot below, we look at the relationship between `Ozone` and `Solar.R` and use vertical lines to indicate the `Solar.R` values for cases that are missing `Ozone`.
+
+- **Impact of Information:** We see that missing `Ozone` cases are within the observed span of `Solar.R`, so we would be ok with predicting `Ozone` from `Solar.R` because there would be no **extrapolation**.
+
+```{r miss_scatter_na_markers}
+#| eval: true
+ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(data = airquality |> filter(is.na(Ozone)), mapping = aes(xintercept = Solar.R))
+```
+
+
+
+## Exercises 
+
+2. **Mechanism detection practice** Look at the boxplot + scatterplot pairs for Alternate Situations 1 and 2 below. How do these situations compare to our actual situation and to each other? What concerns might arise from using a model to impute `Ozone`?
+
+```{r miss_scatter_na_markers_alt}
+#| eval: true
+#| echo: false
+airquality_mod <- airquality |> 
+    mutate(
+        Solar.R_mod1 = if_else(is.na(Ozone), 250 + Solar.R/4, Solar.R),
+        Solar.R_mod2 = if_else(is.na(Ozone), 250 + Solar.R/2, Solar.R)
+    )
+
+ggplot(airquality_mod, aes(x = is.na(Ozone), y = Solar.R_mod1)) + 
+    geom_boxplot() +
+    labs(title = "Alternate Situation 1")
+ggplot(airquality_mod, aes(x = Solar.R_mod1, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(data = airquality_mod |> filter(is.na(Ozone)), mapping = aes(xintercept = Solar.R_mod1)) +
+    labs(title = "Alternate Situation 1")
+
+ggplot(airquality_mod, aes(x = is.na(Ozone), y = Solar.R_mod2)) + 
+    geom_boxplot() +
+    labs(title = "Alternate Situation 2")
+ggplot(airquality_mod, aes(x = Solar.R_mod2, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(data = airquality_mod |> filter(is.na(Ozone)), mapping = aes(xintercept = Solar.R_mod2)) +
+    labs(title = "Alternate Situation 2")
+```
+
+3. **Ozone mechanism detection** Continue the investigation of missingness for `Ozone`. 
+
+We want to see how `Month`, `Wind`, and `Temp` relate to the chance of missingness for `Ozone` and to the value of `Ozone`.
+
+Does it look like a linear regression model (perhaps with variable transformations) could be effective in imputing the missing ozone data?
+
+```{r}
+
+```
+
+
+
+## Regression Imputation 
+
+When a model is built and used to generate a single set of predictions for missing values, this is known as **single imputation**. 
+
+
+- When using singly imputed data in subsequent modeling, the uncertainty in estimates tends to be underestimated. This means that:
+    - Standard errors are lower than they should be.
+    - Confidence intervals won't contain the true parameter value the "advertised" percentage of times
+        - e.g., 95% confidence intervals will not contain the truth in 95% of samples--the coverage probability will be less than 95%
+
+
+In **multiple imputation**, multiple imputed datasets are generated with different values for the filled-in data. 
+
+
+- Subsequent models are fit on each of these datasets, and both estimates and uncertainty measures are pooled across all of these fits. 
+- Multiple imputation more accurately estimates uncertainty measures.
+
+## Simulation Studies 
+
+We can use a **simulation study** to investigate the statistical properties described above.
+
+::: {.incremental}
+
+1. Generate (simulate) data where we are in control of missing data mechanisms and the true relationship between an outcome and the predictors.
+2. On that simulated data, use **single imputation** to fill in the missing values. Fit the desired model, and obtain a confidence interval for a coefficient of interest.
+3. On that simulated data, use **multiple imputation** to fill in the missing values. Fit the desired models on all imputed datasets, pool results, and obtain a confidence interval for a coefficient of interest.
+4. Steps 1 - 3 are repeated a lot of times (`num_simulations <- 1000`) to see how things work out in lots of different samples.
+5. Summarize the performance of single and multiple imputation across the `num_simulations` simulations.
+
+:::
+
+We will slowly step through the simulation study code below. We will pause frequently for you to add comments documenting what is happening. 
+
+```{r mult_single_sim_study}
+set.seed(224)
+num_simulations <- 1000
+ci_list <- vector("list", length = num_simulations)
+
+system.time({
+for (i in 1:num_simulations) {
+    # Simulate data
+    n <- 1000
+    sim_data <- tibble(
+        x1 = runif(n, min = 0, max = 1),
+        x2 = x1 + rnorm(n, mean = 0, sd = 1),
+        x2_miss_bool = rbinom(n, size = 1, prob = x1/2),
+        x2_NA = if_else(x2_miss_bool == 1, NA, x2),
+        y = x1 + x2 + rnorm(n, mean = 0, sd = 1)
+    )
+    
+    # Single imputation ---------------
+    mice_obj <- mice(sim_data |> select(x1, x2_NA, y), m = 1, method = "norm", printFlag = FALSE)
+    si_mod <- with(mice_obj, lm(y ~ x1 + x2_NA))
+    ci_single <- si_mod$analyses[[1]] |> confint(level = 0.95)
+    ci_single <- ci_single["x2_NA",]
+    
+    # Multiple imputation -------------
+    mice_obj <- mice(sim_data |> select(x1, x2_NA, y), m = 10, method = "norm", printFlag = FALSE)
+    mi_mods <- with(mice_obj, lm(y ~ x1 + x2_NA))
+    pooled_res <- pool(mi_mods)
+    summ_pooled_res <- summary(pooled_res, conf.int = TRUE, conf.level = 0.95)
+    ci_multiple_lower <- summ_pooled_res |> filter(term=="x2_NA") |> pull(`2.5 %`)
+    ci_multiple_upper <- summ_pooled_res |> filter(term=="x2_NA") |> pull(`97.5 %`)
+    
+    # Store CI information
+    ci_list[[i]] <- tibble(
+        ci_lower = c(
+            ci_single[1],
+            ci_multiple_lower
+        ),
+        ci_upper = c(
+            ci_single[2],
+            ci_multiple_upper
+        ),
+        which_imp = c("single", "multiple")
+    )
+}
+})
+```
+
+Below we compute the confidence interval (CI) coverage probability (fraction of times the CI contains the true value of `1`) for the CIs generated from single and multiple imputation:
+
+```{r mult_single_sim_study_summ}
+ci_data <- bind_rows(ci_list)
+ci_data |> 
+    mutate(contains_truth = ci_lower < 1 & ci_upper > 1) |> 
+    group_by(which_imp) |> 
+    summarize(frac_contains_truth = mean(contains_truth))
+```
+
+## Done!
+
+- Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
+
