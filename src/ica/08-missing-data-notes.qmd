@@ -148,9 +148,13 @@ Within a dataset, multiple mechanisms may be present--we need to consider the mi
 
 1. **Missing data mechanism** For each of the following situations, propose what missing data mechanism you think is most likely at play. 
   a. In a clinical trial, some patients dropped out before the end of the study. Their reasons for dropping out were not recorded.
-  b. A weather station records temperature, humidity, and wind speed every hour. Some of the recorded values are missing.
-  c. A social media platform collects data on user interactions, such as likes, comments, and shares. Some interactions are not recorded due to bugs in the code.
+  In this case it is most likely MNAR because the reason for dropping out and the missing data is due to a variable that is not recorded or observed, their reason for dropping out. 
 
+  b. A weather station records temperature, humidity, and wind speed every hour. Some of the recorded values are missing.
+  This is missing completely at random or MCAR because there is no recorded variable that can point to the missing variables they simply are missing. 
+  
+  c. A social media platform collects data on user interactions, such as likes, comments, and shares. Some interactions are not recorded due to bugs in the code.
+  This is missing at random or MAR because it is connected to a recorded event or variable bugs in the code, and not pinpointed on something not recorded. 
 
 
 ## Exploring Missing Data 
@@ -265,6 +269,7 @@ ggplot(airquality_mod, aes(x = Solar.R_mod2, y = Ozone)) +
     geom_vline(data = airquality_mod |> filter(is.na(Ozone)), mapping = aes(xintercept = Solar.R_mod2)) +
     labs(title = "Alternate Situation 2")
 ```
+In these alternative situations there is no overlap when it comes to the box plots that are looking at where there are NA values and their relationship to solar radiation. Furthermore when you look at the first line graph you can see that the NA lines all cluster near the top but are in the range, where as in the second scenario they fall outside of the observed range. In our actual situation we could conclude there was no correlation between NA values and Solar Radiation, but in these scenarios there clearly is. If we tried to use a model to represent ozone then we could be misrepresenting the relationships and extrapolating the data. 
 
 3. **Ozone mechanism detection** Continue the investigation of missingness for `Ozone`. 
 
@@ -273,9 +278,26 @@ We want to see how `Month`, `Wind`, and `Temp` relate to the chance of missingne
 Does it look like a linear regression model (perhaps with variable transformations) could be effective in imputing the missing ozone data?
 
 ```{r}
+ggplot(airquality, aes(fill = is.na(Ozone), x = factor(Month))) +
+    geom_bar(position = "fill")
 
+ggplot(airquality, aes(x = is.na(Ozone), y = Wind)) + 
+  geom_boxplot()
+
+ggplot(airquality, aes(x = Wind, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(data = airquality |> filter(is.na(Ozone)), mapping = aes(xintercept = Wind))
+
+ggplot(airquality, aes(x = is.na(Ozone), y = Temp)) + 
+  geom_boxplot()
+
+ggplot(airquality, aes(x = Temp, y = Ozone)) +
+    geom_point() +
+    geom_smooth() +
+    geom_vline(data = airquality |> filter(is.na(Ozone)), mapping = aes(xintercept = Temp))
 ```
-
+Wind and Temp don't really have a strong relationship with missing Ozone values, only one NA case falls outside of the observed range of Wind and Temp. However, month does have a relationship and June has over 50% missing data values, while the others all rest beneath 25% per month. This is most likely a MAR type of variable, where it can be correlated with an observed factor, month. It does look like a linear regression model could be effective in representing the missing ozone data as the wind and temp factors will not strongly extrapolate the data, although data in the month of June might be too similar. 
 
 
 ## Regression Imputation 

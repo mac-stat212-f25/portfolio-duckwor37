@@ -15,3 +15,5 @@
 ![0922-Adv_Data_wrangling_P2.jpeg](0922-Adv_Data_wrangling_P2.jpeg)
 
 ![0929-Missing_Data.jpeg](0929-Missing_Data.jpeg)
+
+![1001-Functions.jpeg](1001-Functions.jpeg)
