@@ -78,6 +78,7 @@ book:
       - src/ica/Advanced_data_wrangling_P1.qmd
       - src/ica/Advanced_data_wrangling_P2.qmd
       - src/ica/08-missing-data-notes.qmd
+      - src/ica/09-functions-notes.qmd
 
     - part: "Exams"
       chapters: 
