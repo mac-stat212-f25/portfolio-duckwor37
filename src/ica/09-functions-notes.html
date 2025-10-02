@@ -725,19 +725,55 @@ cookieconsent.run({
 <code>x = -3:-1</code>. Expected output: <code>0.0 0.5 1.0</code>
 </li>
 </ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>rescale2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  min_x <span class="ot">=</span> <span class="fu">min</span>(x)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">return</span>((x<span class="sc">-</span>min_x)<span class="sc">/</span>(<span class="fu">max</span>(x)<span class="sc">-</span> min_x))</span>
+<span id="cb21-4"><a href="#cb21-4"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0 0.5 1.0</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000000 0.1666667 1.0000000</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0 0.5 1.0</code></pre>
+</div>
+</div>
 <ol start="2" type="1">
 <li>
 <strong>Phone digits</strong> Write a function that formats a 10-digit phone number nicely as <code>(###) ###-####</code>. Your function should work on the following test cases: <code>c("651-330-8661", "6516966000", "800 867 5309")</code>. It may help to refer to the <code>stringr</code> cheatsheet.</li>
-</ol></section><section id="calling-a-function" class="level2"><h2 class="anchored" data-anchor-id="calling-a-function">Calling a Function</h2>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>phone_form <span class="ot">&lt;-</span> <span class="cf">function</span>(num) {</span>
+<span id="cb27-2"><a href="#cb27-2"></a>  num <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(num, <span class="st">"[^[:alnum:]]"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  first_3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb27-4"><a href="#cb27-4"></a>  sec_3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb27-5"><a href="#cb27-5"></a>  thr_4 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">return</span>(<span class="fu">str_glue</span>(<span class="st">"({first_3}) {sec_3}-{thr_4}"</span>))</span>
+<span id="cb27-7"><a href="#cb27-7"></a>}</span>
+<span id="cb27-8"><a href="#cb27-8"></a></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="fu">phone_form</span>(<span class="fu">c</span>(<span class="st">"651-330-8661"</span>, <span class="st">"6516966000"</span>, <span class="st">"800 867 5309"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>(651) 330-8661
+(651) 696-6000
+(800) 867-5309</code></pre>
+</div>
+</div>
+</section><section id="calling-a-function" class="level2"><h2 class="anchored" data-anchor-id="calling-a-function">Calling a Function</h2>
 <p>When you supply arguments to a function, they can be matched <strong>by position</strong> and/or <strong>by name</strong>.</p>
 <p>When you call a function without <code>argument = value</code> inside the parentheses, you are using <strong>positional matching</strong>.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The above works because the first argument of <code>ggplot</code> is <code>data</code> and the second is <code>mapping</code>. (Pull up the documentation on <code>ggplot</code> with <code>?ggplot</code> in the Console.) So the following doesn’t work:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-error">
 <pre><code>Error in `ggplot()`:
 ! `mapping` must be created by `aes()`.
@@ -746,12 +782,12 @@ cookieconsent.run({
 </div>
 <p>But if we named the arguments (<strong>name matching</strong>), we would be fine:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), <span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), <span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Somewhat confusingly, we can name some arguments and not others. Below, <code>mapping</code> is named, but <code>data</code> isn’t. This works because when an argument is matched by name, it is “removed” from the argument list, and the remaining unnamed arguments are matched in the order that they are listed in the function definition. <strong>Just because this is possible doesn’t mean it’s a good idea–don’t do this!</strong></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Argument matching">
@@ -776,27 +812,28 @@ Argument matching
     
 Error in `layer_sf()`:
 ! `mapping` must be created by `aes()`</code></pre>
+<p>The error message is that the positioning in geom_sf if wrong becuase it takes the mapping before it takes data, so right now it thinks the data is the mapping argument. In order to fix this either switch their locations or add the explict name to each of these.</p>
 </section><section id="the-if-else-if-else-control-structure" class="level2"><h2 class="anchored" data-anchor-id="the-if-else-if-else-control-structure">The <code>if-else if-else</code> Control Structure</h2>
 <p>Often in functions, you will want to execute code chunks conditionally. In a programming language, <strong>control structures</strong> are parts of the language that allow you to control what code is executed. By far the most common is the `<code>if-else if-else</code> structure.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="cf">if</span> (logical_condition) {</span>
-<span id="cb27-2"><a href="#cb27-2"></a>    <span class="co"># some code</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_condition) {</span>
-<span id="cb27-4"><a href="#cb27-4"></a>    <span class="co"># some code</span></span>
-<span id="cb27-5"><a href="#cb27-5"></a>} <span class="cf">else</span> {</span>
-<span id="cb27-6"><a href="#cb27-6"></a>    <span class="co"># some code</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a>}</span>
-<span id="cb27-8"><a href="#cb27-8"></a></span>
-<span id="cb27-9"><a href="#cb27-9"></a>middle <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb27-10"><a href="#cb27-10"></a>    mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-11"><a href="#cb27-11"></a>    median_x <span class="ot">&lt;-</span> <span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-12"><a href="#cb27-12"></a>    seems_skewed <span class="ot">&lt;-</span> (mean_x <span class="sc">&gt;</span> <span class="fl">1.5</span><span class="sc">*</span>median_x) <span class="sc">|</span> (mean_x <span class="sc">&lt;</span> (<span class="dv">1</span><span class="sc">/</span><span class="fl">1.5</span>)<span class="sc">*</span>median_x)</span>
-<span id="cb27-13"><a href="#cb27-13"></a>    <span class="cf">if</span> (seems_skewed) {</span>
-<span id="cb27-14"><a href="#cb27-14"></a>        median_x</span>
-<span id="cb27-15"><a href="#cb27-15"></a>    } <span class="cf">else</span> {</span>
-<span id="cb27-16"><a href="#cb27-16"></a>        mean_x</span>
-<span id="cb27-17"><a href="#cb27-17"></a>    }</span>
-<span id="cb27-18"><a href="#cb27-18"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="cf">if</span> (logical_condition) {</span>
+<span id="cb35-2"><a href="#cb35-2"></a>    <span class="co"># some code</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_condition) {</span>
+<span id="cb35-4"><a href="#cb35-4"></a>    <span class="co"># some code</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>} <span class="cf">else</span> {</span>
+<span id="cb35-6"><a href="#cb35-6"></a>    <span class="co"># some code</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a>}</span>
+<span id="cb35-8"><a href="#cb35-8"></a></span>
+<span id="cb35-9"><a href="#cb35-9"></a>middle <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb35-10"><a href="#cb35-10"></a>    mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-11"><a href="#cb35-11"></a>    median_x <span class="ot">&lt;-</span> <span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-12"><a href="#cb35-12"></a>    seems_skewed <span class="ot">&lt;-</span> (mean_x <span class="sc">&gt;</span> <span class="fl">1.5</span><span class="sc">*</span>median_x) <span class="sc">|</span> (mean_x <span class="sc">&lt;</span> (<span class="dv">1</span><span class="sc">/</span><span class="fl">1.5</span>)<span class="sc">*</span>median_x)</span>
+<span id="cb35-13"><a href="#cb35-13"></a>    <span class="cf">if</span> (seems_skewed) {</span>
+<span id="cb35-14"><a href="#cb35-14"></a>        median_x</span>
+<span id="cb35-15"><a href="#cb35-15"></a>    } <span class="cf">else</span> {</span>
+<span id="cb35-16"><a href="#cb35-16"></a>        mean_x</span>
+<span id="cb35-17"><a href="#cb35-17"></a>    }</span>
+<span id="cb35-18"><a href="#cb35-18"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="To vectorize or not to vectorize">
@@ -822,22 +859,72 @@ To vectorize or not to vectorize
 <li>To convert Fahrenheit to Celsius: <code>(Fahrenheit - 32) * 5/9</code>
 </li>
 </ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>convert_temp <span class="ot">&lt;-</span> <span class="cf">function</span>(num, unit) {</span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"C"</span>) {</span>
+<span id="cb36-3"><a href="#cb36-3"></a>     new_val <span class="ot">&lt;-</span> (num <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>     <span class="fu">str_glue</span>(<span class="st">"{new_val} F"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5"></a>  } </span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="cf">else</span> <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"F"</span>) {</span>
+<span id="cb36-7"><a href="#cb36-7"></a>     new_val <span class="ot">&lt;-</span> (num <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a>     <span class="fu">str_glue</span>(<span class="st">"{new_val} C"</span>)</span>
+<span id="cb36-9"><a href="#cb36-9"></a>  }</span>
+<span id="cb36-10"><a href="#cb36-10"></a>}</span>
+<span id="cb36-11"><a href="#cb36-11"></a></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="fu">convert_temp</span>(<span class="dv">20</span>, <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>68 F</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">convert_temp</span>(<span class="dv">67</span>, <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>19.4444444444444 C</code></pre>
+</div>
+</div>
 <ol start="5" type="1">
 <li>
 <strong>Domain Name</strong> Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., “gmail.com”). If the input is not a valid email address, return “Invalid Email”. (A valid email ends in “dot something”.)</li>
-</ol></section><section id="writing-functions-with-tidyverse-verbs" class="level2"><h2 class="anchored" data-anchor-id="writing-functions-with-tidyverse-verbs">Writing Functions with <code>tidyverse</code> Verbs</h2>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>domain_name <span class="ot">&lt;-</span> <span class="cf">function</span>(email) {</span>
+<span id="cb40-2"><a href="#cb40-2"></a>  is_valid <span class="ot">&lt;-</span> (<span class="fu">str_detect</span>(email, <span class="st">"@.+</span><span class="sc">\\</span><span class="st">..+"</span>))</span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="cf">if</span> (is_valid) {</span>
+<span id="cb40-4"><a href="#cb40-4"></a>    <span class="fu">str_extract</span>(email, <span class="st">"@.+$"</span>)</span>
+<span id="cb40-5"><a href="#cb40-5"></a>  }</span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="cf">else</span> {</span>
+<span id="cb40-7"><a href="#cb40-7"></a>    <span class="st">"Invalid Email"</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>  }</span>
+<span id="cb40-9"><a href="#cb40-9"></a>} </span>
+<span id="cb40-10"><a href="#cb40-10"></a></span>
+<span id="cb40-11"><a href="#cb40-11"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor@macalester.edu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "@macalester.edu"</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">domain_name</span>(<span class="st">"tduckworth@gmail"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "Invalid Email"</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor.com"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "Invalid Email"</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor@gmail."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "Invalid Email"</code></pre>
+</div>
+</div>
+</section><section id="writing-functions-with-tidyverse-verbs" class="level2"><h2 class="anchored" data-anchor-id="writing-functions-with-tidyverse-verbs">Writing Functions with <code>tidyverse</code> Verbs</h2>
 <p>Perhaps we are using <code>group_by()</code> and <code>summarize()</code> a lot to compute group means. We might write this function:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb28-2"><a href="#cb28-2"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
-<span id="cb28-5"><a href="#cb28-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb48-2"><a href="#cb48-2"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
+<span id="cb48-5"><a href="#cb48-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let’s use it on the <code>diamonds</code> dataset to compute the mean size (<code>carat</code>) by diamond <code>cut</code>:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-error">
 <pre><code>Error in `group_by()`:
 ! Must group by variables found in `.data`.
@@ -846,7 +933,7 @@ To vectorize or not to vectorize
 </div>
 <p>What if the problem is that the variable names need to be in quotes?</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-error">
 <pre><code>Error in `group_by()`:
 ! Must group by variables found in `.data`.
@@ -861,16 +948,16 @@ To vectorize or not to vectorize
 </ul>
 <p>To fix this we need to <strong>embrace</strong> the variables inside the function with <code>{ var }</code>:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb33-2"><a href="#cb33-2"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb33-5"><a href="#cb33-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb53-2"><a href="#cb53-2"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb53-5"><a href="#cb53-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The <code>{ var }</code> tells R to look at what the variable specified by the input <code>var</code> rather than look for a variable called <code>var</code>.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   cut        mean
@@ -884,7 +971,7 @@ To vectorize or not to vectorize
 </div>
 <p>Let’s group by both <code>cut</code> and <code>color</code>:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-error">
 <pre><code>Error in `group_by()`:
 ℹ In argument: `c(cut, color)`.
@@ -899,21 +986,75 @@ Caused by error:
 </ul>
 <p>To fix this, we need the <code>pick()</code> function to get R to see <code>{ group_var }</code> as a vector of separate variables (like the way <code>select()</code> works).</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb38-2"><a href="#cb38-2"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb38-5"><a href="#cb38-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb58-2"><a href="#cb58-2"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb58-5"><a href="#cb58-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="6" type="1">
 <li>
 <strong>Prop function</strong> Create a new version of <code><a href="https://dplyr.tidyverse.org/reference/count.html">dplyr::count()</a></code> that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the <code>diamonds</code> dataset.</li>
 </ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>proportions <span class="ot">&lt;-</span> <span class="cf">function</span>(df, count_var) {</span>
+<span id="cb59-2"><a href="#cb59-2"></a>  df <span class="sc">|&gt;</span> </span>
+<span id="cb59-3"><a href="#cb59-3"></a>    <span class="fu">count</span>(<span class="fu">pick</span>({{count_var}})) <span class="sc">|&gt;</span> </span>
+<span id="cb59-4"><a href="#cb59-4"></a>    <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb59-5"><a href="#cb59-5"></a>}</span>
+<span id="cb59-6"><a href="#cb59-6"></a></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="fu">proportions</span>(diamonds, cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  cut           n   prop
+  &lt;ord&gt;     &lt;int&gt;  &lt;dbl&gt;
+1 Fair       1610 0.0298
+2 Good       4906 0.0910
+3 Very Good 12082 0.224 
+4 Premium   13791 0.256 
+5 Ideal     21551 0.400 </code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">proportions</span>(diamonds, <span class="fu">c</span>(cut, color))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 4
+   cut   color     n    prop
+   &lt;ord&gt; &lt;ord&gt; &lt;int&gt;   &lt;dbl&gt;
+ 1 Fair  D       163 0.00302
+ 2 Fair  E       224 0.00415
+ 3 Fair  F       312 0.00578
+ 4 Fair  G       314 0.00582
+ 5 Fair  H       303 0.00562
+ 6 Fair  I       175 0.00324
+ 7 Fair  J       119 0.00221
+ 8 Good  D       662 0.0123 
+ 9 Good  E       933 0.0173 
+10 Good  F       909 0.0169 
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
 <ol start="7" type="1">
 <li>
 <strong>Scatterplot + Smooth function</strong> Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the <code>diamonds</code> dataset.</li>
-</ol></section><section id="done" class="level2"><h2 class="anchored" data-anchor-id="done">Done!</h2>
+</ol>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>scatter_smooth <span class="ot">&lt;-</span> <span class="cf">function</span>(df, x, y) {</span>
+<span id="cb63-2"><a href="#cb63-2"></a>  df <span class="sc">|&gt;</span> </span>
+<span id="cb63-3"><a href="#cb63-3"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> {{x}}, <span class="at">y =</span> {{y}})) <span class="sc">+</span> </span>
+<span id="cb63-4"><a href="#cb63-4"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb63-5"><a href="#cb63-5"></a>    <span class="fu">geom_smooth</span>(<span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb63-6"><a href="#cb63-6"></a>    <span class="fu">geom_smooth</span>(<span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb63-7"><a href="#cb63-7"></a>}</span>
+<span id="cb63-8"><a href="#cb63-8"></a></span>
+<span id="cb63-9"><a href="#cb63-9"></a><span class="fu">scatter_smooth</span>(diamonds, carat, price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="09-functions-notes_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="done" class="level2"><h2 class="anchored" data-anchor-id="done">Done!</h2>
 <ul>
 <li>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</li>
 </ul>
@@ -1399,406 +1540,468 @@ Caused by error:
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb39" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1"></a><span class="co">---</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="an">title:</span><span class="co"> "9 Functions"</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="co">---</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a></span>
-<span id="cb39-5"><a href="#cb39-5"></a></span>
-<span id="cb39-6"><a href="#cb39-6"></a><span class="in">```{r doc_setup_09, echo=FALSE, message=FALSE}</span></span>
-<span id="cb39-7"><a href="#cb39-7"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb39-8"><a href="#cb39-8"></a><span class="in">```</span></span>
-<span id="cb39-9"><a href="#cb39-9"></a></span>
-<span id="cb39-10"><a href="#cb39-10"></a><span class="fu">## 🧩 Learning Goals</span></span>
-<span id="cb39-11"><a href="#cb39-11"></a></span>
-<span id="cb39-12"><a href="#cb39-12"></a>By the end of this lesson, you should be able to:</span>
-<span id="cb39-13"><a href="#cb39-13"></a></span>
-<span id="cb39-14"><a href="#cb39-14"></a><span class="ss">- </span>Recognize when it would be useful to write a function</span>
-<span id="cb39-15"><a href="#cb39-15"></a><span class="ss">- </span>Identify the core components of a function definition and explain their role (the <span class="in">`function()`</span> directive, arguments, argument defaults, function body, return value)</span>
-<span id="cb39-16"><a href="#cb39-16"></a><span class="ss">- </span>Identify the scoping of a function in accessing objects in R</span>
-<span id="cb39-17"><a href="#cb39-17"></a><span class="ss">- </span>Describe the difference between argument matching by position and by name</span>
-<span id="cb39-18"><a href="#cb39-18"></a><span class="ss">- </span>Write <span class="in">`if`</span>-<span class="in">`else`</span>, <span class="in">`if`</span>-<span class="in">`else if`</span>-<span class="in">`else`</span> statements to conditionally execute code</span>
-<span id="cb39-19"><a href="#cb39-19"></a><span class="ss">- </span>Write your own function to carry out a repeated task</span>
-<span id="cb39-20"><a href="#cb39-20"></a><span class="ss">- </span>Provide feedback on functions written by others</span>
-<span id="cb39-21"><a href="#cb39-21"></a></span>
-<span id="cb39-22"><a href="#cb39-22"></a></span>
-<span id="cb39-23"><a href="#cb39-23"></a></span>
-<span id="cb39-24"><a href="#cb39-24"></a><span class="fu">## Functions and Control Structures </span></span>
-<span id="cb39-25"><a href="#cb39-25"></a></span>
-<span id="cb39-26"><a href="#cb39-26"></a><span class="fu">### Why functions? </span></span>
-<span id="cb39-27"><a href="#cb39-27"></a></span>
-<span id="cb39-28"><a href="#cb39-28"></a>Getting really good at writing useful and reusable functions is one of the best ways to increase your expertise in data science. It requires a lot of practice.</span>
-<span id="cb39-29"><a href="#cb39-29"></a></span>
-<span id="cb39-30"><a href="#cb39-30"></a></span>
-<span id="cb39-31"><a href="#cb39-31"></a>If you've copied and pasted code **3 or more times**, it's time to write a function. Try to avoid repeating yourself.</span>
-<span id="cb39-32"><a href="#cb39-32"></a></span>
-<span id="cb39-33"><a href="#cb39-33"></a>:::{.incremental}</span>
-<span id="cb39-34"><a href="#cb39-34"></a><span class="ss">1. </span>**Reducing errors:** Copy + paste + modify is prone to errors (e.g., forgetting to change a variable name)</span>
-<span id="cb39-35"><a href="#cb39-35"></a><span class="ss">2. </span>**Efficiency:** If you need to update code, you only need to do it one place. This allows reuse of code within and across projects.</span>
-<span id="cb39-36"><a href="#cb39-36"></a><span class="ss">3. </span>**Readability:** Encapsulating code within a function with a descriptive name makes code more readable.</span>
-<span id="cb39-37"><a href="#cb39-37"></a>:::</span>
-<span id="cb39-38"><a href="#cb39-38"></a></span>
-<span id="cb39-39"><a href="#cb39-39"></a><span class="fu">### Core parts of a function </span></span>
-<span id="cb39-40"><a href="#cb39-40"></a></span>
-<span id="cb39-41"><a href="#cb39-41"></a>When you define a function, what does it look like?</span>
-<span id="cb39-42"><a href="#cb39-42"></a></span>
-<span id="cb39-43"><a href="#cb39-43"></a><span class="in">```{r eval = FALSE}</span></span>
-<span id="cb39-44"><a href="#cb39-44"></a><span class="co"># Defining a function</span></span>
-<span id="cb39-45"><a href="#cb39-45"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(input_name_1, <span class="at">input_name_2 =</span> default_value_2){</span>
-<span id="cb39-46"><a href="#cb39-46"></a></span>
-<span id="cb39-47"><a href="#cb39-47"></a>  <span class="co"># function body - code that does something</span></span>
-<span id="cb39-48"><a href="#cb39-48"></a></span>
-<span id="cb39-49"><a href="#cb39-49"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb39-50"><a href="#cb39-50"></a>}</span>
-<span id="cb39-51"><a href="#cb39-51"></a></span>
-<span id="cb39-52"><a href="#cb39-52"></a><span class="co"># Calling a function (all valid ways)</span></span>
-<span id="cb39-53"><a href="#cb39-53"></a><span class="fu">function_name</span>(<span class="at">input_name_1 =</span> <span class="dv">2</span>, <span class="at">input_name_2 =</span> <span class="dv">4</span>)</span>
-<span id="cb39-54"><a href="#cb39-54"></a><span class="fu">function_name</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
-<span id="cb39-55"><a href="#cb39-55"></a><span class="fu">function_name</span>(<span class="at">input_name_2 =</span> <span class="dv">4</span>, <span class="at">input_name_1 =</span> <span class="dv">2</span>)</span>
-<span id="cb39-56"><a href="#cb39-56"></a><span class="fu">function_name</span>(<span class="dv">2</span>)</span>
-<span id="cb39-57"><a href="#cb39-57"></a></span>
-<span id="cb39-58"><a href="#cb39-58"></a><span class="in">```</span></span>
-<span id="cb39-59"><a href="#cb39-59"></a></span>
-<span id="cb39-60"><a href="#cb39-60"></a></span>
-<span id="cb39-61"><a href="#cb39-61"></a>The core parts of defining a function include:</span>
-<span id="cb39-62"><a href="#cb39-62"></a></span>
-<span id="cb39-63"><a href="#cb39-63"></a><span class="ss">- </span>**`function()` directive**</span>
-<span id="cb39-64"><a href="#cb39-64"></a><span class="ss">    - </span>This is what allows tells R to create a function.</span>
-<span id="cb39-65"><a href="#cb39-65"></a><span class="ss">- </span>**Arguments/Inputs**: the <span class="in">`input_name_1`</span> and <span class="in">`input_name_2`</span> -- these are names of the function inputs</span>
-<span id="cb39-66"><a href="#cb39-66"></a><span class="ss">    - </span><span class="in">`default_value_2`</span> is a default value that is used if no input values are provided when the function is called</span>
-<span id="cb39-67"><a href="#cb39-67"></a><span class="ss">- </span>**Function body**</span>
-<span id="cb39-68"><a href="#cb39-68"></a><span class="ss">    - </span>The code inside the curly braces <span class="in">`{ }`</span> is where all the work happens. This code uses the function arguments to perform computations.</span>
-<span id="cb39-69"><a href="#cb39-69"></a><span class="ss">- </span>**Return value**</span>
-<span id="cb39-70"><a href="#cb39-70"></a><span class="ss">    - </span>We can explicitly return an object by putting it inside <span class="in">`return()`</span>.</span>
-<span id="cb39-71"><a href="#cb39-71"></a></span>
-<span id="cb39-72"><a href="#cb39-72"></a>    </span>
-<span id="cb39-73"><a href="#cb39-73"></a></span>
-<span id="cb39-74"><a href="#cb39-74"></a>Here are three examples that can help us learn a few properties of functions:</span>
-<span id="cb39-75"><a href="#cb39-75"></a></span>
-<span id="cb39-78"><a href="#cb39-78"></a><span class="in">```{r}</span></span>
-<span id="cb39-79"><a href="#cb39-79"></a>average <span class="ot">&lt;-</span> <span class="cf">function</span>(x, remove_nas) {</span>
-<span id="cb39-80"><a href="#cb39-80"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x))</span>
-<span id="cb39-81"><a href="#cb39-81"></a>}</span>
-<span id="cb39-82"><a href="#cb39-82"></a>average2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb39-83"><a href="#cb39-83"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x))</span>
-<span id="cb39-84"><a href="#cb39-84"></a>}</span>
-<span id="cb39-85"><a href="#cb39-85"></a></span>
-<span id="cb39-86"><a href="#cb39-86"></a>average3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, remove_nas) {</span>
-<span id="cb39-87"><a href="#cb39-87"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x)</span>
-<span id="cb39-88"><a href="#cb39-88"></a>}</span>
-<span id="cb39-89"><a href="#cb39-89"></a><span class="in">```</span></span>
-<span id="cb39-90"><a href="#cb39-90"></a></span>
-<span id="cb39-91"><a href="#cb39-91"></a>Note:</span>
-<span id="cb39-92"><a href="#cb39-92"></a></span>
-<span id="cb39-93"><a href="#cb39-93"></a><span class="ss">- </span>In <span class="in">`average2`</span>, the <span class="in">`remove_nas`</span> argument has a **default** value of <span class="in">`TRUE`</span>.</span>
-<span id="cb39-94"><a href="#cb39-94"></a></span>
-<span id="cb39-95"><a href="#cb39-95"></a>When a function has default values for arguments, they don't have to be provided when you call the function if you want to use the default value. See below:</span>
-<span id="cb39-96"><a href="#cb39-96"></a></span>
-<span id="cb39-97"><a href="#cb39-97"></a><span class="in">```{r error = TRUE}</span></span>
-<span id="cb39-98"><a href="#cb39-98"></a><span class="co"># Does throw an error</span></span>
-<span id="cb39-99"><a href="#cb39-99"></a><span class="fu">average</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>))</span>
-<span id="cb39-100"><a href="#cb39-100"></a><span class="fu">average</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>), <span class="at">remove_nas =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-101"><a href="#cb39-101"></a></span>
-<span id="cb39-102"><a href="#cb39-102"></a><span class="co"># Doesn't throw an error</span></span>
-<span id="cb39-103"><a href="#cb39-103"></a><span class="fu">average2</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>))</span>
-<span id="cb39-104"><a href="#cb39-104"></a><span class="fu">average2</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>), <span class="at">remove_nas =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb39-105"><a href="#cb39-105"></a><span class="in">```</span></span>
-<span id="cb39-106"><a href="#cb39-106"></a></span>
-<span id="cb39-107"><a href="#cb39-107"></a></span>
-<span id="cb39-108"><a href="#cb39-108"></a><span class="ss">- </span>If we don't provide a <span class="in">`return()`</span>, the last value that gets evaluated in the **function body** and isn't stored as an object is what the function returns. (This is generally the last line without an assignment operator <span class="in">`&lt;-`</span>.)</span>
-<span id="cb39-109"><a href="#cb39-109"></a><span class="ss">    - </span><span class="in">`average3()`</span> is one example, but this can easily lead to errors.</span>
-<span id="cb39-110"><a href="#cb39-110"></a><span class="ss">    - </span>We should explicitly return an object by putting it inside <span class="in">`return()`</span>.</span>
-<span id="cb39-111"><a href="#cb39-111"></a></span>
-<span id="cb39-112"><a href="#cb39-112"></a></span>
-<span id="cb39-113"><a href="#cb39-113"></a></span>
-<span id="cb39-114"><a href="#cb39-114"></a></span>
-<span id="cb39-115"><a href="#cb39-115"></a><span class="fu">## Scope </span></span>
-<span id="cb39-116"><a href="#cb39-116"></a></span>
-<span id="cb39-117"><a href="#cb39-117"></a>In programming, **scope** refers to the area of a program where a named object is recognized and can be used. </span>
-<span id="cb39-118"><a href="#cb39-118"></a></span>
-<span id="cb39-119"><a href="#cb39-119"></a><span class="ss">- </span>R uses **lexical scoping**, which means that the scope of a variable is determined by where it is created in the code. </span>
-<span id="cb39-120"><a href="#cb39-120"></a></span>
-<span id="cb39-121"><a href="#cb39-121"></a></span>
-<span id="cb39-122"><a href="#cb39-122"></a>Lexical scoping in R:</span>
-<span id="cb39-123"><a href="#cb39-123"></a></span>
-<span id="cb39-124"><a href="#cb39-124"></a><span class="ss">- </span>When code refers to an object (e.g. data set, function, vector, etc.), R looks for the object in the current, **local environment**. </span>
-<span id="cb39-125"><a href="#cb39-125"></a><span class="ss">- </span>If it doesn't find it, it continues to search by looking in the parent environment, and so on. The top-level environment is the **global environment**, the location where all interactive (i.e. outside of a function) computation and storage takes place. </span>
-<span id="cb39-126"><a href="#cb39-126"></a><span class="ss">    - </span>If you save an object in R, outside a function local environment, it is stored in the global environment. </span>
-<span id="cb39-127"><a href="#cb39-127"></a><span class="ss">- </span>If R can't find it in the global environment, it will look for it in loaded packages.</span>
-<span id="cb39-128"><a href="#cb39-128"></a></span>
-<span id="cb39-129"><a href="#cb39-129"></a></span>
-<span id="cb39-130"><a href="#cb39-130"></a>When writing and using functions, the local environment is within the function itself. </span>
-<span id="cb39-131"><a href="#cb39-131"></a></span>
-<span id="cb39-132"><a href="#cb39-132"></a><span class="ss">- </span>If you define an object in the function, it won't be accessible outside that function (unless you pass it as the output). See below:</span>
-<span id="cb39-133"><a href="#cb39-133"></a></span>
-<span id="cb39-134"><a href="#cb39-134"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-135"><a href="#cb39-135"></a>average_new <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb39-136"><a href="#cb39-136"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x)</span>
-<span id="cb39-137"><a href="#cb39-137"></a>  fun_new_thing_within_function <span class="ot">&lt;-</span> <span class="st">"Fun times!"</span></span>
-<span id="cb39-138"><a href="#cb39-138"></a>}</span>
-<span id="cb39-139"><a href="#cb39-139"></a><span class="fu">average_new</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb39-140"><a href="#cb39-140"></a>fun_new_thing_within_function</span>
-<span id="cb39-141"><a href="#cb39-141"></a><span class="in">```</span></span>
-<span id="cb39-142"><a href="#cb39-142"></a></span>
-<span id="cb39-143"><a href="#cb39-143"></a></span>
-<span id="cb39-144"><a href="#cb39-144"></a></span>
-<span id="cb39-145"><a href="#cb39-145"></a>Scoping is important to consider if you try to refer to objects that aren't passed as arguments. </span>
-<span id="cb39-146"><a href="#cb39-146"></a></span>
-<span id="cb39-147"><a href="#cb39-147"></a><span class="ss">- </span>This can be dangerous because if you re-use names of variables, it is easy to accidentally refer to a variable that is not the one you intended. See below:</span>
-<span id="cb39-148"><a href="#cb39-148"></a></span>
-<span id="cb39-149"><a href="#cb39-149"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-150"><a href="#cb39-150"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb39-151"><a href="#cb39-151"></a></span>
-<span id="cb39-152"><a href="#cb39-152"></a>average_new2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb39-153"><a href="#cb39-153"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x) <span class="sc">+</span> v</span>
-<span id="cb39-154"><a href="#cb39-154"></a>}</span>
-<span id="cb39-155"><a href="#cb39-155"></a></span>
-<span id="cb39-156"><a href="#cb39-156"></a></span>
-<span id="cb39-157"><a href="#cb39-157"></a><span class="fu">average_new2</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb39-158"><a href="#cb39-158"></a></span>
-<span id="cb39-159"><a href="#cb39-159"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb39-160"><a href="#cb39-160"></a><span class="fu">average_new2</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb39-161"><a href="#cb39-161"></a><span class="in">```</span></span>
-<span id="cb39-162"><a href="#cb39-162"></a></span>
-<span id="cb39-163"><a href="#cb39-163"></a></span>
-<span id="cb39-164"><a href="#cb39-164"></a>Anything created/saved/updated within a function that you want accessible outside that function needs to be passed to <span class="in">`return()`</span>. See below:</span>
-<span id="cb39-165"><a href="#cb39-165"></a></span>
-<span id="cb39-166"><a href="#cb39-166"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-167"><a href="#cb39-167"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb39-168"><a href="#cb39-168"></a></span>
-<span id="cb39-169"><a href="#cb39-169"></a>average_new3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb39-170"><a href="#cb39-170"></a>  v <span class="ot">&lt;-</span> v <span class="sc">+</span> <span class="dv">10</span> <span class="co"># this is not changing v outside the function... </span></span>
-<span id="cb39-171"><a href="#cb39-171"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x) )</span>
-<span id="cb39-172"><a href="#cb39-172"></a>}</span>
-<span id="cb39-173"><a href="#cb39-173"></a></span>
-<span id="cb39-174"><a href="#cb39-174"></a><span class="fu">average_new3</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb39-175"><a href="#cb39-175"></a>v</span>
-<span id="cb39-176"><a href="#cb39-176"></a></span>
-<span id="cb39-177"><a href="#cb39-177"></a><span class="in">```</span></span>
-<span id="cb39-178"><a href="#cb39-178"></a></span>
-<span id="cb39-179"><a href="#cb39-179"></a></span>
-<span id="cb39-180"><a href="#cb39-180"></a>For more about lexical scoping in R, see <span class="co">[</span><span class="ot">R Programming for Data Science</span><span class="co">](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)</span></span>
-<span id="cb39-181"><a href="#cb39-181"></a></span>
-<span id="cb39-182"><a href="#cb39-182"></a></span>
-<span id="cb39-183"><a href="#cb39-183"></a><span class="fu">## Writing Functions </span></span>
-<span id="cb39-184"><a href="#cb39-184"></a></span>
-<span id="cb39-185"><a href="#cb39-185"></a></span>
-<span id="cb39-186"><a href="#cb39-186"></a>Tips for writing functions:</span>
-<span id="cb39-187"><a href="#cb39-187"></a></span>
-<span id="cb39-188"><a href="#cb39-188"></a><span class="ss">- </span>Write the code for the body of the function (the task that you are wanting to repeat)</span>
-<span id="cb39-189"><a href="#cb39-189"></a><span class="ss">- </span>Identify the parts of the function that could/would change (these are the inputs)</span>
-<span id="cb39-190"><a href="#cb39-190"></a><span class="ss">    - </span>Update the body of the function to be in terms of the inputs</span>
-<span id="cb39-191"><a href="#cb39-191"></a><span class="ss">    - </span>Avoid manually typing anything that is specific to one input; use code to get that (such as unique values of a variable) </span>
-<span id="cb39-192"><a href="#cb39-192"></a><span class="ss">- </span>Identify the output you want to return</span>
-<span id="cb39-193"><a href="#cb39-193"></a></span>
-<span id="cb39-194"><a href="#cb39-194"></a></span>
-<span id="cb39-195"><a href="#cb39-195"></a>**Pair programming exercises:** There are 2 exercises for each section below. </span>
-<span id="cb39-196"><a href="#cb39-196"></a></span>
-<span id="cb39-197"><a href="#cb39-197"></a><span class="ss">- </span>Read through the introduction of the concept and then work on the exercises together.  </span>
-<span id="cb39-198"><a href="#cb39-198"></a><span class="ss">- </span>You'll swap driver and navigator roles between exercises. </span>
-<span id="cb39-199"><a href="#cb39-199"></a><span class="ss">- </span>Remember: The driver writes the code. The navigator oversees and provides guidance. </span>
-<span id="cb39-200"><a href="#cb39-200"></a><span class="ss">- </span>For the first exercise, the person whose birthday is coming up sooner will be the driver first. Swap role for the second exercise and continue in this manner for all exercises.</span>
-<span id="cb39-201"><a href="#cb39-201"></a></span>
-<span id="cb39-202"><a href="#cb39-202"></a></span>
-<span id="cb39-203"><a href="#cb39-203"></a><span class="ss">1. </span>**Rescaling function** Write a function that rescales a numeric vector to be between 0 and 1. Here are some test cases with the expected output. Test out your function on the following inputs:</span>
-<span id="cb39-204"><a href="#cb39-204"></a></span>
-<span id="cb39-205"><a href="#cb39-205"></a><span class="ss">- </span><span class="in">`x = 2:4`</span>. Expected output: <span class="in">`0.0 0.5 1.0`</span></span>
-<span id="cb39-206"><a href="#cb39-206"></a><span class="ss">- </span><span class="in">`x = c(-1, 0, 5)`</span>. Expected output: <span class="in">`0.0000000 0.1666667 1.0000000`</span></span>
-<span id="cb39-207"><a href="#cb39-207"></a><span class="ss">- </span><span class="in">`x = -3:-1`</span>. Expected output: <span class="in">`0.0 0.5 1.0`</span></span>
-<span id="cb39-208"><a href="#cb39-208"></a></span>
-<span id="cb39-211"><a href="#cb39-211"></a><span class="in">```{r}</span></span>
-<span id="cb39-212"><a href="#cb39-212"></a><span class="in">```</span></span>
-<span id="cb39-213"><a href="#cb39-213"></a></span>
-<span id="cb39-214"><a href="#cb39-214"></a><span class="ss">2. </span>**Phone digits** Write a function that formats a 10-digit phone number nicely as <span class="in">`(###) ###-####`</span>. Your function should work on the following test cases: <span class="in">`c("651-330-8661", "6516966000", "800 867 5309")`</span>. It may help to refer to the <span class="in">`stringr`</span> cheatsheet.</span>
-<span id="cb39-215"><a href="#cb39-215"></a></span>
-<span id="cb39-218"><a href="#cb39-218"></a><span class="in">```{r}</span></span>
-<span id="cb39-219"><a href="#cb39-219"></a><span class="in">```</span></span>
-<span id="cb39-220"><a href="#cb39-220"></a></span>
-<span id="cb39-221"><a href="#cb39-221"></a></span>
-<span id="cb39-222"><a href="#cb39-222"></a><span class="fu">## Calling a Function </span></span>
-<span id="cb39-223"><a href="#cb39-223"></a></span>
-<span id="cb39-224"><a href="#cb39-224"></a>When you supply arguments to a function, they can be matched **by position** and/or **by name**.</span>
-<span id="cb39-225"><a href="#cb39-225"></a></span>
-<span id="cb39-226"><a href="#cb39-226"></a></span>
-<span id="cb39-227"><a href="#cb39-227"></a>When you call a function without <span class="in">`argument = value`</span> inside the parentheses, you are using **positional matching**.</span>
-<span id="cb39-228"><a href="#cb39-228"></a></span>
-<span id="cb39-229"><a href="#cb39-229"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb39-230"><a href="#cb39-230"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb39-231"><a href="#cb39-231"></a><span class="in">```</span></span>
-<span id="cb39-232"><a href="#cb39-232"></a></span>
-<span id="cb39-233"><a href="#cb39-233"></a></span>
-<span id="cb39-234"><a href="#cb39-234"></a>The above works because the first argument of <span class="in">`ggplot`</span> is <span class="in">`data`</span> and the second is <span class="in">`mapping`</span>. (Pull up the documentation on <span class="in">`ggplot`</span> with <span class="in">`?ggplot`</span> in the Console.) So the following doesn't work:</span>
-<span id="cb39-235"><a href="#cb39-235"></a></span>
-<span id="cb39-236"><a href="#cb39-236"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-237"><a href="#cb39-237"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb39-238"><a href="#cb39-238"></a><span class="in">```</span></span>
-<span id="cb39-239"><a href="#cb39-239"></a></span>
-<span id="cb39-240"><a href="#cb39-240"></a></span>
-<span id="cb39-241"><a href="#cb39-241"></a>But if we named the arguments (**name matching**), we would be fine:</span>
-<span id="cb39-242"><a href="#cb39-242"></a></span>
-<span id="cb39-243"><a href="#cb39-243"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb39-244"><a href="#cb39-244"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), <span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb39-245"><a href="#cb39-245"></a><span class="in">```</span></span>
-<span id="cb39-246"><a href="#cb39-246"></a></span>
-<span id="cb39-247"><a href="#cb39-247"></a></span>
-<span id="cb39-248"><a href="#cb39-248"></a>Somewhat confusingly, we can name some arguments and not others. Below, <span class="in">`mapping`</span> is named, but <span class="in">`data`</span> isn't. This works because when an argument is matched by name, it is "removed" from the argument list, and the remaining unnamed arguments are matched in the order that they are listed in the function definition. **Just because this is possible doesn't mean it's a good idea--don't do this!**</span>
-<span id="cb39-249"><a href="#cb39-249"></a></span>
-<span id="cb39-250"><a href="#cb39-250"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb39-251"><a href="#cb39-251"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
-<span id="cb39-252"><a href="#cb39-252"></a><span class="in">```</span></span>
-<span id="cb39-253"><a href="#cb39-253"></a></span>
-<span id="cb39-254"><a href="#cb39-254"></a></span>
-<span id="cb39-255"><a href="#cb39-255"></a>::: {.callout-tip title="Argument matching"}</span>
-<span id="cb39-256"><a href="#cb39-256"></a>In general, it is safest to match arguments by name and position for your peace of mind. For functions that you are very familiar with (and know the argument order), it's ok to just use positional matching.</span>
-<span id="cb39-257"><a href="#cb39-257"></a>:::</span>
-<span id="cb39-258"><a href="#cb39-258"></a></span>
-<span id="cb39-259"><a href="#cb39-259"></a></span>
-<span id="cb39-260"><a href="#cb39-260"></a><span class="ss">3. </span>**Error Messages** Diagnose the error message in the example below:</span>
-<span id="cb39-261"><a href="#cb39-261"></a></span>
-<span id="cb39-262"><a href="#cb39-262"></a><span class="in">```</span></span>
-<span id="cb39-263"><a href="#cb39-263"></a><span class="in">ggplot() |&gt;</span></span>
-<span id="cb39-264"><a href="#cb39-264"></a><span class="in">    geom_sf(census_data, aes(fill = population))</span></span>
-<span id="cb39-265"><a href="#cb39-265"></a><span class="in">    </span></span>
-<span id="cb39-266"><a href="#cb39-266"></a><span class="in">Error in `layer_sf()`:</span></span>
-<span id="cb39-267"><a href="#cb39-267"></a><span class="in">! `mapping` must be created by `aes()`</span></span>
-<span id="cb39-268"><a href="#cb39-268"></a><span class="in">```</span></span>
-<span id="cb39-269"><a href="#cb39-269"></a></span>
-<span id="cb39-270"><a href="#cb39-270"></a><span class="fu">## The `if-else if-else` Control Structure </span></span>
-<span id="cb39-271"><a href="#cb39-271"></a></span>
-<span id="cb39-272"><a href="#cb39-272"></a>Often in functions, you will want to execute code chunks conditionally. In a programming language, **control structures** are parts of the language that allow you to control what code is executed. By far the most common is the `<span class="in">`if-else if-else`</span> structure.</span>
-<span id="cb39-273"><a href="#cb39-273"></a></span>
-<span id="cb39-274"><a href="#cb39-274"></a><span class="in">```{r eval=FALSE}</span></span>
-<span id="cb39-275"><a href="#cb39-275"></a><span class="cf">if</span> (logical_condition) {</span>
-<span id="cb39-276"><a href="#cb39-276"></a>    <span class="co"># some code</span></span>
-<span id="cb39-277"><a href="#cb39-277"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_condition) {</span>
-<span id="cb39-278"><a href="#cb39-278"></a>    <span class="co"># some code</span></span>
-<span id="cb39-279"><a href="#cb39-279"></a>} <span class="cf">else</span> {</span>
-<span id="cb39-280"><a href="#cb39-280"></a>    <span class="co"># some code</span></span>
-<span id="cb39-281"><a href="#cb39-281"></a>}</span>
-<span id="cb39-282"><a href="#cb39-282"></a></span>
-<span id="cb39-283"><a href="#cb39-283"></a>middle <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb39-284"><a href="#cb39-284"></a>    mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-285"><a href="#cb39-285"></a>    median_x <span class="ot">&lt;-</span> <span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-286"><a href="#cb39-286"></a>    seems_skewed <span class="ot">&lt;-</span> (mean_x <span class="sc">&gt;</span> <span class="fl">1.5</span><span class="sc">*</span>median_x) <span class="sc">|</span> (mean_x <span class="sc">&lt;</span> (<span class="dv">1</span><span class="sc">/</span><span class="fl">1.5</span>)<span class="sc">*</span>median_x)</span>
-<span id="cb39-287"><a href="#cb39-287"></a>    <span class="cf">if</span> (seems_skewed) {</span>
-<span id="cb39-288"><a href="#cb39-288"></a>        median_x</span>
-<span id="cb39-289"><a href="#cb39-289"></a>    } <span class="cf">else</span> {</span>
-<span id="cb39-290"><a href="#cb39-290"></a>        mean_x</span>
-<span id="cb39-291"><a href="#cb39-291"></a>    }</span>
-<span id="cb39-292"><a href="#cb39-292"></a>}</span>
-<span id="cb39-293"><a href="#cb39-293"></a><span class="in">```</span></span>
-<span id="cb39-294"><a href="#cb39-294"></a></span>
-<span id="cb39-295"><a href="#cb39-295"></a>::: {.callout-tip title="To vectorize or not to vectorize"}</span>
-<span id="cb39-296"><a href="#cb39-296"></a>The <span class="in">`if () else {}`</span> code is not **vectorized**; the logical condition in <span class="in">`if()`</span> cannot be a logical vector of length longer than 1. If you want a vectorized version of conditional execution of code use <span class="in">`if_else()`</span> or <span class="in">`case_when()`</span>; these can be used in <span class="in">`mutate()`</span>. </span>
-<span id="cb39-297"><a href="#cb39-297"></a>:::</span>
-<span id="cb39-298"><a href="#cb39-298"></a></span>
-<span id="cb39-299"><a href="#cb39-299"></a><span class="ss">4. </span>**Convert Temp** Write a function for converting temperatures that takes as input a numeric value and a unit (either "C" for Celsius or "F" for Fahrenheit). The function should convert the temperature from one unit to the other based on the following formulas:</span>
-<span id="cb39-300"><a href="#cb39-300"></a></span>
-<span id="cb39-301"><a href="#cb39-301"></a><span class="ss">- </span>To convert Celsius to Fahrenheit: <span class="in">`(Celsius * 9/5) + 32`</span></span>
-<span id="cb39-302"><a href="#cb39-302"></a><span class="ss">- </span>To convert Fahrenheit to Celsius: <span class="in">`(Fahrenheit - 32) * 5/9`</span></span>
-<span id="cb39-303"><a href="#cb39-303"></a></span>
-<span id="cb39-306"><a href="#cb39-306"></a><span class="in">```{r}</span></span>
-<span id="cb39-307"><a href="#cb39-307"></a><span class="in">```</span></span>
-<span id="cb39-308"><a href="#cb39-308"></a></span>
-<span id="cb39-309"><a href="#cb39-309"></a></span>
-<span id="cb39-310"><a href="#cb39-310"></a><span class="ss">5. </span>**Domain Name** Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)</span>
-<span id="cb39-311"><a href="#cb39-311"></a></span>
-<span id="cb39-314"><a href="#cb39-314"></a><span class="in">```{r}</span></span>
-<span id="cb39-315"><a href="#cb39-315"></a><span class="in">```</span></span>
-<span id="cb39-316"><a href="#cb39-316"></a></span>
-<span id="cb39-317"><a href="#cb39-317"></a></span>
-<span id="cb39-318"><a href="#cb39-318"></a><span class="fu">## Writing Functions with `tidyverse` Verbs </span></span>
-<span id="cb39-319"><a href="#cb39-319"></a></span>
-<span id="cb39-320"><a href="#cb39-320"></a>Perhaps we are using <span class="in">`group_by()`</span> and <span class="in">`summarize()`</span> a lot to compute group means. We might write this function:</span>
-<span id="cb39-321"><a href="#cb39-321"></a></span>
-<span id="cb39-324"><a href="#cb39-324"></a><span class="in">```{r}</span></span>
-<span id="cb39-325"><a href="#cb39-325"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb39-326"><a href="#cb39-326"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb39-327"><a href="#cb39-327"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
-<span id="cb39-328"><a href="#cb39-328"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
-<span id="cb39-329"><a href="#cb39-329"></a>}</span>
-<span id="cb39-330"><a href="#cb39-330"></a><span class="in">```</span></span>
-<span id="cb39-331"><a href="#cb39-331"></a></span>
-<span id="cb39-332"><a href="#cb39-332"></a>Let's use it on the <span class="in">`diamonds`</span> dataset to compute the mean size (<span class="in">`carat`</span>) by diamond <span class="in">`cut`</span>:</span>
-<span id="cb39-333"><a href="#cb39-333"></a></span>
-<span id="cb39-334"><a href="#cb39-334"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-335"><a href="#cb39-335"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
-<span id="cb39-336"><a href="#cb39-336"></a><span class="in">```</span></span>
-<span id="cb39-337"><a href="#cb39-337"></a></span>
-<span id="cb39-338"><a href="#cb39-338"></a></span>
-<span id="cb39-339"><a href="#cb39-339"></a>What if the problem is that the variable names need to be in quotes?</span>
-<span id="cb39-340"><a href="#cb39-340"></a></span>
-<span id="cb39-341"><a href="#cb39-341"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-342"><a href="#cb39-342"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span>
-<span id="cb39-343"><a href="#cb39-343"></a><span class="in">```</span></span>
-<span id="cb39-344"><a href="#cb39-344"></a></span>
-<span id="cb39-345"><a href="#cb39-345"></a></span>
-<span id="cb39-346"><a href="#cb39-346"></a></span>
-<span id="cb39-347"><a href="#cb39-347"></a>What's Going On?</span>
-<span id="cb39-348"><a href="#cb39-348"></a></span>
-<span id="cb39-349"><a href="#cb39-349"></a>The <span class="in">`tidyverse`</span> uses something called **tidy evaluation**: this allows you to refer to a variable by typing it directly (e.g., no need to put it in quotes). </span>
-<span id="cb39-350"><a href="#cb39-350"></a></span>
-<span id="cb39-351"><a href="#cb39-351"></a><span class="ss">- </span><span class="in">`group_by(group_var)`</span> is expecting a variable that is actually called <span class="in">`group_var`</span>, and <span class="in">`mean(mean_var)`</span> is expecting a variable that is actually called <span class="in">`mean_var`</span>.</span>
-<span id="cb39-352"><a href="#cb39-352"></a></span>
-<span id="cb39-353"><a href="#cb39-353"></a></span>
-<span id="cb39-354"><a href="#cb39-354"></a></span>
-<span id="cb39-355"><a href="#cb39-355"></a></span>
-<span id="cb39-356"><a href="#cb39-356"></a>To fix this we need to **embrace** the variables inside the function with <span class="in">`{ var }`</span>:</span>
-<span id="cb39-357"><a href="#cb39-357"></a></span>
-<span id="cb39-360"><a href="#cb39-360"></a><span class="in">```{r}</span></span>
-<span id="cb39-361"><a href="#cb39-361"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb39-362"><a href="#cb39-362"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb39-363"><a href="#cb39-363"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
-<span id="cb39-364"><a href="#cb39-364"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb39-365"><a href="#cb39-365"></a>}</span>
-<span id="cb39-366"><a href="#cb39-366"></a><span class="in">```</span></span>
-<span id="cb39-367"><a href="#cb39-367"></a></span>
-<span id="cb39-368"><a href="#cb39-368"></a>The <span class="in">`{ var }`</span> tells R to look at what the variable specified by the input  <span class="in">`var`</span> rather than look for a variable called <span class="in">`var`</span>.</span>
-<span id="cb39-369"><a href="#cb39-369"></a></span>
-<span id="cb39-372"><a href="#cb39-372"></a><span class="in">```{r}</span></span>
-<span id="cb39-373"><a href="#cb39-373"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
-<span id="cb39-374"><a href="#cb39-374"></a><span class="in">```</span></span>
-<span id="cb39-375"><a href="#cb39-375"></a></span>
-<span id="cb39-376"><a href="#cb39-376"></a></span>
-<span id="cb39-377"><a href="#cb39-377"></a>Let's group by both <span class="in">`cut`</span> and <span class="in">`color`</span>:</span>
-<span id="cb39-378"><a href="#cb39-378"></a></span>
-<span id="cb39-379"><a href="#cb39-379"></a><span class="in">```{r error=TRUE}</span></span>
-<span id="cb39-380"><a href="#cb39-380"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span>
-<span id="cb39-381"><a href="#cb39-381"></a><span class="in">```</span></span>
-<span id="cb39-382"><a href="#cb39-382"></a></span>
-<span id="cb39-383"><a href="#cb39-383"></a></span>
-<span id="cb39-384"><a href="#cb39-384"></a></span>
-<span id="cb39-385"><a href="#cb39-385"></a>Oh No! What Now?! </span>
-<span id="cb39-386"><a href="#cb39-386"></a></span>
-<span id="cb39-387"><a href="#cb39-387"></a>When <span class="in">`c(cut, color)`</span> is put inside <span class="in">`{ c(cut, color) }`</span> within the function, R is actually running the code inside <span class="in">`{ }`</span>. </span>
-<span id="cb39-388"><a href="#cb39-388"></a></span>
-<span id="cb39-389"><a href="#cb39-389"></a><span class="ss">- </span>This combines the columns for those 2 variables into one long vector. What we really meant by <span class="in">`c(cut, color)`</span> is "group by both cut and color".</span>
-<span id="cb39-390"><a href="#cb39-390"></a></span>
-<span id="cb39-391"><a href="#cb39-391"></a></span>
-<span id="cb39-392"><a href="#cb39-392"></a></span>
-<span id="cb39-393"><a href="#cb39-393"></a>To fix this, we need the <span class="in">`pick()`</span> function to get R to see <span class="in">`{ group_var }`</span> as a vector of separate variables (like the way <span class="in">`select()`</span> works).</span>
-<span id="cb39-394"><a href="#cb39-394"></a></span>
-<span id="cb39-397"><a href="#cb39-397"></a><span class="in">```{r}</span></span>
-<span id="cb39-398"><a href="#cb39-398"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
-<span id="cb39-399"><a href="#cb39-399"></a>    df <span class="sc">|&gt;</span></span>
-<span id="cb39-400"><a href="#cb39-400"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
-<span id="cb39-401"><a href="#cb39-401"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
-<span id="cb39-402"><a href="#cb39-402"></a>}</span>
-<span id="cb39-403"><a href="#cb39-403"></a><span class="in">```</span></span>
-<span id="cb39-404"><a href="#cb39-404"></a></span>
-<span id="cb39-405"><a href="#cb39-405"></a></span>
-<span id="cb39-406"><a href="#cb39-406"></a><span class="ss">6. </span>**Prop function** Create a new version of <span class="in">`dplyr::count()`</span> that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the <span class="in">`diamonds`</span> dataset.</span>
-<span id="cb39-407"><a href="#cb39-407"></a></span>
-<span id="cb39-410"><a href="#cb39-410"></a><span class="in">```{r}</span></span>
-<span id="cb39-411"><a href="#cb39-411"></a><span class="in">```</span></span>
-<span id="cb39-412"><a href="#cb39-412"></a></span>
-<span id="cb39-413"><a href="#cb39-413"></a><span class="ss">7. </span>**Scatterplot + Smooth function** Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the <span class="in">`diamonds`</span> dataset.</span>
-<span id="cb39-414"><a href="#cb39-414"></a></span>
-<span id="cb39-415"><a href="#cb39-415"></a></span>
-<span id="cb39-418"><a href="#cb39-418"></a><span class="in">```{r}</span></span>
-<span id="cb39-419"><a href="#cb39-419"></a><span class="in">```</span></span>
-<span id="cb39-420"><a href="#cb39-420"></a><span class="fu">## Done!</span></span>
-<span id="cb39-421"><a href="#cb39-421"></a></span>
-<span id="cb39-422"><a href="#cb39-422"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
+<div class="sourceCode" id="cb64" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">---</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="an">title:</span><span class="co"> "9 Functions"</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a><span class="co">---</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a></span>
+<span id="cb64-5"><a href="#cb64-5"></a></span>
+<span id="cb64-6"><a href="#cb64-6"></a><span class="in">```{r doc_setup_09, echo=FALSE, message=FALSE}</span></span>
+<span id="cb64-7"><a href="#cb64-7"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb64-8"><a href="#cb64-8"></a><span class="in">```</span></span>
+<span id="cb64-9"><a href="#cb64-9"></a></span>
+<span id="cb64-10"><a href="#cb64-10"></a><span class="fu">## 🧩 Learning Goals</span></span>
+<span id="cb64-11"><a href="#cb64-11"></a></span>
+<span id="cb64-12"><a href="#cb64-12"></a>By the end of this lesson, you should be able to:</span>
+<span id="cb64-13"><a href="#cb64-13"></a></span>
+<span id="cb64-14"><a href="#cb64-14"></a><span class="ss">- </span>Recognize when it would be useful to write a function</span>
+<span id="cb64-15"><a href="#cb64-15"></a><span class="ss">- </span>Identify the core components of a function definition and explain their role (the <span class="in">`function()`</span> directive, arguments, argument defaults, function body, return value)</span>
+<span id="cb64-16"><a href="#cb64-16"></a><span class="ss">- </span>Identify the scoping of a function in accessing objects in R</span>
+<span id="cb64-17"><a href="#cb64-17"></a><span class="ss">- </span>Describe the difference between argument matching by position and by name</span>
+<span id="cb64-18"><a href="#cb64-18"></a><span class="ss">- </span>Write <span class="in">`if`</span>-<span class="in">`else`</span>, <span class="in">`if`</span>-<span class="in">`else if`</span>-<span class="in">`else`</span> statements to conditionally execute code</span>
+<span id="cb64-19"><a href="#cb64-19"></a><span class="ss">- </span>Write your own function to carry out a repeated task</span>
+<span id="cb64-20"><a href="#cb64-20"></a><span class="ss">- </span>Provide feedback on functions written by others</span>
+<span id="cb64-21"><a href="#cb64-21"></a></span>
+<span id="cb64-22"><a href="#cb64-22"></a></span>
+<span id="cb64-23"><a href="#cb64-23"></a></span>
+<span id="cb64-24"><a href="#cb64-24"></a><span class="fu">## Functions and Control Structures </span></span>
+<span id="cb64-25"><a href="#cb64-25"></a></span>
+<span id="cb64-26"><a href="#cb64-26"></a><span class="fu">### Why functions? </span></span>
+<span id="cb64-27"><a href="#cb64-27"></a></span>
+<span id="cb64-28"><a href="#cb64-28"></a>Getting really good at writing useful and reusable functions is one of the best ways to increase your expertise in data science. It requires a lot of practice.</span>
+<span id="cb64-29"><a href="#cb64-29"></a></span>
+<span id="cb64-30"><a href="#cb64-30"></a></span>
+<span id="cb64-31"><a href="#cb64-31"></a>If you've copied and pasted code **3 or more times**, it's time to write a function. Try to avoid repeating yourself.</span>
+<span id="cb64-32"><a href="#cb64-32"></a></span>
+<span id="cb64-33"><a href="#cb64-33"></a>:::{.incremental}</span>
+<span id="cb64-34"><a href="#cb64-34"></a><span class="ss">1. </span>**Reducing errors:** Copy + paste + modify is prone to errors (e.g., forgetting to change a variable name)</span>
+<span id="cb64-35"><a href="#cb64-35"></a><span class="ss">2. </span>**Efficiency:** If you need to update code, you only need to do it one place. This allows reuse of code within and across projects.</span>
+<span id="cb64-36"><a href="#cb64-36"></a><span class="ss">3. </span>**Readability:** Encapsulating code within a function with a descriptive name makes code more readable.</span>
+<span id="cb64-37"><a href="#cb64-37"></a>:::</span>
+<span id="cb64-38"><a href="#cb64-38"></a></span>
+<span id="cb64-39"><a href="#cb64-39"></a><span class="fu">### Core parts of a function </span></span>
+<span id="cb64-40"><a href="#cb64-40"></a></span>
+<span id="cb64-41"><a href="#cb64-41"></a>When you define a function, what does it look like?</span>
+<span id="cb64-42"><a href="#cb64-42"></a></span>
+<span id="cb64-43"><a href="#cb64-43"></a><span class="in">```{r eval = FALSE}</span></span>
+<span id="cb64-44"><a href="#cb64-44"></a><span class="co"># Defining a function</span></span>
+<span id="cb64-45"><a href="#cb64-45"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(input_name_1, <span class="at">input_name_2 =</span> default_value_2){</span>
+<span id="cb64-46"><a href="#cb64-46"></a></span>
+<span id="cb64-47"><a href="#cb64-47"></a>  <span class="co"># function body - code that does something</span></span>
+<span id="cb64-48"><a href="#cb64-48"></a></span>
+<span id="cb64-49"><a href="#cb64-49"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb64-50"><a href="#cb64-50"></a>}</span>
+<span id="cb64-51"><a href="#cb64-51"></a></span>
+<span id="cb64-52"><a href="#cb64-52"></a><span class="co"># Calling a function (all valid ways)</span></span>
+<span id="cb64-53"><a href="#cb64-53"></a><span class="fu">function_name</span>(<span class="at">input_name_1 =</span> <span class="dv">2</span>, <span class="at">input_name_2 =</span> <span class="dv">4</span>)</span>
+<span id="cb64-54"><a href="#cb64-54"></a><span class="fu">function_name</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb64-55"><a href="#cb64-55"></a><span class="fu">function_name</span>(<span class="at">input_name_2 =</span> <span class="dv">4</span>, <span class="at">input_name_1 =</span> <span class="dv">2</span>)</span>
+<span id="cb64-56"><a href="#cb64-56"></a><span class="fu">function_name</span>(<span class="dv">2</span>)</span>
+<span id="cb64-57"><a href="#cb64-57"></a></span>
+<span id="cb64-58"><a href="#cb64-58"></a><span class="in">```</span></span>
+<span id="cb64-59"><a href="#cb64-59"></a></span>
+<span id="cb64-60"><a href="#cb64-60"></a></span>
+<span id="cb64-61"><a href="#cb64-61"></a>The core parts of defining a function include:</span>
+<span id="cb64-62"><a href="#cb64-62"></a></span>
+<span id="cb64-63"><a href="#cb64-63"></a><span class="ss">- </span>**`function()` directive**</span>
+<span id="cb64-64"><a href="#cb64-64"></a><span class="ss">    - </span>This is what allows tells R to create a function.</span>
+<span id="cb64-65"><a href="#cb64-65"></a><span class="ss">- </span>**Arguments/Inputs**: the <span class="in">`input_name_1`</span> and <span class="in">`input_name_2`</span> -- these are names of the function inputs</span>
+<span id="cb64-66"><a href="#cb64-66"></a><span class="ss">    - </span><span class="in">`default_value_2`</span> is a default value that is used if no input values are provided when the function is called</span>
+<span id="cb64-67"><a href="#cb64-67"></a><span class="ss">- </span>**Function body**</span>
+<span id="cb64-68"><a href="#cb64-68"></a><span class="ss">    - </span>The code inside the curly braces <span class="in">`{ }`</span> is where all the work happens. This code uses the function arguments to perform computations.</span>
+<span id="cb64-69"><a href="#cb64-69"></a><span class="ss">- </span>**Return value**</span>
+<span id="cb64-70"><a href="#cb64-70"></a><span class="ss">    - </span>We can explicitly return an object by putting it inside <span class="in">`return()`</span>.</span>
+<span id="cb64-71"><a href="#cb64-71"></a></span>
+<span id="cb64-72"><a href="#cb64-72"></a>    </span>
+<span id="cb64-73"><a href="#cb64-73"></a></span>
+<span id="cb64-74"><a href="#cb64-74"></a>Here are three examples that can help us learn a few properties of functions:</span>
+<span id="cb64-75"><a href="#cb64-75"></a></span>
+<span id="cb64-78"><a href="#cb64-78"></a><span class="in">```{r}</span></span>
+<span id="cb64-79"><a href="#cb64-79"></a>average <span class="ot">&lt;-</span> <span class="cf">function</span>(x, remove_nas) {</span>
+<span id="cb64-80"><a href="#cb64-80"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x))</span>
+<span id="cb64-81"><a href="#cb64-81"></a>}</span>
+<span id="cb64-82"><a href="#cb64-82"></a>average2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb64-83"><a href="#cb64-83"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x))</span>
+<span id="cb64-84"><a href="#cb64-84"></a>}</span>
+<span id="cb64-85"><a href="#cb64-85"></a></span>
+<span id="cb64-86"><a href="#cb64-86"></a>average3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, remove_nas) {</span>
+<span id="cb64-87"><a href="#cb64-87"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x)</span>
+<span id="cb64-88"><a href="#cb64-88"></a>}</span>
+<span id="cb64-89"><a href="#cb64-89"></a><span class="in">```</span></span>
+<span id="cb64-90"><a href="#cb64-90"></a></span>
+<span id="cb64-91"><a href="#cb64-91"></a>Note:</span>
+<span id="cb64-92"><a href="#cb64-92"></a></span>
+<span id="cb64-93"><a href="#cb64-93"></a><span class="ss">- </span>In <span class="in">`average2`</span>, the <span class="in">`remove_nas`</span> argument has a **default** value of <span class="in">`TRUE`</span>.</span>
+<span id="cb64-94"><a href="#cb64-94"></a></span>
+<span id="cb64-95"><a href="#cb64-95"></a>When a function has default values for arguments, they don't have to be provided when you call the function if you want to use the default value. See below:</span>
+<span id="cb64-96"><a href="#cb64-96"></a></span>
+<span id="cb64-97"><a href="#cb64-97"></a><span class="in">```{r error = TRUE}</span></span>
+<span id="cb64-98"><a href="#cb64-98"></a><span class="co"># Does throw an error</span></span>
+<span id="cb64-99"><a href="#cb64-99"></a><span class="fu">average</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>))</span>
+<span id="cb64-100"><a href="#cb64-100"></a><span class="fu">average</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>), <span class="at">remove_nas =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-101"><a href="#cb64-101"></a></span>
+<span id="cb64-102"><a href="#cb64-102"></a><span class="co"># Doesn't throw an error</span></span>
+<span id="cb64-103"><a href="#cb64-103"></a><span class="fu">average2</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>))</span>
+<span id="cb64-104"><a href="#cb64-104"></a><span class="fu">average2</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>), <span class="at">remove_nas =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb64-105"><a href="#cb64-105"></a><span class="in">```</span></span>
+<span id="cb64-106"><a href="#cb64-106"></a></span>
+<span id="cb64-107"><a href="#cb64-107"></a></span>
+<span id="cb64-108"><a href="#cb64-108"></a><span class="ss">- </span>If we don't provide a <span class="in">`return()`</span>, the last value that gets evaluated in the **function body** and isn't stored as an object is what the function returns. (This is generally the last line without an assignment operator <span class="in">`&lt;-`</span>.)</span>
+<span id="cb64-109"><a href="#cb64-109"></a><span class="ss">    - </span><span class="in">`average3()`</span> is one example, but this can easily lead to errors.</span>
+<span id="cb64-110"><a href="#cb64-110"></a><span class="ss">    - </span>We should explicitly return an object by putting it inside <span class="in">`return()`</span>.</span>
+<span id="cb64-111"><a href="#cb64-111"></a></span>
+<span id="cb64-112"><a href="#cb64-112"></a></span>
+<span id="cb64-113"><a href="#cb64-113"></a></span>
+<span id="cb64-114"><a href="#cb64-114"></a></span>
+<span id="cb64-115"><a href="#cb64-115"></a><span class="fu">## Scope </span></span>
+<span id="cb64-116"><a href="#cb64-116"></a></span>
+<span id="cb64-117"><a href="#cb64-117"></a>In programming, **scope** refers to the area of a program where a named object is recognized and can be used. </span>
+<span id="cb64-118"><a href="#cb64-118"></a></span>
+<span id="cb64-119"><a href="#cb64-119"></a><span class="ss">- </span>R uses **lexical scoping**, which means that the scope of a variable is determined by where it is created in the code. </span>
+<span id="cb64-120"><a href="#cb64-120"></a></span>
+<span id="cb64-121"><a href="#cb64-121"></a></span>
+<span id="cb64-122"><a href="#cb64-122"></a>Lexical scoping in R:</span>
+<span id="cb64-123"><a href="#cb64-123"></a></span>
+<span id="cb64-124"><a href="#cb64-124"></a><span class="ss">- </span>When code refers to an object (e.g. data set, function, vector, etc.), R looks for the object in the current, **local environment**. </span>
+<span id="cb64-125"><a href="#cb64-125"></a><span class="ss">- </span>If it doesn't find it, it continues to search by looking in the parent environment, and so on. The top-level environment is the **global environment**, the location where all interactive (i.e. outside of a function) computation and storage takes place. </span>
+<span id="cb64-126"><a href="#cb64-126"></a><span class="ss">    - </span>If you save an object in R, outside a function local environment, it is stored in the global environment. </span>
+<span id="cb64-127"><a href="#cb64-127"></a><span class="ss">- </span>If R can't find it in the global environment, it will look for it in loaded packages.</span>
+<span id="cb64-128"><a href="#cb64-128"></a></span>
+<span id="cb64-129"><a href="#cb64-129"></a></span>
+<span id="cb64-130"><a href="#cb64-130"></a>When writing and using functions, the local environment is within the function itself. </span>
+<span id="cb64-131"><a href="#cb64-131"></a></span>
+<span id="cb64-132"><a href="#cb64-132"></a><span class="ss">- </span>If you define an object in the function, it won't be accessible outside that function (unless you pass it as the output). See below:</span>
+<span id="cb64-133"><a href="#cb64-133"></a></span>
+<span id="cb64-134"><a href="#cb64-134"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-135"><a href="#cb64-135"></a>average_new <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb64-136"><a href="#cb64-136"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x)</span>
+<span id="cb64-137"><a href="#cb64-137"></a>  fun_new_thing_within_function <span class="ot">&lt;-</span> <span class="st">"Fun times!"</span></span>
+<span id="cb64-138"><a href="#cb64-138"></a>}</span>
+<span id="cb64-139"><a href="#cb64-139"></a><span class="fu">average_new</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb64-140"><a href="#cb64-140"></a>fun_new_thing_within_function</span>
+<span id="cb64-141"><a href="#cb64-141"></a><span class="in">```</span></span>
+<span id="cb64-142"><a href="#cb64-142"></a></span>
+<span id="cb64-143"><a href="#cb64-143"></a></span>
+<span id="cb64-144"><a href="#cb64-144"></a></span>
+<span id="cb64-145"><a href="#cb64-145"></a>Scoping is important to consider if you try to refer to objects that aren't passed as arguments. </span>
+<span id="cb64-146"><a href="#cb64-146"></a></span>
+<span id="cb64-147"><a href="#cb64-147"></a><span class="ss">- </span>This can be dangerous because if you re-use names of variables, it is easy to accidentally refer to a variable that is not the one you intended. See below:</span>
+<span id="cb64-148"><a href="#cb64-148"></a></span>
+<span id="cb64-149"><a href="#cb64-149"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-150"><a href="#cb64-150"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb64-151"><a href="#cb64-151"></a></span>
+<span id="cb64-152"><a href="#cb64-152"></a>average_new2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb64-153"><a href="#cb64-153"></a>    <span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x) <span class="sc">+</span> v</span>
+<span id="cb64-154"><a href="#cb64-154"></a>}</span>
+<span id="cb64-155"><a href="#cb64-155"></a></span>
+<span id="cb64-156"><a href="#cb64-156"></a></span>
+<span id="cb64-157"><a href="#cb64-157"></a><span class="fu">average_new2</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb64-158"><a href="#cb64-158"></a></span>
+<span id="cb64-159"><a href="#cb64-159"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb64-160"><a href="#cb64-160"></a><span class="fu">average_new2</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb64-161"><a href="#cb64-161"></a><span class="in">```</span></span>
+<span id="cb64-162"><a href="#cb64-162"></a></span>
+<span id="cb64-163"><a href="#cb64-163"></a></span>
+<span id="cb64-164"><a href="#cb64-164"></a>Anything created/saved/updated within a function that you want accessible outside that function needs to be passed to <span class="in">`return()`</span>. See below:</span>
+<span id="cb64-165"><a href="#cb64-165"></a></span>
+<span id="cb64-166"><a href="#cb64-166"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-167"><a href="#cb64-167"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb64-168"><a href="#cb64-168"></a></span>
+<span id="cb64-169"><a href="#cb64-169"></a>average_new3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">remove_nas =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb64-170"><a href="#cb64-170"></a>  v <span class="ot">&lt;-</span> v <span class="sc">+</span> <span class="dv">10</span> <span class="co"># this is not changing v outside the function... </span></span>
+<span id="cb64-171"><a href="#cb64-171"></a>  <span class="fu">return</span>(<span class="fu">sum</span>(x, <span class="at">na.rm =</span> remove_nas)<span class="sc">/</span><span class="fu">length</span>(x) )</span>
+<span id="cb64-172"><a href="#cb64-172"></a>}</span>
+<span id="cb64-173"><a href="#cb64-173"></a></span>
+<span id="cb64-174"><a href="#cb64-174"></a><span class="fu">average_new3</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb64-175"><a href="#cb64-175"></a>v</span>
+<span id="cb64-176"><a href="#cb64-176"></a></span>
+<span id="cb64-177"><a href="#cb64-177"></a><span class="in">```</span></span>
+<span id="cb64-178"><a href="#cb64-178"></a></span>
+<span id="cb64-179"><a href="#cb64-179"></a></span>
+<span id="cb64-180"><a href="#cb64-180"></a>For more about lexical scoping in R, see <span class="co">[</span><span class="ot">R Programming for Data Science</span><span class="co">](https://bookdown.org/rdpeng/rprogdatascience/scoping-rules-of-r.html)</span></span>
+<span id="cb64-181"><a href="#cb64-181"></a></span>
+<span id="cb64-182"><a href="#cb64-182"></a></span>
+<span id="cb64-183"><a href="#cb64-183"></a><span class="fu">## Writing Functions </span></span>
+<span id="cb64-184"><a href="#cb64-184"></a></span>
+<span id="cb64-185"><a href="#cb64-185"></a></span>
+<span id="cb64-186"><a href="#cb64-186"></a>Tips for writing functions:</span>
+<span id="cb64-187"><a href="#cb64-187"></a></span>
+<span id="cb64-188"><a href="#cb64-188"></a><span class="ss">- </span>Write the code for the body of the function (the task that you are wanting to repeat)</span>
+<span id="cb64-189"><a href="#cb64-189"></a><span class="ss">- </span>Identify the parts of the function that could/would change (these are the inputs)</span>
+<span id="cb64-190"><a href="#cb64-190"></a><span class="ss">    - </span>Update the body of the function to be in terms of the inputs</span>
+<span id="cb64-191"><a href="#cb64-191"></a><span class="ss">    - </span>Avoid manually typing anything that is specific to one input; use code to get that (such as unique values of a variable) </span>
+<span id="cb64-192"><a href="#cb64-192"></a><span class="ss">- </span>Identify the output you want to return</span>
+<span id="cb64-193"><a href="#cb64-193"></a></span>
+<span id="cb64-194"><a href="#cb64-194"></a></span>
+<span id="cb64-195"><a href="#cb64-195"></a>**Pair programming exercises:** There are 2 exercises for each section below. </span>
+<span id="cb64-196"><a href="#cb64-196"></a></span>
+<span id="cb64-197"><a href="#cb64-197"></a><span class="ss">- </span>Read through the introduction of the concept and then work on the exercises together.  </span>
+<span id="cb64-198"><a href="#cb64-198"></a><span class="ss">- </span>You'll swap driver and navigator roles between exercises. </span>
+<span id="cb64-199"><a href="#cb64-199"></a><span class="ss">- </span>Remember: The driver writes the code. The navigator oversees and provides guidance. </span>
+<span id="cb64-200"><a href="#cb64-200"></a><span class="ss">- </span>For the first exercise, the person whose birthday is coming up sooner will be the driver first. Swap role for the second exercise and continue in this manner for all exercises.</span>
+<span id="cb64-201"><a href="#cb64-201"></a></span>
+<span id="cb64-202"><a href="#cb64-202"></a></span>
+<span id="cb64-203"><a href="#cb64-203"></a><span class="ss">1. </span>**Rescaling function** Write a function that rescales a numeric vector to be between 0 and 1. Here are some test cases with the expected output. Test out your function on the following inputs:</span>
+<span id="cb64-204"><a href="#cb64-204"></a></span>
+<span id="cb64-205"><a href="#cb64-205"></a><span class="ss">- </span><span class="in">`x = 2:4`</span>. Expected output: <span class="in">`0.0 0.5 1.0`</span></span>
+<span id="cb64-206"><a href="#cb64-206"></a><span class="ss">- </span><span class="in">`x = c(-1, 0, 5)`</span>. Expected output: <span class="in">`0.0000000 0.1666667 1.0000000`</span></span>
+<span id="cb64-207"><a href="#cb64-207"></a><span class="ss">- </span><span class="in">`x = -3:-1`</span>. Expected output: <span class="in">`0.0 0.5 1.0`</span></span>
+<span id="cb64-208"><a href="#cb64-208"></a></span>
+<span id="cb64-211"><a href="#cb64-211"></a><span class="in">```{r}</span></span>
+<span id="cb64-212"><a href="#cb64-212"></a>rescale2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb64-213"><a href="#cb64-213"></a>  min_x <span class="ot">=</span> <span class="fu">min</span>(x)</span>
+<span id="cb64-214"><a href="#cb64-214"></a>  <span class="fu">return</span>((x<span class="sc">-</span>min_x)<span class="sc">/</span>(<span class="fu">max</span>(x)<span class="sc">-</span> min_x))</span>
+<span id="cb64-215"><a href="#cb64-215"></a>}</span>
+<span id="cb64-216"><a href="#cb64-216"></a></span>
+<span id="cb64-217"><a href="#cb64-217"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb64-218"><a href="#cb64-218"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb64-219"><a href="#cb64-219"></a><span class="fu">rescale2</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:-</span><span class="dv">1</span>)</span>
+<span id="cb64-220"><a href="#cb64-220"></a><span class="in">```</span></span>
+<span id="cb64-221"><a href="#cb64-221"></a></span>
+<span id="cb64-222"><a href="#cb64-222"></a><span class="ss">2. </span>**Phone digits** Write a function that formats a 10-digit phone number nicely as <span class="in">`(###) ###-####`</span>. Your function should work on the following test cases: <span class="in">`c("651-330-8661", "6516966000", "800 867 5309")`</span>. It may help to refer to the <span class="in">`stringr`</span> cheatsheet.</span>
+<span id="cb64-223"><a href="#cb64-223"></a></span>
+<span id="cb64-226"><a href="#cb64-226"></a><span class="in">```{r}</span></span>
+<span id="cb64-227"><a href="#cb64-227"></a>phone_form <span class="ot">&lt;-</span> <span class="cf">function</span>(num) {</span>
+<span id="cb64-228"><a href="#cb64-228"></a>  num <span class="ot">&lt;-</span> <span class="fu">str_remove_all</span>(num, <span class="st">"[^[:alnum:]]"</span>)</span>
+<span id="cb64-229"><a href="#cb64-229"></a>  first_3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb64-230"><a href="#cb64-230"></a>  sec_3 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb64-231"><a href="#cb64-231"></a>  thr_4 <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(num, <span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb64-232"><a href="#cb64-232"></a>  <span class="fu">return</span>(<span class="fu">str_glue</span>(<span class="st">"({first_3}) {sec_3}-{thr_4}"</span>))</span>
+<span id="cb64-233"><a href="#cb64-233"></a>}</span>
+<span id="cb64-234"><a href="#cb64-234"></a></span>
+<span id="cb64-235"><a href="#cb64-235"></a><span class="fu">phone_form</span>(<span class="fu">c</span>(<span class="st">"651-330-8661"</span>, <span class="st">"6516966000"</span>, <span class="st">"800 867 5309"</span>))</span>
+<span id="cb64-236"><a href="#cb64-236"></a><span class="in">```</span></span>
+<span id="cb64-237"><a href="#cb64-237"></a></span>
+<span id="cb64-238"><a href="#cb64-238"></a></span>
+<span id="cb64-239"><a href="#cb64-239"></a><span class="fu">## Calling a Function </span></span>
+<span id="cb64-240"><a href="#cb64-240"></a></span>
+<span id="cb64-241"><a href="#cb64-241"></a>When you supply arguments to a function, they can be matched **by position** and/or **by name**.</span>
+<span id="cb64-242"><a href="#cb64-242"></a></span>
+<span id="cb64-243"><a href="#cb64-243"></a></span>
+<span id="cb64-244"><a href="#cb64-244"></a>When you call a function without <span class="in">`argument = value`</span> inside the parentheses, you are using **positional matching**.</span>
+<span id="cb64-245"><a href="#cb64-245"></a></span>
+<span id="cb64-246"><a href="#cb64-246"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb64-247"><a href="#cb64-247"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb64-248"><a href="#cb64-248"></a><span class="in">```</span></span>
+<span id="cb64-249"><a href="#cb64-249"></a></span>
+<span id="cb64-250"><a href="#cb64-250"></a></span>
+<span id="cb64-251"><a href="#cb64-251"></a>The above works because the first argument of <span class="in">`ggplot`</span> is <span class="in">`data`</span> and the second is <span class="in">`mapping`</span>. (Pull up the documentation on <span class="in">`ggplot`</span> with <span class="in">`?ggplot`</span> in the Console.) So the following doesn't work:</span>
+<span id="cb64-252"><a href="#cb64-252"></a></span>
+<span id="cb64-253"><a href="#cb64-253"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-254"><a href="#cb64-254"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb64-255"><a href="#cb64-255"></a><span class="in">```</span></span>
+<span id="cb64-256"><a href="#cb64-256"></a></span>
+<span id="cb64-257"><a href="#cb64-257"></a></span>
+<span id="cb64-258"><a href="#cb64-258"></a>But if we named the arguments (**name matching**), we would be fine:</span>
+<span id="cb64-259"><a href="#cb64-259"></a></span>
+<span id="cb64-260"><a href="#cb64-260"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb64-261"><a href="#cb64-261"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), <span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb64-262"><a href="#cb64-262"></a><span class="in">```</span></span>
+<span id="cb64-263"><a href="#cb64-263"></a></span>
+<span id="cb64-264"><a href="#cb64-264"></a></span>
+<span id="cb64-265"><a href="#cb64-265"></a>Somewhat confusingly, we can name some arguments and not others. Below, <span class="in">`mapping`</span> is named, but <span class="in">`data`</span> isn't. This works because when an argument is matched by name, it is "removed" from the argument list, and the remaining unnamed arguments are matched in the order that they are listed in the function definition. **Just because this is possible doesn't mean it's a good idea--don't do this!**</span>
+<span id="cb64-266"><a href="#cb64-266"></a></span>
+<span id="cb64-267"><a href="#cb64-267"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb64-268"><a href="#cb64-268"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price), diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb64-269"><a href="#cb64-269"></a><span class="in">```</span></span>
+<span id="cb64-270"><a href="#cb64-270"></a></span>
+<span id="cb64-271"><a href="#cb64-271"></a></span>
+<span id="cb64-272"><a href="#cb64-272"></a>::: {.callout-tip title="Argument matching"}</span>
+<span id="cb64-273"><a href="#cb64-273"></a>In general, it is safest to match arguments by name and position for your peace of mind. For functions that you are very familiar with (and know the argument order), it's ok to just use positional matching.</span>
+<span id="cb64-274"><a href="#cb64-274"></a>:::</span>
+<span id="cb64-275"><a href="#cb64-275"></a></span>
+<span id="cb64-276"><a href="#cb64-276"></a></span>
+<span id="cb64-277"><a href="#cb64-277"></a><span class="ss">3. </span>**Error Messages** Diagnose the error message in the example below:</span>
+<span id="cb64-278"><a href="#cb64-278"></a></span>
+<span id="cb64-279"><a href="#cb64-279"></a><span class="in">```</span></span>
+<span id="cb64-280"><a href="#cb64-280"></a><span class="in">ggplot() |&gt;</span></span>
+<span id="cb64-281"><a href="#cb64-281"></a><span class="in">    geom_sf(census_data, aes(fill = population))</span></span>
+<span id="cb64-282"><a href="#cb64-282"></a><span class="in">    </span></span>
+<span id="cb64-283"><a href="#cb64-283"></a><span class="in">Error in `layer_sf()`:</span></span>
+<span id="cb64-284"><a href="#cb64-284"></a><span class="in">! `mapping` must be created by `aes()`</span></span>
+<span id="cb64-285"><a href="#cb64-285"></a><span class="in">```</span></span>
+<span id="cb64-286"><a href="#cb64-286"></a>The error message is that the positioning in geom_sf if wrong becuase it takes the mapping before it takes data, so right now it thinks the data is the mapping argument. In order to fix this either switch their locations or add the explict name to each of these. </span>
+<span id="cb64-287"><a href="#cb64-287"></a></span>
+<span id="cb64-288"><a href="#cb64-288"></a><span class="fu">## The `if-else if-else` Control Structure </span></span>
+<span id="cb64-289"><a href="#cb64-289"></a></span>
+<span id="cb64-290"><a href="#cb64-290"></a>Often in functions, you will want to execute code chunks conditionally. In a programming language, **control structures** are parts of the language that allow you to control what code is executed. By far the most common is the `<span class="in">`if-else if-else`</span> structure.</span>
+<span id="cb64-291"><a href="#cb64-291"></a></span>
+<span id="cb64-292"><a href="#cb64-292"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb64-293"><a href="#cb64-293"></a><span class="cf">if</span> (logical_condition) {</span>
+<span id="cb64-294"><a href="#cb64-294"></a>    <span class="co"># some code</span></span>
+<span id="cb64-295"><a href="#cb64-295"></a>} <span class="cf">else</span> <span class="cf">if</span> (other_logical_condition) {</span>
+<span id="cb64-296"><a href="#cb64-296"></a>    <span class="co"># some code</span></span>
+<span id="cb64-297"><a href="#cb64-297"></a>} <span class="cf">else</span> {</span>
+<span id="cb64-298"><a href="#cb64-298"></a>    <span class="co"># some code</span></span>
+<span id="cb64-299"><a href="#cb64-299"></a>}</span>
+<span id="cb64-300"><a href="#cb64-300"></a></span>
+<span id="cb64-301"><a href="#cb64-301"></a>middle <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb64-302"><a href="#cb64-302"></a>    mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-303"><a href="#cb64-303"></a>    median_x <span class="ot">&lt;-</span> <span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb64-304"><a href="#cb64-304"></a>    seems_skewed <span class="ot">&lt;-</span> (mean_x <span class="sc">&gt;</span> <span class="fl">1.5</span><span class="sc">*</span>median_x) <span class="sc">|</span> (mean_x <span class="sc">&lt;</span> (<span class="dv">1</span><span class="sc">/</span><span class="fl">1.5</span>)<span class="sc">*</span>median_x)</span>
+<span id="cb64-305"><a href="#cb64-305"></a>    <span class="cf">if</span> (seems_skewed) {</span>
+<span id="cb64-306"><a href="#cb64-306"></a>        median_x</span>
+<span id="cb64-307"><a href="#cb64-307"></a>    } <span class="cf">else</span> {</span>
+<span id="cb64-308"><a href="#cb64-308"></a>        mean_x</span>
+<span id="cb64-309"><a href="#cb64-309"></a>    }</span>
+<span id="cb64-310"><a href="#cb64-310"></a>}</span>
+<span id="cb64-311"><a href="#cb64-311"></a><span class="in">```</span></span>
+<span id="cb64-312"><a href="#cb64-312"></a></span>
+<span id="cb64-313"><a href="#cb64-313"></a>::: {.callout-tip title="To vectorize or not to vectorize"}</span>
+<span id="cb64-314"><a href="#cb64-314"></a>The <span class="in">`if () else {}`</span> code is not **vectorized**; the logical condition in <span class="in">`if()`</span> cannot be a logical vector of length longer than 1. If you want a vectorized version of conditional execution of code use <span class="in">`if_else()`</span> or <span class="in">`case_when()`</span>; these can be used in <span class="in">`mutate()`</span>. </span>
+<span id="cb64-315"><a href="#cb64-315"></a>:::</span>
+<span id="cb64-316"><a href="#cb64-316"></a></span>
+<span id="cb64-317"><a href="#cb64-317"></a><span class="ss">4. </span>**Convert Temp** Write a function for converting temperatures that takes as input a numeric value and a unit (either "C" for Celsius or "F" for Fahrenheit). The function should convert the temperature from one unit to the other based on the following formulas:</span>
+<span id="cb64-318"><a href="#cb64-318"></a></span>
+<span id="cb64-319"><a href="#cb64-319"></a><span class="ss">- </span>To convert Celsius to Fahrenheit: <span class="in">`(Celsius * 9/5) + 32`</span></span>
+<span id="cb64-320"><a href="#cb64-320"></a><span class="ss">- </span>To convert Fahrenheit to Celsius: <span class="in">`(Fahrenheit - 32) * 5/9`</span></span>
+<span id="cb64-321"><a href="#cb64-321"></a></span>
+<span id="cb64-324"><a href="#cb64-324"></a><span class="in">```{r}</span></span>
+<span id="cb64-325"><a href="#cb64-325"></a>convert_temp <span class="ot">&lt;-</span> <span class="cf">function</span>(num, unit) {</span>
+<span id="cb64-326"><a href="#cb64-326"></a>  <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"C"</span>) {</span>
+<span id="cb64-327"><a href="#cb64-327"></a>     new_val <span class="ot">&lt;-</span> (num <span class="sc">*</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb64-328"><a href="#cb64-328"></a>     <span class="fu">str_glue</span>(<span class="st">"{new_val} F"</span>)</span>
+<span id="cb64-329"><a href="#cb64-329"></a>  } </span>
+<span id="cb64-330"><a href="#cb64-330"></a>  <span class="cf">else</span> <span class="cf">if</span> (unit <span class="sc">==</span> <span class="st">"F"</span>) {</span>
+<span id="cb64-331"><a href="#cb64-331"></a>     new_val <span class="ot">&lt;-</span> (num <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span><span class="sc">/</span><span class="dv">9</span></span>
+<span id="cb64-332"><a href="#cb64-332"></a>     <span class="fu">str_glue</span>(<span class="st">"{new_val} C"</span>)</span>
+<span id="cb64-333"><a href="#cb64-333"></a>  }</span>
+<span id="cb64-334"><a href="#cb64-334"></a>}</span>
+<span id="cb64-335"><a href="#cb64-335"></a></span>
+<span id="cb64-336"><a href="#cb64-336"></a><span class="fu">convert_temp</span>(<span class="dv">20</span>, <span class="st">"C"</span>)</span>
+<span id="cb64-337"><a href="#cb64-337"></a><span class="fu">convert_temp</span>(<span class="dv">67</span>, <span class="st">"F"</span>)</span>
+<span id="cb64-338"><a href="#cb64-338"></a><span class="in">```</span></span>
+<span id="cb64-339"><a href="#cb64-339"></a></span>
+<span id="cb64-340"><a href="#cb64-340"></a></span>
+<span id="cb64-341"><a href="#cb64-341"></a><span class="ss">5. </span>**Domain Name** Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)</span>
+<span id="cb64-342"><a href="#cb64-342"></a></span>
+<span id="cb64-345"><a href="#cb64-345"></a><span class="in">```{r}</span></span>
+<span id="cb64-346"><a href="#cb64-346"></a>domain_name <span class="ot">&lt;-</span> <span class="cf">function</span>(email) {</span>
+<span id="cb64-347"><a href="#cb64-347"></a>  is_valid <span class="ot">&lt;-</span> (<span class="fu">str_detect</span>(email, <span class="st">"@.+</span><span class="sc">\\</span><span class="st">..+"</span>))</span>
+<span id="cb64-348"><a href="#cb64-348"></a>  <span class="cf">if</span> (is_valid) {</span>
+<span id="cb64-349"><a href="#cb64-349"></a>    <span class="fu">str_extract</span>(email, <span class="st">"@.+$"</span>)</span>
+<span id="cb64-350"><a href="#cb64-350"></a>  }</span>
+<span id="cb64-351"><a href="#cb64-351"></a>  <span class="cf">else</span> {</span>
+<span id="cb64-352"><a href="#cb64-352"></a>    <span class="st">"Invalid Email"</span></span>
+<span id="cb64-353"><a href="#cb64-353"></a>  }</span>
+<span id="cb64-354"><a href="#cb64-354"></a>} </span>
+<span id="cb64-355"><a href="#cb64-355"></a></span>
+<span id="cb64-356"><a href="#cb64-356"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor@macalester.edu"</span>)</span>
+<span id="cb64-357"><a href="#cb64-357"></a><span class="fu">domain_name</span>(<span class="st">"tduckworth@gmail"</span>)</span>
+<span id="cb64-358"><a href="#cb64-358"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor.com"</span>)</span>
+<span id="cb64-359"><a href="#cb64-359"></a><span class="fu">domain_name</span>(<span class="st">"tduckwor@gmail."</span>)</span>
+<span id="cb64-360"><a href="#cb64-360"></a><span class="in">```</span></span>
+<span id="cb64-361"><a href="#cb64-361"></a></span>
+<span id="cb64-362"><a href="#cb64-362"></a></span>
+<span id="cb64-363"><a href="#cb64-363"></a><span class="fu">## Writing Functions with `tidyverse` Verbs </span></span>
+<span id="cb64-364"><a href="#cb64-364"></a></span>
+<span id="cb64-365"><a href="#cb64-365"></a>Perhaps we are using <span class="in">`group_by()`</span> and <span class="in">`summarize()`</span> a lot to compute group means. We might write this function:</span>
+<span id="cb64-366"><a href="#cb64-366"></a></span>
+<span id="cb64-369"><a href="#cb64-369"></a><span class="in">```{r}</span></span>
+<span id="cb64-370"><a href="#cb64-370"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-371"><a href="#cb64-371"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-372"><a href="#cb64-372"></a>        <span class="fu">group_by</span>(group_var) <span class="sc">|&gt;</span></span>
+<span id="cb64-373"><a href="#cb64-373"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(mean_var))</span>
+<span id="cb64-374"><a href="#cb64-374"></a>}</span>
+<span id="cb64-375"><a href="#cb64-375"></a><span class="in">```</span></span>
+<span id="cb64-376"><a href="#cb64-376"></a></span>
+<span id="cb64-377"><a href="#cb64-377"></a>Let's use it on the <span class="in">`diamonds`</span> dataset to compute the mean size (<span class="in">`carat`</span>) by diamond <span class="in">`cut`</span>:</span>
+<span id="cb64-378"><a href="#cb64-378"></a></span>
+<span id="cb64-379"><a href="#cb64-379"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-380"><a href="#cb64-380"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-381"><a href="#cb64-381"></a><span class="in">```</span></span>
+<span id="cb64-382"><a href="#cb64-382"></a></span>
+<span id="cb64-383"><a href="#cb64-383"></a></span>
+<span id="cb64-384"><a href="#cb64-384"></a>What if the problem is that the variable names need to be in quotes?</span>
+<span id="cb64-385"><a href="#cb64-385"></a></span>
+<span id="cb64-386"><a href="#cb64-386"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-387"><a href="#cb64-387"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="st">"cut"</span>, <span class="at">mean_var =</span> <span class="st">"carat"</span>)</span>
+<span id="cb64-388"><a href="#cb64-388"></a><span class="in">```</span></span>
+<span id="cb64-389"><a href="#cb64-389"></a></span>
+<span id="cb64-390"><a href="#cb64-390"></a></span>
+<span id="cb64-391"><a href="#cb64-391"></a></span>
+<span id="cb64-392"><a href="#cb64-392"></a>What's Going On?</span>
+<span id="cb64-393"><a href="#cb64-393"></a></span>
+<span id="cb64-394"><a href="#cb64-394"></a>The <span class="in">`tidyverse`</span> uses something called **tidy evaluation**: this allows you to refer to a variable by typing it directly (e.g., no need to put it in quotes). </span>
+<span id="cb64-395"><a href="#cb64-395"></a></span>
+<span id="cb64-396"><a href="#cb64-396"></a><span class="ss">- </span><span class="in">`group_by(group_var)`</span> is expecting a variable that is actually called <span class="in">`group_var`</span>, and <span class="in">`mean(mean_var)`</span> is expecting a variable that is actually called <span class="in">`mean_var`</span>.</span>
+<span id="cb64-397"><a href="#cb64-397"></a></span>
+<span id="cb64-398"><a href="#cb64-398"></a></span>
+<span id="cb64-399"><a href="#cb64-399"></a></span>
+<span id="cb64-400"><a href="#cb64-400"></a></span>
+<span id="cb64-401"><a href="#cb64-401"></a>To fix this we need to **embrace** the variables inside the function with <span class="in">`{ var }`</span>:</span>
+<span id="cb64-402"><a href="#cb64-402"></a></span>
+<span id="cb64-405"><a href="#cb64-405"></a><span class="in">```{r}</span></span>
+<span id="cb64-406"><a href="#cb64-406"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-407"><a href="#cb64-407"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-408"><a href="#cb64-408"></a>        <span class="fu">group_by</span>({{ group_var }}) <span class="sc">|&gt;</span></span>
+<span id="cb64-409"><a href="#cb64-409"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb64-410"><a href="#cb64-410"></a>}</span>
+<span id="cb64-411"><a href="#cb64-411"></a><span class="in">```</span></span>
+<span id="cb64-412"><a href="#cb64-412"></a></span>
+<span id="cb64-413"><a href="#cb64-413"></a>The <span class="in">`{ var }`</span> tells R to look at what the variable specified by the input  <span class="in">`var`</span> rather than look for a variable called <span class="in">`var`</span>.</span>
+<span id="cb64-414"><a href="#cb64-414"></a></span>
+<span id="cb64-417"><a href="#cb64-417"></a><span class="in">```{r}</span></span>
+<span id="cb64-418"><a href="#cb64-418"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> cut, <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-419"><a href="#cb64-419"></a><span class="in">```</span></span>
+<span id="cb64-420"><a href="#cb64-420"></a></span>
+<span id="cb64-421"><a href="#cb64-421"></a></span>
+<span id="cb64-422"><a href="#cb64-422"></a>Let's group by both <span class="in">`cut`</span> and <span class="in">`color`</span>:</span>
+<span id="cb64-423"><a href="#cb64-423"></a></span>
+<span id="cb64-424"><a href="#cb64-424"></a><span class="in">```{r error=TRUE}</span></span>
+<span id="cb64-425"><a href="#cb64-425"></a><span class="fu">group_means</span>(diamonds, <span class="at">group_var =</span> <span class="fu">c</span>(cut, color), <span class="at">mean_var =</span> carat)</span>
+<span id="cb64-426"><a href="#cb64-426"></a><span class="in">```</span></span>
+<span id="cb64-427"><a href="#cb64-427"></a></span>
+<span id="cb64-428"><a href="#cb64-428"></a></span>
+<span id="cb64-429"><a href="#cb64-429"></a></span>
+<span id="cb64-430"><a href="#cb64-430"></a>Oh No! What Now?! </span>
+<span id="cb64-431"><a href="#cb64-431"></a></span>
+<span id="cb64-432"><a href="#cb64-432"></a>When <span class="in">`c(cut, color)`</span> is put inside <span class="in">`{ c(cut, color) }`</span> within the function, R is actually running the code inside <span class="in">`{ }`</span>. </span>
+<span id="cb64-433"><a href="#cb64-433"></a></span>
+<span id="cb64-434"><a href="#cb64-434"></a><span class="ss">- </span>This combines the columns for those 2 variables into one long vector. What we really meant by <span class="in">`c(cut, color)`</span> is "group by both cut and color".</span>
+<span id="cb64-435"><a href="#cb64-435"></a></span>
+<span id="cb64-436"><a href="#cb64-436"></a></span>
+<span id="cb64-437"><a href="#cb64-437"></a></span>
+<span id="cb64-438"><a href="#cb64-438"></a>To fix this, we need the <span class="in">`pick()`</span> function to get R to see <span class="in">`{ group_var }`</span> as a vector of separate variables (like the way <span class="in">`select()`</span> works).</span>
+<span id="cb64-439"><a href="#cb64-439"></a></span>
+<span id="cb64-442"><a href="#cb64-442"></a><span class="in">```{r}</span></span>
+<span id="cb64-443"><a href="#cb64-443"></a>group_means <span class="ot">&lt;-</span> <span class="cf">function</span>(df, group_var, mean_var) {</span>
+<span id="cb64-444"><a href="#cb64-444"></a>    df <span class="sc">|&gt;</span></span>
+<span id="cb64-445"><a href="#cb64-445"></a>        <span class="fu">group_by</span>(<span class="fu">pick</span>({{ group_var }})) <span class="sc">|&gt;</span></span>
+<span id="cb64-446"><a href="#cb64-446"></a>        <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>({{ mean_var }}))</span>
+<span id="cb64-447"><a href="#cb64-447"></a>}</span>
+<span id="cb64-448"><a href="#cb64-448"></a><span class="in">```</span></span>
+<span id="cb64-449"><a href="#cb64-449"></a></span>
+<span id="cb64-450"><a href="#cb64-450"></a></span>
+<span id="cb64-451"><a href="#cb64-451"></a><span class="ss">6. </span>**Prop function** Create a new version of <span class="in">`dplyr::count()`</span> that also shows proportions instead of just sample sizes. The function should be able to handle counting by multiple variables. Test your function with two different sets of arguments using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-452"><a href="#cb64-452"></a></span>
+<span id="cb64-455"><a href="#cb64-455"></a><span class="in">```{r}</span></span>
+<span id="cb64-456"><a href="#cb64-456"></a>proportions <span class="ot">&lt;-</span> <span class="cf">function</span>(df, count_var) {</span>
+<span id="cb64-457"><a href="#cb64-457"></a>  df <span class="sc">|&gt;</span> </span>
+<span id="cb64-458"><a href="#cb64-458"></a>    <span class="fu">count</span>(<span class="fu">pick</span>({{count_var}})) <span class="sc">|&gt;</span> </span>
+<span id="cb64-459"><a href="#cb64-459"></a>    <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb64-460"><a href="#cb64-460"></a>}</span>
+<span id="cb64-461"><a href="#cb64-461"></a></span>
+<span id="cb64-462"><a href="#cb64-462"></a><span class="fu">proportions</span>(diamonds, cut)</span>
+<span id="cb64-463"><a href="#cb64-463"></a><span class="fu">proportions</span>(diamonds, <span class="fu">c</span>(cut, color))</span>
+<span id="cb64-464"><a href="#cb64-464"></a><span class="in">```</span></span>
+<span id="cb64-465"><a href="#cb64-465"></a></span>
+<span id="cb64-466"><a href="#cb64-466"></a><span class="ss">7. </span>**Scatterplot + Smooth function** Create a function that creates a scatterplot from a user-supplied dataset with user-supplied x and y variables. The plot should also show a curvy smoothing line in blue, and a linear smoothing line in red. Test your function using the <span class="in">`diamonds`</span> dataset.</span>
+<span id="cb64-467"><a href="#cb64-467"></a></span>
+<span id="cb64-468"><a href="#cb64-468"></a></span>
+<span id="cb64-471"><a href="#cb64-471"></a><span class="in">```{r}</span></span>
+<span id="cb64-472"><a href="#cb64-472"></a>scatter_smooth <span class="ot">&lt;-</span> <span class="cf">function</span>(df, x, y) {</span>
+<span id="cb64-473"><a href="#cb64-473"></a>  df <span class="sc">|&gt;</span> </span>
+<span id="cb64-474"><a href="#cb64-474"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> {{x}}, <span class="at">y =</span> {{y}})) <span class="sc">+</span> </span>
+<span id="cb64-475"><a href="#cb64-475"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb64-476"><a href="#cb64-476"></a>    <span class="fu">geom_smooth</span>(<span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb64-477"><a href="#cb64-477"></a>    <span class="fu">geom_smooth</span>(<span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb64-478"><a href="#cb64-478"></a>}</span>
+<span id="cb64-479"><a href="#cb64-479"></a></span>
+<span id="cb64-480"><a href="#cb64-480"></a><span class="fu">scatter_smooth</span>(diamonds, carat, price)</span>
+<span id="cb64-481"><a href="#cb64-481"></a><span class="in">```</span></span>
+<span id="cb64-482"><a href="#cb64-482"></a><span class="fu">## Done!</span></span>
+<span id="cb64-483"><a href="#cb64-483"></a></span>
+<span id="cb64-484"><a href="#cb64-484"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
