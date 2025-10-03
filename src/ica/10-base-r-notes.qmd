@@ -12,6 +12,11 @@ By the end of this lesson, you should be able to:
 - Use the `str()` function to examine the structure of an unfamiliar object and extract components from the object
 - Apply printing strategies to streamline the debugging and development process
 
+```{r}
+library(tibble)
+library(tidyverse)
+```
+
 
 ## Common R Object Structures 
 
@@ -322,8 +327,43 @@ mtcars |> pull(mpg)
 1. **Subsetting Functions** For each of the tasks below, write a function that take a vector as input returns the desired output:
 
 a. The elements at even-numbered positions. (Hint: use the `seq()` function.)
+
+```{r}
+even_position <- function(vector) {
+  if (length(vector) <= 1) {
+     return("No even positions")
+  }
+  else {
+     seq <- seq(2, length(vector), by = 2)
+     vector[seq]
+  }
+}
+
+even_position(1)
+even_position(1:10)
+even_position(23:30)
+```
+
 b. Every element except the last value.
+
+```{r}
+except_last <- function(vector) {
+  vector[-length(vector)]
+}
+
+except_last(1:9)
+except_last(c("two", "hi", "boo", "class"))
+```
+
 c. Only even values (and no missing values).
+
+```{r}
+even_values <- function(vector) {
+  vector[vector %% 2 == 0 & !is.na(vector)]
+}
+
+even_values(c(1, NA, 9, 10, 17, 12, NA, 6, 4))
+```
 
 ## Exploring the structure of an object with `str()`  
 
@@ -366,10 +406,10 @@ pred_of_interest <- "hp"
 When you're done developing your function, remove these objects to declutter your environment by entering `rm(data, yvar, preds, pred_of_interest)` in the Console.
 
 ```{r eval=FALSE}
-fit_mod_and_extract <- function(___) {
-    # Use str_c to create a string (formula_str) that looks like "yvar ~ pred1 + pred2"
+fit_mod_and_extract <- function(data, yvar, preds, pred_of_interest) {
+  # Use str_c to create a string (formula_str) that looks like "yvar ~ pred1 + pred2"
     # Look at the documentation for a helpful argument
-    mod_formula_str <- 
+    mod_formula_str <- str_c(yvar, "~", str_c(preds, collapse = "+"))
     mod_form <- as.formula(mod_formula_str)
     
     # Fit a linear model using the constructed formula and given data
@@ -381,17 +421,15 @@ fit_mod_and_extract <- function(___) {
     # Return the coefficient estimate and CI for the predictor of interest
     tibble(
         which_pred = pred_of_interest,
-        estimate = ___,
-        ci_lower = ___,
-        ci_upper = ___
+        estimate = mod$coefficients[pred_of_interest],
+        ci_lower = ci[pred_of_interest, "2.5 %"],
+        ci_upper = ci[pred_of_interest, "97.5 %"]
     )
 }
 ```
 
 ```{r}
-
-
-
+fit_mod_and_extract(mtcars, "mpg", c("hp", "wt"), "hp")
 
 ```
 
