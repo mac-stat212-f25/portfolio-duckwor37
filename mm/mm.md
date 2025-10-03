@@ -17,3 +17,5 @@
 ![0929-Missing_Data.jpeg](0929-Missing_Data.jpeg)
 
 ![1001-Functions.jpeg](1001-Functions.jpeg)
+
+![1003-BaseR.jpeg](1003-Functions.jpeg)
