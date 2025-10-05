@@ -498,7 +498,7 @@ fit_mod_and_extract(data = mtcars, yvar = "mpg", preds = c("hp", "wt"), pred_of_
 - Use `try()` to catch errors and print out a message when an error occurs.
   - Example below:
 
-```{r error = TRUE, r eval = FALSE}
+```{r error = TRUE, eval = FALSE}
 My_own_sum <- function(x){
   return(sum(x))
 }
@@ -515,7 +515,7 @@ class(results)
 - Include `if else` statements within a function to ensure that you are passing the right type of input to a function. You can create you own custom error message with `stop()`. 
   - Example below:
 
-```{r error=TRUE, r eval = FALSE}
+```{r error=TRUE, eval = FALSE}
 My_own_sum <- function(x){
   if(!is.numeric(x)){
     stop("Input must be numeric")
