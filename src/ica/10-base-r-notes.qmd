@@ -428,7 +428,7 @@ fit_mod_and_extract <- function(data, yvar, preds, pred_of_interest) {
 }
 ```
 
-```{r}
+```{r eval = FALSE}
 fit_mod_and_extract(mtcars, "mpg", c("hp", "wt"), "hp")
 
 ```
