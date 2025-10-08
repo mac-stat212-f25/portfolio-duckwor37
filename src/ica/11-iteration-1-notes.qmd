@@ -426,7 +426,7 @@ remove_outliers(diamonds, what_var = carat, sd_thresh = 3)
 
 3. Write a function called `fit_model` that implements the different settings for our `diamonds` analysis.
 
-```{r eval=FALSE}
+```{r}
 fit_model <- function(data, mod_formula, remove_outliers) {
     # remove_outliers is a TRUE/FALSE flag of whether or not to remove outliers
   if(remove_outliers) {
