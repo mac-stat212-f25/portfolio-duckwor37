@@ -21,3 +21,5 @@
 ![1003-BaseR.jpeg](1003-Functions.jpeg)
 
 ![1006-Iterations.jpeg](1006-Iterations.jpeg)
+
+![1008-Iterations_2.jpeg](1008-Iterations_2.jpeg)
