@@ -2,6 +2,12 @@
 title: "12 Loops+Iter P2"
 ---
 
+```{r}
+library(purrr)
+library(tidyverse)
+```
+
+
 ## 🧩 Learning Goals
 
 By the end of this lesson, you should be able to:
@@ -27,10 +33,21 @@ Recall that:
 
 
 - First, write out the steps in words.
+
+go over each column 
+get the class of each column 
+store the classes
+
 - Then translate each step to code.
 
 ```{r}
+mtcars_vector <- vector("character", c(ncol(mtcars)))
 
+for (i in seq_along(mtcars)) {
+  mtcars_vector[i] <- class(mtcars[[i]])
+}
+
+mtcars_vector
 ```
 
 ## Iteration with `purrr` 
@@ -55,7 +72,7 @@ The main advantages of `purrr` include:
 Compare the four ways to create a vector of integers from 1 to 100,000.
 
 
-```{r}
+```{r eval = FALSE}
 # Example 1: For loop with no storage container; append new value to existing vector
 x <- integer()
 results1 <- bench::mark(
@@ -80,7 +97,7 @@ results3 <- bench::mark(purrr::map_int(1:1e5, ~.x))
 results4 <- bench::mark(seq(1,1e5))
 ```
 
-```{r}
+```{r eval = FALSE}
 # Compile Results
 bind_rows(results1, results2, results3, results4) |>
   mutate(type = c("for_loop_no_storage", "for_loop_with_storage", "purrr_map", "standard_func")) |>
@@ -117,7 +134,7 @@ map_chr(mtcars, class)
 
 Let's get the class of each variable in `diamonds`:
 
-```{r purrr_col_classes_error, error=TRUE}
+```{r purrr_col_classes_error, error=TRUE, eval = FALSE}
 map_chr(diamonds, class)
 ```
 
@@ -163,13 +180,44 @@ map_int(diamonds |> select(!where(is.numeric)), n_distinct)
 
 - Write a function called `summ_stats()` that takes a numeric vector `x` as input and returns the mean, median, standard deviation, and IQR as a data frame. You can use `tibble()` to create the data frame.
     - Example: `tibble(a = 1:2, b = 2:3)` creates a data frame with variables `a` and `b`.
+
+```{r}
+diamonds_num <- diamonds |> select(where(is.numeric))
+
+summ_stats <- function(x) {
+  tibble(
+    Mean = mean(x, na.rm = TRUE),
+    Median = median(x, na.rm = TRUE),
+    SD = sd(x, na.rm = TRUE),
+    IQR = IQR(x, na.rm = TRUE)
+  )
+}
+```
+
 - Use a `map*()` function from `purrr` to get the summary statistics for each quantitative variable in `diamonds`.
 - Look up the `bind_rows()` documentation from `dplyr` to combine summary statistics for all quantitative variables into one data frame.
     - Note: You'll notice that the variable names are not present in the output. Try to figure out a way to add variable names back in with `mutate()` and `colnames()`.
-    
+
+```{r}
+map(diamonds_num, summ_stats) |> 
+  bind_rows() |> 
+  mutate(variable = colnames(diamonds_num))
+```
+   
     
 Once you've done that with `map()`, write a `for` loop to achieve the same result. Which do you prefer in terms of ease of code writing and readability?
 
+```{r}
+diamond_summ_stats <- vector("list", length = ncol(diamonds_num))
+
+for (i in seq_along(diamonds_num)) {
+  diamond_summ_stats[[i]] <- summ_stats(diamonds_num[[i]])
+} 
+ 
+diamond_summ_stats |> 
+  set_names(colnames(diamonds_num)) |> 
+  bind_rows(.id = "variable")  
+```
 
 
 
@@ -237,7 +285,21 @@ pmap_chr(string_data, str_replace_all, string = "ppp nnn hhh")
 - Use different arguments for `start` and `end` but a fixed `string`
 
 ```{r}
+string_data2 <- tibble(
+  string = c("eye", "leg", "feet", "hands"),
+  start = c(1, 2, 3, 2),
+  end = c(1, 5, 4, 9)
+)
 
+pmap_chr(string_data2, str_sub)
+
+
+string_data3 <- tibble(
+  start = c(1, 3, 5),
+  end = c(1, 5, 10)
+)
+
+pmap_chr(string_data3, str_sub, string = "Hello World")
 ```
 
 2. Last class we worked on an extended exercise where our goal was to write a series of functions and a `for` loop to repeat linear model fitting under different "settings" (removal of outliers, model formula choice). 
@@ -277,7 +339,8 @@ fit_model <- function(data, mod_formula, remove_outliers) {
 
 # use pmap()
 
-
+df_arg_combos |> 
+  mutate(fit_mod = pmap(df_arg_combos, fit_model, data = diamonds))
 
 
 ```
