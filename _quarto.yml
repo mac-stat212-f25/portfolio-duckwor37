@@ -81,6 +81,7 @@ book:
       - src/ica/09-functions-notes.qmd
       - src/ica/10-base-r-notes.qmd
       - src/ica/11-iteration-1-notes.qmd
+      - src/ica/12-iteration-2-notes.qmd
 
     - part: "Exams"
       chapters: 
