@@ -18,7 +18,7 @@
 
 ![1001-Functions.jpeg](1001-Functions.jpeg)
 
-![1003-BaseR.jpeg](1003-Functions.jpeg)
+![1003-BaseR.jpeg](1003-BaseR.jpeg)
 
 ![1006-Iterations.jpeg](1006-Iterations.jpeg)
 
