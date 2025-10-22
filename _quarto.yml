@@ -82,9 +82,10 @@ book:
       - src/ica/10-base-r-notes.qmd
       - src/ica/11-iteration-1-notes.qmd
       - src/ica/12-iteration-2-notes.qmd
+      - src/ica/14-apis-2-notes.qmd
 
     - part: "Exams"
-      chapters: 
+      chapters:
       - src/exams/Exam_summary_sheets.md
       - src/exams/exam_1/exam_1.qmd
 
