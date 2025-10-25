@@ -25,3 +25,5 @@
 ![1008-Iterations_2.jpeg](1008-Iterations_2.jpeg)
 
 ![1020-APIs_P1.jpeg](1020-APIs_P1.jpeg)
+
+![1025-Scrapping.jpeg](1025-Scrapping.jpeg)
