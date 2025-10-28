@@ -27,3 +27,5 @@
 ![1020-APIs_P1.jpeg](1020-APIs_P1.jpeg)
 
 ![1025-Scrapping.jpeg](1025-Scrapping.jpeg)
+
+![1028-Databases_SQL.jpeg](1028-Databases_SQL.jpeg)
