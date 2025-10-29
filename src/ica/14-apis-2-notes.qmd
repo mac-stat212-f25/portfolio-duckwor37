@@ -80,7 +80,7 @@ In R, it is easiest to access Web APIs through a **wrapper package**, an R packa
 In our work with maps, we've used the `tidycensus` package to obtain census data to display on maps.
 `tidycensus` is a wrapper package that makes it easy to obtain desired census information:
 
-```{r tidycensus, eval=FALSE}
+```{r tidycensus}
 tidycensus::get_acs(
     year = 2020,
     state = "MN",
@@ -130,7 +130,6 @@ Copy and paste your key into a new text file:
 Read in the key with the following code:
 
 ```{r read_census_api_key2}
-#| eval: false
 census_api_key <- readLines("census_api_key.txt")
 ```
 
