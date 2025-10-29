@@ -129,7 +129,7 @@ Copy and paste your key into a new text file:
 
 Read in the key with the following code:
 
-```{r read_census_api_key2}
+```{r read_census_api_key2, eval = FALSE}
 census_api_key <- readLines("census_api_key.txt")
 ```
 
@@ -168,7 +168,7 @@ We will use the `httr2` package to build up a full URL from its parts because of
     -   The backticks around `for` are needed because `for` is a reserved word in R (for for-loops). You'll need backticks whenever the key name has special characters (like spaces, dashes).
     -   We can see from [here](https://www.census.gov/data/developers/guidance/api-user-guide.Help_&_Contact_Us.html) that providing an API key is achieved with `key=YOUR_API_KEY`.
 
-```{r httr2_census}
+```{r httr2_census, eval = FALSE}
 req <- request("https://api.census.gov") |> 
     req_url_path_append("data") |> 
     req_url_path_append("2019") |> 
@@ -187,7 +187,7 @@ req <- request("https://api.census.gov") |>
 
 Once we've fully constructed our request, we can use `req_perform()` to send out the API request and get a **response**.
 
-```{r census_request}
+```{r census_request, eval = FALSE}
 resp <- req_perform(req)
 ```
 
@@ -200,7 +200,7 @@ We can navigate to the request URL to see the structure of this output.
     -   This function uses `fromJSON()` behind the scenes.
     -   Without `simplifyVector = TRUE`, the JSON is read in as a list.
 
-```{r census_json}
+```{r census_json, eval=FALSE}
 resp_json_df <- resp |> resp_body_json(simplifyVector = TRUE)
 
 # Data Cleaning
@@ -248,7 +248,7 @@ We can navigate to the request URL to see the structure of this output.
 -   XML (Extensible Markup Language) is a tree structure of named nodes and attributes.
 -   We can use `resp_body_xml()` to read in the XML as an R object.
 
-```{r bgg_response}
+```{r bgg_response, eval = FALSE}
 resp <- req_perform(req)
 resp
 resp <- resp_body_xml(resp)
@@ -299,7 +299,7 @@ resp |> xml_find_all('item/name') |> xml_attr("value")
 ```
 
 2.  Get the board game ID number (e.g., 63495, 40175)
-```{r}
+```{r, eval = FALSE}
 resp |> xml_find_all("item") |> xml_attr("id")
 ```
 
@@ -450,7 +450,7 @@ resp_pt$response$meta
 -   the number of `hits` (number of search results) within the `meta` object
 -   the abstracts and leading paragraphs of the articles found in the search
 
-```{r}
+```{r, eval = FALSE}
 resp_pt[['copyright']]
 resp_pt$response$meta$hits
 
