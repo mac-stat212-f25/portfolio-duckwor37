@@ -260,7 +260,7 @@ The XML output is not packaged in a nice way.
 
 Let's first use the `xml_structure()` function to see how information is organized:
 
-```{r xml_structure}
+```{r xml_structure, eval = FALSE}
 xml_structure(resp)
 ```
 
