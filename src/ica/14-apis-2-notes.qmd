@@ -274,7 +274,7 @@ The key navigation and extraction functions in `xml2` are:
 -   `xml_attr()`: Selects the value of an attribute (the information to the right of the `=` in quotes)
     -   `<node_name attribute_name1="attribute_value1" attribute_name2="attribute_value2">`
 
-```{r xml_nav_extract}
+```{r xml_nav_extract, eval = FALSE}
 # Get the item nodes in 2 different ways
 resp |> xml_find_all("item")
 resp |> xml_children()
@@ -294,7 +294,7 @@ resp |> xml_find_all("item/name") |> xml_attr("type")
 
 1.  Get the board game name (e.g., "Murder Mystery..." and "Robinson Crusoe")
 
-```{r}
+```{r, eval = FALSE}
 resp |> xml_find_all('item/name') |> xml_attr("value")
 ```
 
