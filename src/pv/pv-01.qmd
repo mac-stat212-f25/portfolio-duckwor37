@@ -13,7 +13,6 @@ library(stringr)
 Your exploratory data analysis of the team datasets go here.
 ```{r}
 MentalHealthSurvey <- read_csv("data/raw/MentalHealthSurvey.csv")
-View(MentalHealthSurvey)
 ```
 # Counting function
 ```{r}
