@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Professional Viz Sample – COMP/STAT212 Portfolio</title>
+<title>TidyTuesday 09/09/2025 – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/tt/hw01-tt.html" rel="next">
-<link href="../../index.html" rel="prev">
+<link href="../../src/tt/hw03-tt.html" rel="next">
+<link href="../../src/tt/hw01-tt.html" rel="prev">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -290,7 +290,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/pv/pv-01.html">Prof Viz</a></li><li class="breadcrumb-item"><a href="../../src/pv/pv-01.html"><span class="chapter-title">Professional Viz Sample</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../../src/tt/hw02-tt.html"><span class="chapter-title">TidyTuesday 09/09/2025</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -338,7 +338,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/pv/pv-01.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Professional Viz Sample</span></a>
+  <a href="../../src/pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz Sample</span></a>
   </div>
 </li>
       </ul>
@@ -359,7 +359,7 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tt/hw02-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">TidyTuesday 09/09/2025</span></a>
+  <a href="../../src/tt/hw02-tt.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">TidyTuesday 09/09/2025</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -500,13 +500,15 @@ cookieconsent.run({
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#counting-function" id="toc-counting-function" class="nav-link active" data-scroll-target="#counting-function">Counting function</a></li>
-  <li><a href="#calculating-percentages-creating-data-set" id="toc-calculating-percentages-creating-data-set" class="nav-link" data-scroll-target="#calculating-percentages-creating-data-set">Calculating Percentages &amp; creating data set</a></li>
+<li><a href="#tidytuesday-section-optional" id="toc-tidytuesday-section-optional" class="nav-link active" data-scroll-target="#tidytuesday-section-optional">TidyTuesday Section (optional)</a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/pv/pv-01.html">Prof Viz</a></li><li class="breadcrumb-item"><a href="../../src/pv/pv-01.html"><span class="chapter-title">Professional Viz Sample</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Professional Viz Sample</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/tt/hw01-tt.html">TidyTuesday</a></li><li class="breadcrumb-item"><a href="../../src/tt/hw02-tt.html"><span class="chapter-title">TidyTuesday 09/09/2025</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">TidyTuesday 09/09/2025</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -520,142 +522,155 @@ cookieconsent.run({
   
 
 
-</header><div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(janitor) </span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(viridisLite)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</header><section id="tidytuesday-section-optional" class="level2"><h2 class="anchored" data-anchor-id="tidytuesday-section-optional">TidyTuesday Section (optional)</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Instructions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Instructions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.</p>
+</div>
+</div>
+<p>Explore the week’s <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> challenge. Develop a research question, then answer it through a short data story with <a href="?var:effective-viz-url">effective visualization(s)</a>. Provide sufficient background for readers to grasp your narrative.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Necessary Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#| include: false</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(hrbrthemes)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(tidytuesdayR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Your exploratory data analysis of the team datasets go here.</p>
+</section><section id="importing-data" class="level2"><h2 class="anchored" data-anchor-id="importing-data">Importing Data</h2>
+<p>Reading in the data about individual countries as well as their rank by year. In this case they were scored based on the number of destinations that passport could travel to with no visa requried. This plays into the rank of the passport which is essentially its travel power.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>tt_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">"2025-09-09"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>country <span class="ot">&lt;-</span> tt_data<span class="sc">$</span>country_lists</span>
+<span id="cb2-3"><a href="#cb2-3"></a>year <span class="ot">&lt;-</span> tt_data<span class="sc">$</span>rank_by_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="counting-function" class="level1"><h1>Counting function</h1>
+<p>Research Question: How has the power of different regions passports shifted over time? What is the most powerful passport?</p>
+</section><section id="exploring-the-data" class="level2"><h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>percent_calc <span class="ot">&lt;-</span> <span class="cf">function</span>(column_name) {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  MentalHealthSurvey <span class="sc">|&gt;</span> </span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">count</span>({{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">mutate</span>(<span class="at">column_level =</span> (n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">rename</span>(<span class="at">scale_system =</span> {{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">select</span>(scale_system, column_level) <span class="sc">|&gt;</span> </span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb3-8"><a href="#cb3-8"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#Joining the </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>country_expanded <span class="ot">&lt;-</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">full_join</span>(country, year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="calculating-percentages-creating-data-set" class="level1"><h1>Calculating Percentages &amp; creating data set</h1>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>Depression <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(depression) <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">rename</span>(<span class="at">depression =</span> column_level)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>Anxiety <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">rename</span>(<span class="at">anxiety =</span> column_level)</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>Isolation <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(isolation) <span class="sc">|&gt;</span> </span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="fu">rename</span>(<span class="at">isolation =</span> column_level)</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>Workload <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_workload) <span class="sc">|&gt;</span> </span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">rename</span>(<span class="at">academic_workload =</span> column_level)</span>
-<span id="cb4-12"><a href="#cb4-12"></a>  </span>
-<span id="cb4-13"><a href="#cb4-13"></a>Pressure <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">rename</span>(<span class="at">academic_pressure =</span> column_level)</span>
-<span id="cb4-15"><a href="#cb4-15"></a></span>
-<span id="cb4-16"><a href="#cb4-16"></a>Organized_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(Depression, Anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb4-17"><a href="#cb4-17"></a>  <span class="fu">full_join</span>(Isolation) <span class="sc">|&gt;</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a>  <span class="fu">full_join</span>(Workload) <span class="sc">|&gt;</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">full_join</span>(Pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">cols =</span> <span class="fu">c</span>(depression, anxiety, isolation, academic_workload, academic_pressure)) <span class="sc">|&gt;</span> </span>
-<span id="cb4-21"><a href="#cb4-21"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-22"><a href="#cb4-22"></a>    <span class="at">value =</span> </span>
-<span id="cb4-23"><a href="#cb4-23"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb4-24"><a href="#cb4-24"></a>      <span class="fu">is.na</span>(value) <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb4-25"><a href="#cb4-25"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value </span>
-<span id="cb4-26"><a href="#cb4-26"></a>      )) <span class="sc">|&gt;</span> </span>
-<span id="cb4-27"><a href="#cb4-27"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-28"><a href="#cb4-28"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)),</span>
-<span id="cb4-29"><a href="#cb4-29"></a>    <span class="at">value =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-30"><a href="#cb4-30"></a>      scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">~</span> <span class="sc">-</span>value,</span>
-<span id="cb4-31"><a href="#cb4-31"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value</span>
-<span id="cb4-32"><a href="#cb4-32"></a>    )</span>
-<span id="cb4-33"><a href="#cb4-33"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb4-34"><a href="#cb4-34"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-35"><a href="#cb4-35"></a>    <span class="at">value =</span> <span class="fu">round</span>(value)</span>
-<span id="cb4-36"><a href="#cb4-36"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb4-37"><a href="#cb4-37"></a>  <span class="fu">mutate</span>(<span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"5"</span>, <span class="st">"4"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))) </span>
-<span id="cb4-38"><a href="#cb4-38"></a></span>
-<span id="cb4-39"><a href="#cb4-39"></a>Organized_data<span class="sc">$</span>Metric <span class="ot">&lt;-</span> <span class="fu">recode</span>(Organized_data<span class="sc">$</span>Metric, </span>
-<span id="cb4-40"><a href="#cb4-40"></a>                                <span class="st">"depression"</span> <span class="ot">=</span> <span class="st">"Depression"</span>, </span>
-<span id="cb4-41"><a href="#cb4-41"></a>                                <span class="st">"anxiety"</span> <span class="ot">=</span> <span class="st">"Anxiety"</span>, </span>
-<span id="cb4-42"><a href="#cb4-42"></a>                                <span class="st">"isolation"</span> <span class="ot">=</span> <span class="st">"Isolation"</span>, </span>
-<span id="cb4-43"><a href="#cb4-43"></a>                                <span class="st">"academic_workload"</span> <span class="ot">=</span> <span class="st">"Academic Workload"</span>, </span>
-<span id="cb4-44"><a href="#cb4-44"></a>                                <span class="st">"academic_pressure"</span> <span class="ot">=</span> <span class="st">"Academic Pressure"</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a>                                )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">visa_free_count =</span> <span class="fu">as.numeric</span>(visa_free_count)) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Visa =</span> <span class="fu">mean</span>(visa_free_count), <span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  region      Mean_Visa Mean_rank
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 AFRICA           49.7      77.5
+2 AMERICAS        109.       36.0
+3 ASIA             68.4      65.6
+4 CARIBBEAN        95.7      45.8
+5 EUROPE          131.       22.4
+6 MIDDLE EAST      57.0      74.0
+7 OCEANIA          92.6      45.2</code></pre>
 </div>
-<p>#Making Labels</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>Organzied_Data_labs <span class="ot">&lt;-</span> Organized_data <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">group_by</span>(Metric) <span class="sc">|&gt;</span> </span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">arrange</span>(Metric, scale_system) <span class="sc">|&gt;</span> </span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-8"><a href="#cb5-8"></a>    <span class="at">pos =</span> <span class="fu">cumsum</span>(value) <span class="sc">-</span> (<span class="fl">0.5</span> <span class="sc">*</span> value),  </span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">pos =</span> <span class="fu">case_when</span>(</span>
-<span id="cb5-10"><a href="#cb5-10"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Anxiety"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Depression"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">10</span>,</span>
-<span id="cb5-12"><a href="#cb5-12"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Isolation"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb5-13"><a href="#cb5-13"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Workload"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">38</span>,</span>
-<span id="cb5-14"><a href="#cb5-14"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Pressure"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">33</span>,</span>
-<span id="cb5-15"><a href="#cb5-15"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> pos</span>
-<span id="cb5-16"><a href="#cb5-16"></a>  ),</span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="at">value =</span> <span class="fu">abs</span>(value), </span>
-<span id="cb5-18"><a href="#cb5-18"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb5-19"><a href="#cb5-19"></a>  <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-20"><a href="#cb5-20"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-21"><a href="#cb5-21"></a>    <span class="at">value =</span> <span class="fu">as.character</span>(value), </span>
-<span id="cb5-22"><a href="#cb5-22"></a>    <span class="at">value =</span> <span class="fu">paste0</span>(value, <span class="st">"%"</span>)</span>
-<span id="cb5-23"><a href="#cb5-23"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<p>#Creating graphs</p>
+<p>In this table we can see that that Europe has the best overall mean rank for its countries and that passports from Europe tend to be let into a lot more countries. This is then followed by passports from the Americas, then the Caribbean. In last place is Africa.</p>
+</section><section id="visualizations" class="level2"><h2 class="anchored" data-anchor-id="visualizations">Visualizations</h2>
+<p>In order to get a better idea on how these trends have changed overtime I created the following visualizations.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(Organized_data, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> value, <span class="at">fill =</span> scale_system)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Organzied_Data_labs, <span class="fu">aes</span>(<span class="at">y =</span> pos, <span class="at">label =</span> value), </span>
-<span id="cb6-4"><a href="#cb6-4"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#f45b5b"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#f4a261"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"gray70"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9"></a>               <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#4ea8de"</span>, <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"#0077b6"</span>), </span>
-<span id="cb6-10"><a href="#cb6-10"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
-<span id="cb6-11"><a href="#cb6-11"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-14"><a href="#cb6-14"></a>    <span class="at">title =</span> <span class="st">"Students Rating of Mental Health and Academic Difficultly on a Scale of 1-5"</span>,</span>
-<span id="cb6-15"><a href="#cb6-15"></a>    <span class="at">fill =</span> <span class="st">"Level:"</span>,</span>
-<span id="cb6-16"><a href="#cb6-16"></a>    <span class="at">y =</span> <span class="cn">NULL</span>, </span>
-<span id="cb6-17"><a href="#cb6-17"></a>    <span class="at">x =</span> <span class="cn">NULL</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a>  <span class="fu">theme</span>(</span>
-<span id="cb6-21"><a href="#cb6-21"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-22"><a href="#cb6-22"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-23"><a href="#cb6-23"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb6-24"><a href="#cb6-24"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb6-25"><a href="#cb6-25"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
-<span id="cb6-26"><a href="#cb6-26"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>)</span>
-<span id="cb6-27"><a href="#cb6-27"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>region <span class="ot">&lt;-</span> country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">visa_free_count =</span> <span class="fu">as.numeric</span>(visa_free_count)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">group_by</span>(region, year) <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Visa =</span> <span class="fu">mean</span>(visa_free_count), <span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank))</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>region <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Mean_Visa, <span class="at">color =</span> region), <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span>  </span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2006</span>,<span class="dv">2025</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-13"><a href="#cb6-13"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-14"><a href="#cb6-14"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-15"><a href="#cb6-15"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb6-16"><a href="#cb6-16"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>, </span>
+<span id="cb6-17"><a href="#cb6-17"></a>  ) <span class="sc">+</span> </span>
+<span id="cb6-18"><a href="#cb6-18"></a>   <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> </span>
+<span id="cb6-19"><a href="#cb6-19"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average number of visa free entries over time"</span>, <span class="at">subtitle =</span> <span class="st">"per region of the world"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Mean Visa Free Count"</span>, <span class="at">color =</span> <span class="st">"Region"</span>, <span class="at">caption =</span> <span class="st">"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25"</span>) <span class="sc">+</span> </span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">2013</span>), <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span> </span>
+<span id="cb6-21"><a href="#cb6-21"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2014</span>, <span class="at">y =</span> <span class="dv">200</span>, <span class="at">label =</span> <span class="st">"2013"</span>), <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb6-22"><a href="#cb6-22"></a>  <span class="fu">labs</span>(<span class="at">alt =</span> <span class="st">"alt.text = line graph showing the average number of countries a passport can enter without a visa per region over time. We can clearly see that Europe has the most passports that can visit the most counties without visas, followed by the Americas, and despite rising overtime they have not changed position. Following behind them is the caribbean followed by oceania, which are now about the same level in recent years. Then passports from Asia, the Middle east and Africa follow. There is a line marking 2013 as that is when there seems to be a global shift in the trend of allowing more visa free travel, going from a steady about 45 degree angle incline to plataueing for a year, followed by a much slower climb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="pv-01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. " width="1536"></p>
+<figure class="figure"><p><img src="hw02-tt_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>In this visualization we can clearly see that the mean number of countries each region’s passports allow people into without visas has increase overtime. In fact they were all following a similar slope until 2013 where there was a significant bump and then most regions plateaued before steadily rising a lot slower. It is unclear what global event could have caused this stalling in the rise of freedom to travel, but the pace has not quite recovered.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>Best_passport <span class="ot">&lt;-</span> country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"EUROPE"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">as.numeric</span>(rank)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">filter</span>(<span class="fu">any</span>(rank <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8"></a>Best_passport <span class="sc">|&gt;</span>   </span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rank, <span class="at">color =</span> country), <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span>  </span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2006</span>,<span class="dv">2025</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-15"><a href="#cb7-15"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-16"><a href="#cb7-16"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-17"><a href="#cb7-17"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb7-18"><a href="#cb7-18"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>, </span>
+<span id="cb7-19"><a href="#cb7-19"></a>  ) <span class="sc">+</span> </span>
+<span id="cb7-20"><a href="#cb7-20"></a>   <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> </span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Best Passport Overtime"</span>, <span class="at">subtitle =</span> <span class="st">"from Europe"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Rank"</span>, <span class="at">color =</span> <span class="st">"Country"</span>, <span class="at">caption =</span> <span class="st">"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25"</span>) <span class="sc">+</span> </span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span> </span>
+<span id="cb7-23"><a href="#cb7-23"></a>  <span class="fu">labs</span>(<span class="at">alt =</span> <span class="st">"This graph shows 8 European countries who have all been ranked number one at some point from 2006-2025.  Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. There is a lot of fluctiation between countries and over time."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="hw02-tt_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>By looking at this graph, it seems that Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. However, while this graph shows the changes it doesn’t give us a definitive answer, which I do in the following short table.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>Best_passport <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">summarise</span>(<span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">arrange</span>(Mean_rank) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+  country        Mean_rank
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Germany             2.2 
+2 Finland             2.4 
+3 Denmark             2.65
+4 Sweden              2.9 
+5 Italy               3.3 
+6 Spain               3.65
+7 France              3.95
+8 United Kingdom      4.15</code></pre>
+</div>
+</div>
+<p>Through this we can in fact see that Germany has been most consistently the top rated passport. However Finland and Denmark are not far behind. Despite one time taking the first place spot, the UK is last of the 8 European countries in terms of consistent rank.</p>
+<p>All in all these visualizations tell us that the rate of the number of countries each passport can get a holder in somewhere has slowed down compared to the early 2000s, although still is increasing. Individiuals from Europes passports on average get them into many more countries without a visa, around 131 to be exact, while if your are a German passport holder you have the ultimate travel power.</p>
 
 
 <!-- -->
@@ -1128,152 +1143,145 @@ cookieconsent.run({
     }
   });
   </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="Welcome">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+      <a href="../../src/tt/hw01-tt.html" class="pagination-link" aria-label="TidyTuesday 09/02/2025">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">TidyTuesday 09/02/2025</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/tt/hw01-tt.html" class="pagination-link" aria-label="TidyTuesday 09/02/2025">
-        <span class="nav-page-text"><span class="chapter-title">TidyTuesday 09/02/2025</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/tt/hw03-tt.html" class="pagination-link" aria-label="TidyTuesday 09/16/2025">
+        <span class="nav-page-text"><span class="chapter-title">TidyTuesday 09/16/2025</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "Professional Viz Sample"</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">---</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="in">```{r}</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="fu">library</span>(janitor) </span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="fu">library</span>(viridisLite)</span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="in">```</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a></span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a>Your exploratory data analysis of the team datasets go here.</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="in">```{r}</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="in">```</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="fu"># Counting function</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="in">```{r}</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a>percent_calc <span class="ot">&lt;-</span> <span class="cf">function</span>(column_name) {</span>
-<span id="cb7-26"><a href="#cb7-26"></a>  MentalHealthSurvey <span class="sc">|&gt;</span> </span>
-<span id="cb7-27"><a href="#cb7-27"></a>  <span class="fu">count</span>({{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb7-28"><a href="#cb7-28"></a>  <span class="fu">mutate</span>(<span class="at">column_level =</span> (n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a>  <span class="fu">rename</span>(<span class="at">scale_system =</span> {{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb7-30"><a href="#cb7-30"></a>  <span class="fu">select</span>(scale_system, column_level) <span class="sc">|&gt;</span> </span>
-<span id="cb7-31"><a href="#cb7-31"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb7-32"><a href="#cb7-32"></a>}</span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="in">```</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a></span>
-<span id="cb7-35"><a href="#cb7-35"></a></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="fu"># Calculating Percentages &amp; creating data set</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="in">```{r}</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a>Depression <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(depression) <span class="sc">|&gt;</span> </span>
-<span id="cb7-41"><a href="#cb7-41"></a>  <span class="fu">rename</span>(<span class="at">depression =</span> column_level)</span>
-<span id="cb7-42"><a href="#cb7-42"></a></span>
-<span id="cb7-43"><a href="#cb7-43"></a>Anxiety <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb7-44"><a href="#cb7-44"></a>  <span class="fu">rename</span>(<span class="at">anxiety =</span> column_level)</span>
-<span id="cb7-45"><a href="#cb7-45"></a></span>
-<span id="cb7-46"><a href="#cb7-46"></a>Isolation <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(isolation) <span class="sc">|&gt;</span> </span>
-<span id="cb7-47"><a href="#cb7-47"></a>  <span class="fu">rename</span>(<span class="at">isolation =</span> column_level)</span>
-<span id="cb7-48"><a href="#cb7-48"></a></span>
-<span id="cb7-49"><a href="#cb7-49"></a>Workload <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_workload) <span class="sc">|&gt;</span> </span>
-<span id="cb7-50"><a href="#cb7-50"></a>  <span class="fu">rename</span>(<span class="at">academic_workload =</span> column_level)</span>
-<span id="cb7-51"><a href="#cb7-51"></a>  </span>
-<span id="cb7-52"><a href="#cb7-52"></a>Pressure <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb7-53"><a href="#cb7-53"></a>  <span class="fu">rename</span>(<span class="at">academic_pressure =</span> column_level)</span>
-<span id="cb7-54"><a href="#cb7-54"></a></span>
-<span id="cb7-55"><a href="#cb7-55"></a>Organized_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(Depression, Anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb7-56"><a href="#cb7-56"></a>  <span class="fu">full_join</span>(Isolation) <span class="sc">|&gt;</span></span>
-<span id="cb7-57"><a href="#cb7-57"></a>  <span class="fu">full_join</span>(Workload) <span class="sc">|&gt;</span></span>
-<span id="cb7-58"><a href="#cb7-58"></a>  <span class="fu">full_join</span>(Pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb7-59"><a href="#cb7-59"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">cols =</span> <span class="fu">c</span>(depression, anxiety, isolation, academic_workload, academic_pressure)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-60"><a href="#cb7-60"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb7-61"><a href="#cb7-61"></a>    <span class="at">value =</span> </span>
-<span id="cb7-62"><a href="#cb7-62"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb7-63"><a href="#cb7-63"></a>      <span class="fu">is.na</span>(value) <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb7-64"><a href="#cb7-64"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value </span>
-<span id="cb7-65"><a href="#cb7-65"></a>      )) <span class="sc">|&gt;</span> </span>
-<span id="cb7-66"><a href="#cb7-66"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-67"><a href="#cb7-67"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)),</span>
-<span id="cb7-68"><a href="#cb7-68"></a>    <span class="at">value =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-69"><a href="#cb7-69"></a>      scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">~</span> <span class="sc">-</span>value,</span>
-<span id="cb7-70"><a href="#cb7-70"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value</span>
-<span id="cb7-71"><a href="#cb7-71"></a>    )</span>
-<span id="cb7-72"><a href="#cb7-72"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-73"><a href="#cb7-73"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-74"><a href="#cb7-74"></a>    <span class="at">value =</span> <span class="fu">round</span>(value)</span>
-<span id="cb7-75"><a href="#cb7-75"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-76"><a href="#cb7-76"></a>  <span class="fu">mutate</span>(<span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"5"</span>, <span class="st">"4"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))) </span>
-<span id="cb7-77"><a href="#cb7-77"></a></span>
-<span id="cb7-78"><a href="#cb7-78"></a>Organized_data<span class="sc">$</span>Metric <span class="ot">&lt;-</span> <span class="fu">recode</span>(Organized_data<span class="sc">$</span>Metric, </span>
-<span id="cb7-79"><a href="#cb7-79"></a>                                <span class="st">"depression"</span> <span class="ot">=</span> <span class="st">"Depression"</span>, </span>
-<span id="cb7-80"><a href="#cb7-80"></a>                                <span class="st">"anxiety"</span> <span class="ot">=</span> <span class="st">"Anxiety"</span>, </span>
-<span id="cb7-81"><a href="#cb7-81"></a>                                <span class="st">"isolation"</span> <span class="ot">=</span> <span class="st">"Isolation"</span>, </span>
-<span id="cb7-82"><a href="#cb7-82"></a>                                <span class="st">"academic_workload"</span> <span class="ot">=</span> <span class="st">"Academic Workload"</span>, </span>
-<span id="cb7-83"><a href="#cb7-83"></a>                                <span class="st">"academic_pressure"</span> <span class="ot">=</span> <span class="st">"Academic Pressure"</span></span>
-<span id="cb7-84"><a href="#cb7-84"></a>                                )</span>
-<span id="cb7-85"><a href="#cb7-85"></a></span>
-<span id="cb7-86"><a href="#cb7-86"></a><span class="in">```</span></span>
-<span id="cb7-87"><a href="#cb7-87"></a>#Making Labels </span>
-<span id="cb7-90"><a href="#cb7-90"></a><span class="in">```{r}</span></span>
-<span id="cb7-91"><a href="#cb7-91"></a>Organzied_Data_labs <span class="ot">&lt;-</span> Organized_data <span class="sc">|&gt;</span> </span>
-<span id="cb7-92"><a href="#cb7-92"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-93"><a href="#cb7-93"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))</span>
-<span id="cb7-94"><a href="#cb7-94"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-95"><a href="#cb7-95"></a>  <span class="fu">group_by</span>(Metric) <span class="sc">|&gt;</span> </span>
-<span id="cb7-96"><a href="#cb7-96"></a>  <span class="fu">arrange</span>(Metric, scale_system) <span class="sc">|&gt;</span> </span>
-<span id="cb7-97"><a href="#cb7-97"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-98"><a href="#cb7-98"></a>    <span class="at">pos =</span> <span class="fu">cumsum</span>(value) <span class="sc">-</span> (<span class="fl">0.5</span> <span class="sc">*</span> value),  </span>
-<span id="cb7-99"><a href="#cb7-99"></a>    <span class="at">pos =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-100"><a href="#cb7-100"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Anxiety"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb7-101"><a href="#cb7-101"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Depression"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">10</span>,</span>
-<span id="cb7-102"><a href="#cb7-102"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Isolation"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb7-103"><a href="#cb7-103"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Workload"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">38</span>,</span>
-<span id="cb7-104"><a href="#cb7-104"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Pressure"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">33</span>,</span>
-<span id="cb7-105"><a href="#cb7-105"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> pos</span>
-<span id="cb7-106"><a href="#cb7-106"></a>  ),</span>
-<span id="cb7-107"><a href="#cb7-107"></a>  <span class="at">value =</span> <span class="fu">abs</span>(value), </span>
-<span id="cb7-108"><a href="#cb7-108"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-109"><a href="#cb7-109"></a>  <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-110"><a href="#cb7-110"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-111"><a href="#cb7-111"></a>    <span class="at">value =</span> <span class="fu">as.character</span>(value), </span>
-<span id="cb7-112"><a href="#cb7-112"></a>    <span class="at">value =</span> <span class="fu">paste0</span>(value, <span class="st">"%"</span>)</span>
-<span id="cb7-113"><a href="#cb7-113"></a>  )</span>
-<span id="cb7-114"><a href="#cb7-114"></a><span class="in">```</span></span>
-<span id="cb7-115"><a href="#cb7-115"></a></span>
-<span id="cb7-116"><a href="#cb7-116"></a></span>
-<span id="cb7-117"><a href="#cb7-117"></a>#Creating graphs </span>
-<span id="cb7-118"><a href="#cb7-118"></a><span class="in">```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. "}</span></span>
-<span id="cb7-119"><a href="#cb7-119"></a><span class="fu">ggplot</span>(Organized_data, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> value, <span class="at">fill =</span> scale_system)) <span class="sc">+</span></span>
-<span id="cb7-120"><a href="#cb7-120"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb7-121"><a href="#cb7-121"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Organzied_Data_labs, <span class="fu">aes</span>(<span class="at">y =</span> pos, <span class="at">label =</span> value), </span>
-<span id="cb7-122"><a href="#cb7-122"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, </span>
-<span id="cb7-123"><a href="#cb7-123"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-124"><a href="#cb7-124"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-125"><a href="#cb7-125"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb7-126"><a href="#cb7-126"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#f45b5b"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#f4a261"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"gray70"</span>,</span>
-<span id="cb7-127"><a href="#cb7-127"></a>               <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#4ea8de"</span>, <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"#0077b6"</span>), </span>
-<span id="cb7-128"><a href="#cb7-128"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
-<span id="cb7-129"><a href="#cb7-129"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-130"><a href="#cb7-130"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
-<span id="cb7-131"><a href="#cb7-131"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-132"><a href="#cb7-132"></a>    <span class="at">title =</span> <span class="st">"Students Rating of Mental Health and Academic Difficultly on a Scale of 1-5"</span>,</span>
-<span id="cb7-133"><a href="#cb7-133"></a>    <span class="at">fill =</span> <span class="st">"Level:"</span>,</span>
-<span id="cb7-134"><a href="#cb7-134"></a>    <span class="at">y =</span> <span class="cn">NULL</span>, </span>
-<span id="cb7-135"><a href="#cb7-135"></a>    <span class="at">x =</span> <span class="cn">NULL</span></span>
-<span id="cb7-136"><a href="#cb7-136"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-137"><a href="#cb7-137"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb7-138"><a href="#cb7-138"></a>  <span class="fu">theme</span>(</span>
-<span id="cb7-139"><a href="#cb7-139"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-140"><a href="#cb7-140"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-141"><a href="#cb7-141"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-142"><a href="#cb7-142"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb7-143"><a href="#cb7-143"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
-<span id="cb7-144"><a href="#cb7-144"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>)</span>
-<span id="cb7-145"><a href="#cb7-145"></a>  ) </span>
-<span id="cb7-146"><a href="#cb7-146"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="an">title:</span><span class="co"> "TidyTuesday 09/09/2025"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">---</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">## TidyTuesday Section (optional)</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a>::: {.callout-important title="Instructions"}</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.</span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>:::</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15"></a>Explore the week's <span class="co">[</span><span class="ot">TidyTuesday</span><span class="co">](https://github.com/rfordatascience/tidytuesday)</span> challenge. Develop a research question, then answer it through a short data story with <span class="co">[</span><span class="ot">effective visualization(s)</span><span class="co">]({{&lt; var effective-viz-url &gt;}})</span>.  Provide sufficient background for readers to grasp your narrative.</span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="in">```{r}</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#Necessary Libraries</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#| include: false</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="fu">library</span>(hrbrthemes)</span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="in">```</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="fu">## Importing Data</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a></span>
+<span id="cb10-34"><a href="#cb10-34"></a>Reading in the data about individual countries as well as their rank by year. In this case they were scored based on the number of destinations that passport could travel to with no visa requried. This plays into the rank of the passport which is essentially its travel power. </span>
+<span id="cb10-35"><a href="#cb10-35"></a></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="in">```{r}</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#| include: true</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#| echo: true</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a></span>
+<span id="cb10-42"><a href="#cb10-42"></a>tt_data <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">"2025-09-09"</span>)</span>
+<span id="cb10-43"><a href="#cb10-43"></a>country <span class="ot">&lt;-</span> tt_data<span class="sc">$</span>country_lists</span>
+<span id="cb10-44"><a href="#cb10-44"></a>year <span class="ot">&lt;-</span> tt_data<span class="sc">$</span>rank_by_year</span>
+<span id="cb10-45"><a href="#cb10-45"></a><span class="in">```</span></span>
+<span id="cb10-46"><a href="#cb10-46"></a></span>
+<span id="cb10-47"><a href="#cb10-47"></a>Research Question: How has the power of different regions passports shifted over time? What is the most powerful passport? </span>
+<span id="cb10-48"><a href="#cb10-48"></a></span>
+<span id="cb10-49"><a href="#cb10-49"></a><span class="fu">## Exploring the Data </span></span>
+<span id="cb10-50"><a href="#cb10-50"></a></span>
+<span id="cb10-53"><a href="#cb10-53"></a><span class="in">```{r}</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="co">#Joining the </span></span>
+<span id="cb10-55"><a href="#cb10-55"></a>country_expanded <span class="ot">&lt;-</span> </span>
+<span id="cb10-56"><a href="#cb10-56"></a>  <span class="fu">full_join</span>(country, year)</span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="in">```</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="in">```{r}</span></span>
+<span id="cb10-62"><a href="#cb10-62"></a>country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb10-63"><a href="#cb10-63"></a>  <span class="fu">mutate</span>(<span class="at">visa_free_count =</span> <span class="fu">as.numeric</span>(visa_free_count)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-64"><a href="#cb10-64"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span> </span>
+<span id="cb10-65"><a href="#cb10-65"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Visa =</span> <span class="fu">mean</span>(visa_free_count), <span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank))</span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="in">```</span></span>
+<span id="cb10-67"><a href="#cb10-67"></a></span>
+<span id="cb10-68"><a href="#cb10-68"></a>In this table we can see that that Europe has the best overall mean rank for its countries and that passports from Europe tend to be let into a lot more countries. This is then followed by passports from the Americas, then the Caribbean. In last place is Africa. </span>
+<span id="cb10-69"><a href="#cb10-69"></a></span>
+<span id="cb10-70"><a href="#cb10-70"></a></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="fu">## Visualizations </span></span>
+<span id="cb10-72"><a href="#cb10-72"></a></span>
+<span id="cb10-73"><a href="#cb10-73"></a>In order to get a better idea on how these trends have changed overtime I created the following visualizations. </span>
+<span id="cb10-74"><a href="#cb10-74"></a></span>
+<span id="cb10-77"><a href="#cb10-77"></a><span class="in">```{r}</span></span>
+<span id="cb10-78"><a href="#cb10-78"></a>region <span class="ot">&lt;-</span> country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb10-79"><a href="#cb10-79"></a>  <span class="fu">mutate</span>(<span class="at">visa_free_count =</span> <span class="fu">as.numeric</span>(visa_free_count)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-80"><a href="#cb10-80"></a>  <span class="fu">group_by</span>(region, year) <span class="sc">|&gt;</span> </span>
+<span id="cb10-81"><a href="#cb10-81"></a>  <span class="fu">summarise</span>(<span class="at">Mean_Visa =</span> <span class="fu">mean</span>(visa_free_count), <span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank))</span>
+<span id="cb10-82"><a href="#cb10-82"></a></span>
+<span id="cb10-83"><a href="#cb10-83"></a>region <span class="sc">|&gt;</span> </span>
+<span id="cb10-84"><a href="#cb10-84"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb10-85"><a href="#cb10-85"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> Mean_Visa, <span class="at">color =</span> region), <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb10-86"><a href="#cb10-86"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span>  </span>
+<span id="cb10-87"><a href="#cb10-87"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">50</span>)) <span class="sc">+</span> </span>
+<span id="cb10-88"><a href="#cb10-88"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2006</span>,<span class="dv">2025</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb10-89"><a href="#cb10-89"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-90"><a href="#cb10-90"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-91"><a href="#cb10-91"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-92"><a href="#cb10-92"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb10-93"><a href="#cb10-93"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>, </span>
+<span id="cb10-94"><a href="#cb10-94"></a>  ) <span class="sc">+</span> </span>
+<span id="cb10-95"><a href="#cb10-95"></a>   <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> </span>
+<span id="cb10-96"><a href="#cb10-96"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average number of visa free entries over time"</span>, <span class="at">subtitle =</span> <span class="st">"per region of the world"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Mean Visa Free Count"</span>, <span class="at">color =</span> <span class="st">"Region"</span>, <span class="at">caption =</span> <span class="st">"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25"</span>) <span class="sc">+</span> </span>
+<span id="cb10-97"><a href="#cb10-97"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">2013</span>), <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span> </span>
+<span id="cb10-98"><a href="#cb10-98"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2014</span>, <span class="at">y =</span> <span class="dv">200</span>, <span class="at">label =</span> <span class="st">"2013"</span>), <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb10-99"><a href="#cb10-99"></a>  <span class="fu">labs</span>(<span class="at">alt =</span> <span class="st">"alt.text = line graph showing the average number of countries a passport can enter without a visa per region over time. We can clearly see that Europe has the most passports that can visit the most counties without visas, followed by the Americas, and despite rising overtime they have not changed position. Following behind them is the caribbean followed by oceania, which are now about the same level in recent years. Then passports from Asia, the Middle east and Africa follow. There is a line marking 2013 as that is when there seems to be a global shift in the trend of allowing more visa free travel, going from a steady about 45 degree angle incline to plataueing for a year, followed by a much slower climb"</span>)</span>
+<span id="cb10-100"><a href="#cb10-100"></a><span class="in">```</span></span>
+<span id="cb10-101"><a href="#cb10-101"></a>In this visualization we can clearly see that the mean number of countries each region's passports allow people into without visas has increase overtime. In fact they were all following a similar slope until 2013 where there was a significant bump and then most regions plateaued before steadily rising a lot slower. It is unclear what global event could have caused this stalling in the rise of freedom to travel, but the pace has not quite recovered. </span>
+<span id="cb10-102"><a href="#cb10-102"></a></span>
+<span id="cb10-105"><a href="#cb10-105"></a><span class="in">```{r}</span></span>
+<span id="cb10-106"><a href="#cb10-106"></a>Best_passport <span class="ot">&lt;-</span> country_expanded <span class="sc">|&gt;</span> </span>
+<span id="cb10-107"><a href="#cb10-107"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"EUROPE"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-108"><a href="#cb10-108"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">as.numeric</span>(rank)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-109"><a href="#cb10-109"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb10-110"><a href="#cb10-110"></a>  <span class="fu">filter</span>(<span class="fu">any</span>(rank <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-111"><a href="#cb10-111"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb10-112"><a href="#cb10-112"></a>  </span>
+<span id="cb10-113"><a href="#cb10-113"></a>Best_passport <span class="sc">|&gt;</span>   </span>
+<span id="cb10-114"><a href="#cb10-114"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-115"><a href="#cb10-115"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rank, <span class="at">color =</span> country), <span class="at">stat =</span> <span class="st">"smooth"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb10-116"><a href="#cb10-116"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span>  </span>
+<span id="cb10-117"><a href="#cb10-117"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb10-118"><a href="#cb10-118"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2006</span>,<span class="dv">2025</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb10-119"><a href="#cb10-119"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-120"><a href="#cb10-120"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-121"><a href="#cb10-121"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-122"><a href="#cb10-122"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb10-123"><a href="#cb10-123"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>, </span>
+<span id="cb10-124"><a href="#cb10-124"></a>  ) <span class="sc">+</span> </span>
+<span id="cb10-125"><a href="#cb10-125"></a>   <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span> </span>
+<span id="cb10-126"><a href="#cb10-126"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Best Passport Overtime"</span>, <span class="at">subtitle =</span> <span class="st">"from Europe"</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Rank"</span>, <span class="at">color =</span> <span class="st">"Country"</span>, <span class="at">caption =</span> <span class="st">"Made by: Tori Duckworth, Date: Sep.15,2025, Source: TidyTuesday 09-09-25"</span>) <span class="sc">+</span> </span>
+<span id="cb10-127"><a href="#cb10-127"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span> </span>
+<span id="cb10-128"><a href="#cb10-128"></a>  <span class="fu">labs</span>(<span class="at">alt =</span> <span class="st">"This graph shows 8 European countries who have all been ranked number one at some point from 2006-2025.  Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. There is a lot of fluctiation between countries and over time."</span>)</span>
+<span id="cb10-129"><a href="#cb10-129"></a><span class="in">```</span></span>
+<span id="cb10-130"><a href="#cb10-130"></a>By looking at this graph, it seems that Denmark was ranked the best for about 8 years, until around 2013 when both Sweden and the UK were around first. Then Germany became the top rated passport and remained that way until 2025 when Spain over took it. However, while this graph shows the changes it doesn't give us a definitive answer, which I do in the following short table. </span>
+<span id="cb10-131"><a href="#cb10-131"></a></span>
+<span id="cb10-134"><a href="#cb10-134"></a><span class="in">```{r}</span></span>
+<span id="cb10-135"><a href="#cb10-135"></a><span class="co">#| fig.alt: "a table showing the average ranking of the 8 top ranked European passports. Germany has a mean rank of 2.2 coming in first, followed by Finland, then Denmark, then Sweden, then Italy, then Spain, then France and finally the UK with an average rank of 4.15."</span></span>
+<span id="cb10-136"><a href="#cb10-136"></a>Best_passport <span class="sc">|&gt;</span> </span>
+<span id="cb10-137"><a href="#cb10-137"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb10-138"><a href="#cb10-138"></a>  <span class="fu">summarise</span>(<span class="at">Mean_rank =</span> <span class="fu">mean</span>(rank)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-139"><a href="#cb10-139"></a>  <span class="fu">arrange</span>(Mean_rank) </span>
+<span id="cb10-140"><a href="#cb10-140"></a><span class="in">```</span></span>
+<span id="cb10-141"><a href="#cb10-141"></a>Through this we can in fact see that Germany has been most consistently the top rated passport. However Finland and Denmark are not far behind. Despite one time taking the first place spot, the UK is last of the 8 European countries in terms of consistent rank. </span>
+<span id="cb10-142"><a href="#cb10-142"></a></span>
+<span id="cb10-143"><a href="#cb10-143"></a>All in all these visualizations tell us that the rate of the number of countries each passport can get a holder in somewhere has slowed down compared to the early 2000s, although still is increasing. Individiuals from Europes passports on average get them into many more countries without a visa, around 131 to be exact, while if your are a German passport holder you have the ultimate travel power. </span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
