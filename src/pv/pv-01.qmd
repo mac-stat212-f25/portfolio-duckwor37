@@ -2,4 +2,57 @@
 title: "Professional Viz Sample"
 ---
 
-Add content here
+```{r}
+library(tidyverse)
+library(janitor) 
+library(viridisLite)
+library(stringr)
+```
+
+
+Your exploratory data analysis of the team datasets go here.
+```{r}
+MentalHealthSurvey <- read_csv("data/raw/MentalHealthSurvey.csv")
+View(MentalHealthSurvey)
+```
+# Counting function
+```{r}
+percent_calc <- function(column_name) {
+  MentalHealthSurvey |> 
+  count({{column_name}}) |> 
+  mutate(column_level = (n /sum(n)) * 100) |>
+  rename(scale_system = {{column_name}}) |> 
+  select(scale_system, column_level) |> 
+  as.data.frame()
+}
+```
+
+
+# Calculating Percentages & creating data set
+```{r}
+Depression <- percent_calc(depression) |> 
+  rename(depression = column_level)
+
+Anxiety <- percent_calc(anxiety) |> 
+  rename(anxiety = column_level)
+
+Isolation <- percent_calc(isolation) |> 
+  rename(isolation = column_level)
+
+Workload <- percent_calc(academic_workload) |> 
+  rename(academic_workload = column_level)
+  
+Pressure <- percent_calc(academic_pressure) |> 
+  rename(academic_pressure = column_level)
+
+left_join(Depression, Anxiety) |> 
+  full_join(Isolation) |>
+  full_join(Workload) |>
+  full_join(Pressure) 
+```
+
+#Creating graphs 
+```{r}
+
+```
+
