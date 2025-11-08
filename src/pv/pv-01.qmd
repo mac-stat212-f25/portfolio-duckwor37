@@ -45,14 +45,94 @@ Workload <- percent_calc(academic_workload) |>
 Pressure <- percent_calc(academic_pressure) |> 
   rename(academic_pressure = column_level)
 
-left_join(Depression, Anxiety) |> 
+Organized_data <- left_join(Depression, Anxiety) |> 
   full_join(Isolation) |>
   full_join(Workload) |>
-  full_join(Pressure) 
+  full_join(Pressure) |> 
+  pivot_longer(names_to = "Metric", cols = c(depression, anxiety, isolation, academic_workload, academic_pressure)) |> 
+    mutate(
+    value = 
+      case_when(
+      is.na(value) ~ 0, 
+      TRUE ~ value 
+      )) |> 
+  mutate(
+    scale_system = factor(scale_system, levels = c("1", "2", "3", "4", "5")),
+    value = case_when(
+      scale_system %in% c("1", "2", "3") ~ -value,
+      TRUE ~ value
+    )
+  ) |> 
+  mutate(
+    value = round(value)
+  ) |> 
+  mutate(scale_system = factor(scale_system, levels = c("5", "4", "1", "2", "3"))) 
+
+Organized_data$Metric <- recode(Organized_data$Metric, 
+                                "depression" = "Depression", 
+                                "anxiety" = "Anxiety", 
+                                "isolation" = "Isolation", 
+                                "academic_workload" = "Academic Workload", 
+                                "academic_pressure" = "Academic Pressure"
+                                )
+
+```
+#Making Labels 
+```{r}
+Organzied_Data_labs <- Organized_data |> 
+  mutate(
+    scale_system = factor(scale_system, levels = c("4", "5", "1", "2", "3"))
+  ) |> 
+  group_by(Metric) |> 
+  arrange(Metric, scale_system) |> 
+  mutate(
+    pos = cumsum(value) - (0.5 * value),  
+    pos = case_when(
+      (scale_system %in% c("1", "2", "3") & Metric == "Anxiety") ~ -pos - 8,
+      (scale_system %in% c("1", "2", "3") & Metric == "Depression") ~ -pos - 10,
+      (scale_system %in% c("1", "2", "3") & Metric == "Isolation") ~ -pos - 8,
+      (scale_system %in% c("2", "3") & Metric == "Academic Workload") ~ -pos + 38,
+      (scale_system %in% c("1", "2", "3") & Metric == "Academic Pressure") ~ -pos + 33,
+      TRUE ~ pos
+  ),
+  value = abs(value), 
+  ) |> 
+  filter(value != 0) |> 
+  mutate(
+    value = as.character(value), 
+    value = paste0(value, "%")
+  )
 ```
 
-#Creating graphs 
-```{r}
 
+#Creating graphs 
+```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. "}
+ggplot(Organized_data, aes(x = Metric, y = value, fill = scale_system)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  geom_text(data = Organzied_Data_labs, aes(y = pos, label = value), 
+            colour = "white", 
+            size = 3) +
+  coord_flip() +
+  scale_fill_manual(
+    values = c("1" = "#f45b5b", "2" = "#f4a261", "3" = "gray70",
+               "4" = "#4ea8de", "5" = "#0077b6"), 
+    limits = c("1", "2", "3", "4", "5")
+  ) +
+  scale_y_continuous(labels = abs) +
+  labs(
+    title = "Students Rating of Mental Health and Academic Difficultly on a Scale of 1-5",
+    fill = "Level:",
+    y = NULL, 
+    x = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "top",
+    plot.title = element_text(face = "bold", color = "#2a4d69", hjust = 0.5), 
+    plot.margin = unit(c(1, 2, 1, 1.5), "cm")
+  ) 
 ```
 
