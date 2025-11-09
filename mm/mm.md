@@ -31,3 +31,5 @@
 ![1028-Databases_SQL.jpeg](1028-Databases_SQL.jpeg)
 
 ![1104-Data_Storytelling.jpeg](1104-Data_Storytelling.jpeg)
+
+![1109-Interactive_vis.jpeg](1109-Interactive_vis.jpeg)
