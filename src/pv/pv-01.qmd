@@ -7,12 +7,18 @@ library(tidyverse)
 library(janitor) 
 library(viridisLite)
 library(stringr)
+library(extrafont)
+library(showtext)
 ```
 
 
-Your exploratory data analysis of the team datasets go here.
+
 ```{r}
 MentalHealthSurvey <- read_csv("data/raw/MentalHealthSurvey.csv")
+font_add(family = "RobotoCondensed", 
+         regular = "data/raw/Roboto_Condensed/static/RobotoCondensed-Regular.ttf",
+         bold = "data/raw/Roboto_Condensed/static/RobotoCondensed-Bold.ttf")
+showtext_auto()
 ```
 # Counting function
 ```{r}
@@ -105,12 +111,12 @@ Organzied_Data_labs <- Organized_data |>
 
 
 #Creating graphs 
-```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. "}
+```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5."}
 ggplot(Organized_data, aes(x = Metric, y = value, fill = scale_system)) +
   geom_bar(stat = "identity", width = 0.7) +
   geom_text(data = Organzied_Data_labs, aes(y = pos, label = value), 
             colour = "white", 
-            size = 3) +
+            size = 5, family = "RobotoCondensed", face = "bold") +
   coord_flip() +
   scale_fill_manual(
     values = c("1" = "#f45b5b", "2" = "#f4a261", "3" = "gray70",
@@ -130,8 +136,11 @@ ggplot(Organized_data, aes(x = Metric, y = value, fill = scale_system)) +
     panel.grid.minor = element_blank(),
     axis.title.y = element_blank(),
     legend.position = "top",
-    plot.title = element_text(face = "bold", color = "#2a4d69", hjust = 0.5), 
-    plot.margin = unit(c(1, 2, 1, 1.5), "cm")
+    plot.title = element_text(size = 20, face = "bold", color = "#2a4d69", hjust = 0.5, family = "RobotoCondensed"), 
+    plot.margin = unit(c(1, 2, 1, 1.5), "cm"), 
+    axis.text.y = element_text(size = 15, family = "RobotoCondensed", face = "bold"), 
+    legend.text = element_text(family = "RobotoCondensed", size = 14), 
+    legend.title = element_text(family = "RobotoCondensed", size = 15)
   ) 
 ```
 
