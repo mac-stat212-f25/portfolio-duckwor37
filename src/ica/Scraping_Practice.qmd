@@ -1,0 +1,38 @@
+---
+title: "Scraping_Practice"
+format: html
+---
+
+```{r}
+library(rvest)
+library(tidyverse)
+```
+
+```{r}
+url <- "https://www.macalester.edu/registrar/academic-calendars/"
+```
+
+```{r}
+page <- url |> read_html()
+page
+```
+
+```{r}
+content <- page |> 
+  html_elements(".layout-interior__components") 
+```
+
+```{r}
+content |> 
+  html_elements("h3, h4") |> 
+  html_text()
+```
+
+
+```{r}
+content |> 
+  html_element("table") |> 
+  html_table()
+```
+
+
