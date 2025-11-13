@@ -31,7 +31,7 @@ percent_calc <- function(column_name) {
   as.data.frame()
 }
 ```
-
+This is a function that will help me count the number of students that fall into each category, which will help me calculate my percentages. 
 
 # Calculating Percentages & creating data set
 ```{r}
@@ -82,6 +82,8 @@ Organized_data$Metric <- recode(Organized_data$Metric,
                                 )
 
 ```
+In order to get the data that I wanted from the data set in the correct format for the graphic I had in mind I had to calculate for each individual variable I wanted to look at. Then I had to combine them into a dataset and pivot them, and then restructure large sections in order for it to show up exactly as I wanted. This part was edited a lot throughout the creation of the visualization. 
+
 #Making Labels 
 ```{r}
 Organzied_Data_labs <- Organized_data |> 
@@ -108,7 +110,7 @@ Organzied_Data_labs <- Organized_data |>
     value = paste0(value, "%")
   )
 ```
-
+In order to get the numbers that hover over each part of the bar chart I had to create a separate dataset specifically for the geom_text. They then had to be moved around for each individual variable. It was hard to get precise through the math, so that is why there are "random" numbers amended, as I found that is what made them look the best. 
 
 #Creating graphs 
 ```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5."}
@@ -143,4 +145,4 @@ ggplot(Organized_data, aes(x = Metric, y = value, fill = scale_system)) +
     legend.title = element_text(family = "RobotoCondensed", size = 15)
   ) 
 ```
-
+This final part creates the visualization! Through this we can see that a majority of students think that their academic workload and pressure are rather high, or above what might be a "manageable" level. Despite that, we are not seeing the same reflection in mental health markers. It would be logical to assume that as academic workload and pressure increase to an unmanageable level, that mental health might follow. While there are certainly a fair amount of students that feel these mental health symptoms to a high degree, it is not over 50%. 
