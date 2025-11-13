@@ -524,12 +524,17 @@ cookieconsent.run({
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(janitor) </span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(viridisLite)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Your exploratory data analysis of the team datasets go here.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3"></a>         <span class="at">regular =</span> <span class="st">"data/raw/Roboto_Condensed/static/RobotoCondensed-Regular.ttf"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>         <span class="at">bold =</span> <span class="st">"data/raw/Roboto_Condensed/static/RobotoCondensed-Bold.ttf"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">showtext_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="counting-function" class="level1"><h1>Counting function</h1>
@@ -544,6 +549,7 @@ cookieconsent.run({
 <span id="cb3-8"><a href="#cb3-8"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>This is a function that will help me count the number of students that fall into each category, which will help me calculate my percentages.</p>
 </section><section id="calculating-percentages-creating-data-set" class="level1"><h1>Calculating Percentages &amp; creating data set</h1>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>Depression <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(depression) <span class="sc">|&gt;</span> </span>
@@ -593,6 +599,7 @@ cookieconsent.run({
 <span id="cb4-45"><a href="#cb4-45"></a>                                )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>In order to get the data that I wanted from the data set in the correct format for the graphic I had in mind I had to calculate for each individual variable I wanted to look at. Then I had to combine them into a dataset and pivot them, and then restructure large sections in order for it to show up exactly as I wanted. This part was edited a lot throughout the creation of the visualization.</p>
 <p>#Making Labels</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>Organzied_Data_labs <span class="ot">&lt;-</span> Organized_data <span class="sc">|&gt;</span> </span>
@@ -620,13 +627,14 @@ cookieconsent.run({
 <span id="cb5-23"><a href="#cb5-23"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>In order to get the numbers that hover over each part of the bar chart I had to create a separate dataset specifically for the geom_text. They then had to be moved around for each individual variable. It was hard to get precise through the math, so that is why there are “random” numbers amended, as I found that is what made them look the best.</p>
 <p>#Creating graphs</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(Organized_data, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> value, <span class="at">fill =</span> scale_system)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Organzied_Data_labs, <span class="fu">aes</span>(<span class="at">y =</span> pos, <span class="at">label =</span> value), </span>
 <span id="cb6-4"><a href="#cb6-4"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">face =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">scale_fill_manual</span>(</span>
 <span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#f45b5b"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#f4a261"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"gray70"</span>,</span>
@@ -646,16 +654,20 @@ cookieconsent.run({
 <span id="cb6-22"><a href="#cb6-22"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb6-23"><a href="#cb6-23"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb6-24"><a href="#cb6-24"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb6-25"><a href="#cb6-25"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
-<span id="cb6-26"><a href="#cb6-26"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>)</span>
-<span id="cb6-27"><a href="#cb6-27"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-25"><a href="#cb6-25"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>), </span>
+<span id="cb6-26"><a href="#cb6-26"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>), </span>
+<span id="cb6-27"><a href="#cb6-27"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">face =</span> <span class="st">"bold"</span>), </span>
+<span id="cb6-28"><a href="#cb6-28"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">size =</span> <span class="dv">14</span>), </span>
+<span id="cb6-29"><a href="#cb6-29"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
+<span id="cb6-30"><a href="#cb6-30"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="pv-01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. " width="1536"></p>
+<figure class="figure"><p><img src="pv-01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5." width="1536"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>This final part creates the visualization! Through this we can see that a majority of students think that their academic workload and pressure are rather high, or above what might be a “manageable” level. Despite that, we are not seeing the same reflection in mental health markers. It would be logical to assume that as academic workload and pressure increase to an unmanageable level, that mental health might follow. While there are certainly a fair amount of students that feel these mental health symptoms to a high degree, it is not over 50%.</p>
 
 
 <!-- -->
@@ -1147,133 +1159,145 @@ cookieconsent.run({
 <span id="cb7-9"><a href="#cb7-9"></a><span class="fu">library</span>(janitor) </span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="fu">library</span>(viridisLite)</span>
 <span id="cb7-11"><a href="#cb7-11"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="in">```</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a></span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a>Your exploratory data analysis of the team datasets go here.</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="in">```{r}</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="in">```</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="fu"># Counting function</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="in">```{r}</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a>percent_calc <span class="ot">&lt;-</span> <span class="cf">function</span>(column_name) {</span>
-<span id="cb7-26"><a href="#cb7-26"></a>  MentalHealthSurvey <span class="sc">|&gt;</span> </span>
-<span id="cb7-27"><a href="#cb7-27"></a>  <span class="fu">count</span>({{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb7-28"><a href="#cb7-28"></a>  <span class="fu">mutate</span>(<span class="at">column_level =</span> (n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a>  <span class="fu">rename</span>(<span class="at">scale_system =</span> {{column_name}}) <span class="sc">|&gt;</span> </span>
-<span id="cb7-30"><a href="#cb7-30"></a>  <span class="fu">select</span>(scale_system, column_level) <span class="sc">|&gt;</span> </span>
-<span id="cb7-31"><a href="#cb7-31"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb7-32"><a href="#cb7-32"></a>}</span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="in">```</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a></span>
-<span id="cb7-35"><a href="#cb7-35"></a></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="fu"># Calculating Percentages &amp; creating data set</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="in">```{r}</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a>Depression <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(depression) <span class="sc">|&gt;</span> </span>
-<span id="cb7-41"><a href="#cb7-41"></a>  <span class="fu">rename</span>(<span class="at">depression =</span> column_level)</span>
-<span id="cb7-42"><a href="#cb7-42"></a></span>
-<span id="cb7-43"><a href="#cb7-43"></a>Anxiety <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb7-44"><a href="#cb7-44"></a>  <span class="fu">rename</span>(<span class="at">anxiety =</span> column_level)</span>
-<span id="cb7-45"><a href="#cb7-45"></a></span>
-<span id="cb7-46"><a href="#cb7-46"></a>Isolation <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(isolation) <span class="sc">|&gt;</span> </span>
-<span id="cb7-47"><a href="#cb7-47"></a>  <span class="fu">rename</span>(<span class="at">isolation =</span> column_level)</span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="in">```</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="in">```{r}</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>MentalHealthSurvey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/raw/MentalHealthSurvey.csv"</span>)</span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, </span>
+<span id="cb7-23"><a href="#cb7-23"></a>         <span class="at">regular =</span> <span class="st">"data/raw/Roboto_Condensed/static/RobotoCondensed-Regular.ttf"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24"></a>         <span class="at">bold =</span> <span class="st">"data/raw/Roboto_Condensed/static/RobotoCondensed-Bold.ttf"</span>)</span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="in">```</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="fu"># Counting function</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="in">```{r}</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a>percent_calc <span class="ot">&lt;-</span> <span class="cf">function</span>(column_name) {</span>
+<span id="cb7-32"><a href="#cb7-32"></a>  MentalHealthSurvey <span class="sc">|&gt;</span> </span>
+<span id="cb7-33"><a href="#cb7-33"></a>  <span class="fu">count</span>({{column_name}}) <span class="sc">|&gt;</span> </span>
+<span id="cb7-34"><a href="#cb7-34"></a>  <span class="fu">mutate</span>(<span class="at">column_level =</span> (n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a>  <span class="fu">rename</span>(<span class="at">scale_system =</span> {{column_name}}) <span class="sc">|&gt;</span> </span>
+<span id="cb7-36"><a href="#cb7-36"></a>  <span class="fu">select</span>(scale_system, column_level) <span class="sc">|&gt;</span> </span>
+<span id="cb7-37"><a href="#cb7-37"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb7-38"><a href="#cb7-38"></a>}</span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="in">```</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a>This is a function that will help me count the number of students that fall into each category, which will help me calculate my percentages. </span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="fu"># Calculating Percentages &amp; creating data set</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="in">```{r}</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a>Depression <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(depression) <span class="sc">|&gt;</span> </span>
+<span id="cb7-47"><a href="#cb7-47"></a>  <span class="fu">rename</span>(<span class="at">depression =</span> column_level)</span>
 <span id="cb7-48"><a href="#cb7-48"></a></span>
-<span id="cb7-49"><a href="#cb7-49"></a>Workload <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_workload) <span class="sc">|&gt;</span> </span>
-<span id="cb7-50"><a href="#cb7-50"></a>  <span class="fu">rename</span>(<span class="at">academic_workload =</span> column_level)</span>
-<span id="cb7-51"><a href="#cb7-51"></a>  </span>
-<span id="cb7-52"><a href="#cb7-52"></a>Pressure <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb7-53"><a href="#cb7-53"></a>  <span class="fu">rename</span>(<span class="at">academic_pressure =</span> column_level)</span>
+<span id="cb7-49"><a href="#cb7-49"></a>Anxiety <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(anxiety) <span class="sc">|&gt;</span> </span>
+<span id="cb7-50"><a href="#cb7-50"></a>  <span class="fu">rename</span>(<span class="at">anxiety =</span> column_level)</span>
+<span id="cb7-51"><a href="#cb7-51"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a>Isolation <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(isolation) <span class="sc">|&gt;</span> </span>
+<span id="cb7-53"><a href="#cb7-53"></a>  <span class="fu">rename</span>(<span class="at">isolation =</span> column_level)</span>
 <span id="cb7-54"><a href="#cb7-54"></a></span>
-<span id="cb7-55"><a href="#cb7-55"></a>Organized_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(Depression, Anxiety) <span class="sc">|&gt;</span> </span>
-<span id="cb7-56"><a href="#cb7-56"></a>  <span class="fu">full_join</span>(Isolation) <span class="sc">|&gt;</span></span>
-<span id="cb7-57"><a href="#cb7-57"></a>  <span class="fu">full_join</span>(Workload) <span class="sc">|&gt;</span></span>
-<span id="cb7-58"><a href="#cb7-58"></a>  <span class="fu">full_join</span>(Pressure) <span class="sc">|&gt;</span> </span>
-<span id="cb7-59"><a href="#cb7-59"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">cols =</span> <span class="fu">c</span>(depression, anxiety, isolation, academic_workload, academic_pressure)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-60"><a href="#cb7-60"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb7-61"><a href="#cb7-61"></a>    <span class="at">value =</span> </span>
-<span id="cb7-62"><a href="#cb7-62"></a>      <span class="fu">case_when</span>(</span>
-<span id="cb7-63"><a href="#cb7-63"></a>      <span class="fu">is.na</span>(value) <span class="sc">~</span> <span class="dv">0</span>, </span>
-<span id="cb7-64"><a href="#cb7-64"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value </span>
-<span id="cb7-65"><a href="#cb7-65"></a>      )) <span class="sc">|&gt;</span> </span>
-<span id="cb7-66"><a href="#cb7-66"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-67"><a href="#cb7-67"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)),</span>
-<span id="cb7-68"><a href="#cb7-68"></a>    <span class="at">value =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-69"><a href="#cb7-69"></a>      scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">~</span> <span class="sc">-</span>value,</span>
-<span id="cb7-70"><a href="#cb7-70"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value</span>
-<span id="cb7-71"><a href="#cb7-71"></a>    )</span>
-<span id="cb7-72"><a href="#cb7-72"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-73"><a href="#cb7-73"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-74"><a href="#cb7-74"></a>    <span class="at">value =</span> <span class="fu">round</span>(value)</span>
-<span id="cb7-75"><a href="#cb7-75"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-76"><a href="#cb7-76"></a>  <span class="fu">mutate</span>(<span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"5"</span>, <span class="st">"4"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))) </span>
-<span id="cb7-77"><a href="#cb7-77"></a></span>
-<span id="cb7-78"><a href="#cb7-78"></a>Organized_data<span class="sc">$</span>Metric <span class="ot">&lt;-</span> <span class="fu">recode</span>(Organized_data<span class="sc">$</span>Metric, </span>
-<span id="cb7-79"><a href="#cb7-79"></a>                                <span class="st">"depression"</span> <span class="ot">=</span> <span class="st">"Depression"</span>, </span>
-<span id="cb7-80"><a href="#cb7-80"></a>                                <span class="st">"anxiety"</span> <span class="ot">=</span> <span class="st">"Anxiety"</span>, </span>
-<span id="cb7-81"><a href="#cb7-81"></a>                                <span class="st">"isolation"</span> <span class="ot">=</span> <span class="st">"Isolation"</span>, </span>
-<span id="cb7-82"><a href="#cb7-82"></a>                                <span class="st">"academic_workload"</span> <span class="ot">=</span> <span class="st">"Academic Workload"</span>, </span>
-<span id="cb7-83"><a href="#cb7-83"></a>                                <span class="st">"academic_pressure"</span> <span class="ot">=</span> <span class="st">"Academic Pressure"</span></span>
-<span id="cb7-84"><a href="#cb7-84"></a>                                )</span>
-<span id="cb7-85"><a href="#cb7-85"></a></span>
-<span id="cb7-86"><a href="#cb7-86"></a><span class="in">```</span></span>
-<span id="cb7-87"><a href="#cb7-87"></a>#Making Labels </span>
-<span id="cb7-90"><a href="#cb7-90"></a><span class="in">```{r}</span></span>
-<span id="cb7-91"><a href="#cb7-91"></a>Organzied_Data_labs <span class="ot">&lt;-</span> Organized_data <span class="sc">|&gt;</span> </span>
-<span id="cb7-92"><a href="#cb7-92"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-93"><a href="#cb7-93"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))</span>
-<span id="cb7-94"><a href="#cb7-94"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-95"><a href="#cb7-95"></a>  <span class="fu">group_by</span>(Metric) <span class="sc">|&gt;</span> </span>
-<span id="cb7-96"><a href="#cb7-96"></a>  <span class="fu">arrange</span>(Metric, scale_system) <span class="sc">|&gt;</span> </span>
-<span id="cb7-97"><a href="#cb7-97"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-98"><a href="#cb7-98"></a>    <span class="at">pos =</span> <span class="fu">cumsum</span>(value) <span class="sc">-</span> (<span class="fl">0.5</span> <span class="sc">*</span> value),  </span>
-<span id="cb7-99"><a href="#cb7-99"></a>    <span class="at">pos =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-100"><a href="#cb7-100"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Anxiety"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb7-101"><a href="#cb7-101"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Depression"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">10</span>,</span>
-<span id="cb7-102"><a href="#cb7-102"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Isolation"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
-<span id="cb7-103"><a href="#cb7-103"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Workload"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">38</span>,</span>
-<span id="cb7-104"><a href="#cb7-104"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Pressure"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">33</span>,</span>
-<span id="cb7-105"><a href="#cb7-105"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> pos</span>
-<span id="cb7-106"><a href="#cb7-106"></a>  ),</span>
-<span id="cb7-107"><a href="#cb7-107"></a>  <span class="at">value =</span> <span class="fu">abs</span>(value), </span>
-<span id="cb7-108"><a href="#cb7-108"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-109"><a href="#cb7-109"></a>  <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-110"><a href="#cb7-110"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-111"><a href="#cb7-111"></a>    <span class="at">value =</span> <span class="fu">as.character</span>(value), </span>
-<span id="cb7-112"><a href="#cb7-112"></a>    <span class="at">value =</span> <span class="fu">paste0</span>(value, <span class="st">"%"</span>)</span>
-<span id="cb7-113"><a href="#cb7-113"></a>  )</span>
-<span id="cb7-114"><a href="#cb7-114"></a><span class="in">```</span></span>
-<span id="cb7-115"><a href="#cb7-115"></a></span>
-<span id="cb7-116"><a href="#cb7-116"></a></span>
-<span id="cb7-117"><a href="#cb7-117"></a>#Creating graphs </span>
-<span id="cb7-118"><a href="#cb7-118"></a><span class="in">```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5. "}</span></span>
-<span id="cb7-119"><a href="#cb7-119"></a><span class="fu">ggplot</span>(Organized_data, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> value, <span class="at">fill =</span> scale_system)) <span class="sc">+</span></span>
-<span id="cb7-120"><a href="#cb7-120"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb7-121"><a href="#cb7-121"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Organzied_Data_labs, <span class="fu">aes</span>(<span class="at">y =</span> pos, <span class="at">label =</span> value), </span>
-<span id="cb7-122"><a href="#cb7-122"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, </span>
-<span id="cb7-123"><a href="#cb7-123"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-124"><a href="#cb7-124"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-125"><a href="#cb7-125"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb7-126"><a href="#cb7-126"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#f45b5b"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#f4a261"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"gray70"</span>,</span>
-<span id="cb7-127"><a href="#cb7-127"></a>               <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#4ea8de"</span>, <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"#0077b6"</span>), </span>
-<span id="cb7-128"><a href="#cb7-128"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
-<span id="cb7-129"><a href="#cb7-129"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-130"><a href="#cb7-130"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
-<span id="cb7-131"><a href="#cb7-131"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-132"><a href="#cb7-132"></a>    <span class="at">title =</span> <span class="st">"Students Rating of Mental Health and Academic Difficultly on a Scale of 1-5"</span>,</span>
-<span id="cb7-133"><a href="#cb7-133"></a>    <span class="at">fill =</span> <span class="st">"Level:"</span>,</span>
-<span id="cb7-134"><a href="#cb7-134"></a>    <span class="at">y =</span> <span class="cn">NULL</span>, </span>
-<span id="cb7-135"><a href="#cb7-135"></a>    <span class="at">x =</span> <span class="cn">NULL</span></span>
-<span id="cb7-136"><a href="#cb7-136"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-137"><a href="#cb7-137"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb7-138"><a href="#cb7-138"></a>  <span class="fu">theme</span>(</span>
-<span id="cb7-139"><a href="#cb7-139"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-140"><a href="#cb7-140"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-141"><a href="#cb7-141"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-142"><a href="#cb7-142"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb7-143"><a href="#cb7-143"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>), </span>
-<span id="cb7-144"><a href="#cb7-144"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>)</span>
-<span id="cb7-145"><a href="#cb7-145"></a>  ) </span>
-<span id="cb7-146"><a href="#cb7-146"></a><span class="in">```</span></span>
+<span id="cb7-55"><a href="#cb7-55"></a>Workload <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_workload) <span class="sc">|&gt;</span> </span>
+<span id="cb7-56"><a href="#cb7-56"></a>  <span class="fu">rename</span>(<span class="at">academic_workload =</span> column_level)</span>
+<span id="cb7-57"><a href="#cb7-57"></a>  </span>
+<span id="cb7-58"><a href="#cb7-58"></a>Pressure <span class="ot">&lt;-</span> <span class="fu">percent_calc</span>(academic_pressure) <span class="sc">|&gt;</span> </span>
+<span id="cb7-59"><a href="#cb7-59"></a>  <span class="fu">rename</span>(<span class="at">academic_pressure =</span> column_level)</span>
+<span id="cb7-60"><a href="#cb7-60"></a></span>
+<span id="cb7-61"><a href="#cb7-61"></a>Organized_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(Depression, Anxiety) <span class="sc">|&gt;</span> </span>
+<span id="cb7-62"><a href="#cb7-62"></a>  <span class="fu">full_join</span>(Isolation) <span class="sc">|&gt;</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a>  <span class="fu">full_join</span>(Workload) <span class="sc">|&gt;</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a>  <span class="fu">full_join</span>(Pressure) <span class="sc">|&gt;</span> </span>
+<span id="cb7-65"><a href="#cb7-65"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">cols =</span> <span class="fu">c</span>(depression, anxiety, isolation, academic_workload, academic_pressure)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-66"><a href="#cb7-66"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb7-67"><a href="#cb7-67"></a>    <span class="at">value =</span> </span>
+<span id="cb7-68"><a href="#cb7-68"></a>      <span class="fu">case_when</span>(</span>
+<span id="cb7-69"><a href="#cb7-69"></a>      <span class="fu">is.na</span>(value) <span class="sc">~</span> <span class="dv">0</span>, </span>
+<span id="cb7-70"><a href="#cb7-70"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value </span>
+<span id="cb7-71"><a href="#cb7-71"></a>      )) <span class="sc">|&gt;</span> </span>
+<span id="cb7-72"><a href="#cb7-72"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-73"><a href="#cb7-73"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)),</span>
+<span id="cb7-74"><a href="#cb7-74"></a>    <span class="at">value =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-75"><a href="#cb7-75"></a>      scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">~</span> <span class="sc">-</span>value,</span>
+<span id="cb7-76"><a href="#cb7-76"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value</span>
+<span id="cb7-77"><a href="#cb7-77"></a>    )</span>
+<span id="cb7-78"><a href="#cb7-78"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-79"><a href="#cb7-79"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-80"><a href="#cb7-80"></a>    <span class="at">value =</span> <span class="fu">round</span>(value)</span>
+<span id="cb7-81"><a href="#cb7-81"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-82"><a href="#cb7-82"></a>  <span class="fu">mutate</span>(<span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"5"</span>, <span class="st">"4"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))) </span>
+<span id="cb7-83"><a href="#cb7-83"></a></span>
+<span id="cb7-84"><a href="#cb7-84"></a>Organized_data<span class="sc">$</span>Metric <span class="ot">&lt;-</span> <span class="fu">recode</span>(Organized_data<span class="sc">$</span>Metric, </span>
+<span id="cb7-85"><a href="#cb7-85"></a>                                <span class="st">"depression"</span> <span class="ot">=</span> <span class="st">"Depression"</span>, </span>
+<span id="cb7-86"><a href="#cb7-86"></a>                                <span class="st">"anxiety"</span> <span class="ot">=</span> <span class="st">"Anxiety"</span>, </span>
+<span id="cb7-87"><a href="#cb7-87"></a>                                <span class="st">"isolation"</span> <span class="ot">=</span> <span class="st">"Isolation"</span>, </span>
+<span id="cb7-88"><a href="#cb7-88"></a>                                <span class="st">"academic_workload"</span> <span class="ot">=</span> <span class="st">"Academic Workload"</span>, </span>
+<span id="cb7-89"><a href="#cb7-89"></a>                                <span class="st">"academic_pressure"</span> <span class="ot">=</span> <span class="st">"Academic Pressure"</span></span>
+<span id="cb7-90"><a href="#cb7-90"></a>                                )</span>
+<span id="cb7-91"><a href="#cb7-91"></a></span>
+<span id="cb7-92"><a href="#cb7-92"></a><span class="in">```</span></span>
+<span id="cb7-93"><a href="#cb7-93"></a>In order to get the data that I wanted from the data set in the correct format for the graphic I had in mind I had to calculate for each individual variable I wanted to look at. Then I had to combine them into a dataset and pivot them, and then restructure large sections in order for it to show up exactly as I wanted. This part was edited a lot throughout the creation of the visualization. </span>
+<span id="cb7-94"><a href="#cb7-94"></a></span>
+<span id="cb7-95"><a href="#cb7-95"></a>#Making Labels </span>
+<span id="cb7-98"><a href="#cb7-98"></a><span class="in">```{r}</span></span>
+<span id="cb7-99"><a href="#cb7-99"></a>Organzied_Data_labs <span class="ot">&lt;-</span> Organized_data <span class="sc">|&gt;</span> </span>
+<span id="cb7-100"><a href="#cb7-100"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-101"><a href="#cb7-101"></a>    <span class="at">scale_system =</span> <span class="fu">factor</span>(scale_system, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>))</span>
+<span id="cb7-102"><a href="#cb7-102"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-103"><a href="#cb7-103"></a>  <span class="fu">group_by</span>(Metric) <span class="sc">|&gt;</span> </span>
+<span id="cb7-104"><a href="#cb7-104"></a>  <span class="fu">arrange</span>(Metric, scale_system) <span class="sc">|&gt;</span> </span>
+<span id="cb7-105"><a href="#cb7-105"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-106"><a href="#cb7-106"></a>    <span class="at">pos =</span> <span class="fu">cumsum</span>(value) <span class="sc">-</span> (<span class="fl">0.5</span> <span class="sc">*</span> value),  </span>
+<span id="cb7-107"><a href="#cb7-107"></a>    <span class="at">pos =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-108"><a href="#cb7-108"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Anxiety"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
+<span id="cb7-109"><a href="#cb7-109"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Depression"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">10</span>,</span>
+<span id="cb7-110"><a href="#cb7-110"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Isolation"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">-</span> <span class="dv">8</span>,</span>
+<span id="cb7-111"><a href="#cb7-111"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Workload"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">38</span>,</span>
+<span id="cb7-112"><a href="#cb7-112"></a>      (scale_system <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>) <span class="sc">&amp;</span> Metric <span class="sc">==</span> <span class="st">"Academic Pressure"</span>) <span class="sc">~</span> <span class="sc">-</span>pos <span class="sc">+</span> <span class="dv">33</span>,</span>
+<span id="cb7-113"><a href="#cb7-113"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> pos</span>
+<span id="cb7-114"><a href="#cb7-114"></a>  ),</span>
+<span id="cb7-115"><a href="#cb7-115"></a>  <span class="at">value =</span> <span class="fu">abs</span>(value), </span>
+<span id="cb7-116"><a href="#cb7-116"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-117"><a href="#cb7-117"></a>  <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-118"><a href="#cb7-118"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-119"><a href="#cb7-119"></a>    <span class="at">value =</span> <span class="fu">as.character</span>(value), </span>
+<span id="cb7-120"><a href="#cb7-120"></a>    <span class="at">value =</span> <span class="fu">paste0</span>(value, <span class="st">"%"</span>)</span>
+<span id="cb7-121"><a href="#cb7-121"></a>  )</span>
+<span id="cb7-122"><a href="#cb7-122"></a><span class="in">```</span></span>
+<span id="cb7-123"><a href="#cb7-123"></a>In order to get the numbers that hover over each part of the bar chart I had to create a separate dataset specifically for the geom_text. They then had to be moved around for each individual variable. It was hard to get precise through the math, so that is why there are "random" numbers amended, as I found that is what made them look the best. </span>
+<span id="cb7-124"><a href="#cb7-124"></a></span>
+<span id="cb7-125"><a href="#cb7-125"></a>#Creating graphs </span>
+<span id="cb7-126"><a href="#cb7-126"></a><span class="in">```{r fig.width = 16, fig.height = 6, fig.alt = "A bar graph demonstrating what percentage of students rated each of the following categories on a scale of 1-5 in realtion to school. For Isolation, 16% said 1, 15% said 2, 23% said 3 (or neutral), 21% said 4, and 25% said 5. For Depression 15% of students said 1, 16% of students said 2, 24% of students said 3, 22% of students said 4, and 23% of students said 5. For Anxiety, 11% of students said 1, 21% of students said 2, 22% of students said 3, 26% of students said 4, and 20% of students said 5. In Academic workload, no students said it was 1 level difficulty, only 6% said 2, 25% said 3, while 44% said 4 and 25% said 5. Lastly 6% of students said academic pressure was a 1, 7% said 2, 21% said 3, 37% said 4, and 30% said 5."}</span></span>
+<span id="cb7-127"><a href="#cb7-127"></a><span class="fu">ggplot</span>(Organized_data, <span class="fu">aes</span>(<span class="at">x =</span> Metric, <span class="at">y =</span> value, <span class="at">fill =</span> scale_system)) <span class="sc">+</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb7-129"><a href="#cb7-129"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> Organzied_Data_labs, <span class="fu">aes</span>(<span class="at">y =</span> pos, <span class="at">label =</span> value), </span>
+<span id="cb7-130"><a href="#cb7-130"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, </span>
+<span id="cb7-131"><a href="#cb7-131"></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">face =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb7-132"><a href="#cb7-132"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb7-133"><a href="#cb7-133"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb7-134"><a href="#cb7-134"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"#f45b5b"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"#f4a261"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"gray70"</span>,</span>
+<span id="cb7-135"><a href="#cb7-135"></a>               <span class="st">"4"</span> <span class="ot">=</span> <span class="st">"#4ea8de"</span>, <span class="st">"5"</span> <span class="ot">=</span> <span class="st">"#0077b6"</span>), </span>
+<span id="cb7-136"><a href="#cb7-136"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>)</span>
+<span id="cb7-137"><a href="#cb7-137"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-138"><a href="#cb7-138"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb7-139"><a href="#cb7-139"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-140"><a href="#cb7-140"></a>    <span class="at">title =</span> <span class="st">"Students Rating of Mental Health and Academic Difficultly on a Scale of 1-5"</span>,</span>
+<span id="cb7-141"><a href="#cb7-141"></a>    <span class="at">fill =</span> <span class="st">"Level:"</span>,</span>
+<span id="cb7-142"><a href="#cb7-142"></a>    <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-143"><a href="#cb7-143"></a>    <span class="at">x =</span> <span class="cn">NULL</span></span>
+<span id="cb7-144"><a href="#cb7-144"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-145"><a href="#cb7-145"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb7-146"><a href="#cb7-146"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-147"><a href="#cb7-147"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-148"><a href="#cb7-148"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-149"><a href="#cb7-149"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-150"><a href="#cb7-150"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb7-151"><a href="#cb7-151"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#2a4d69"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>), </span>
+<span id="cb7-152"><a href="#cb7-152"></a>    <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.5</span>), <span class="st">"cm"</span>), </span>
+<span id="cb7-153"><a href="#cb7-153"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">face =</span> <span class="st">"bold"</span>), </span>
+<span id="cb7-154"><a href="#cb7-154"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">size =</span> <span class="dv">14</span>), </span>
+<span id="cb7-155"><a href="#cb7-155"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"RobotoCondensed"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
+<span id="cb7-156"><a href="#cb7-156"></a>  ) </span>
+<span id="cb7-157"><a href="#cb7-157"></a><span class="in">```</span></span>
+<span id="cb7-158"><a href="#cb7-158"></a>This final part creates the visualization! Through this we can see that a majority of students think that their academic workload and pressure are rather high, or above what might be a "manageable" level. Despite that, we are not seeing the same reflection in mental health markers. It would be logical to assume that as academic workload and pressure increase to an unmanageable level, that mental health might follow. While there are certainly a fair amount of students that feel these mental health symptoms to a high degree, it is not over 50%. </span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
