@@ -11,6 +11,8 @@ library(tidyverse)
 library(shiny)
 library(sf)
 library(plotly)
+library(babynames)
+library(gapminder)
 ```
 
 ## Background
