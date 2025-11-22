@@ -85,6 +85,7 @@ book:
       - src/ica/14-apis-2-notes.qmd
       - src/ica/15-scraping-notes.qmd
       - src/ica/16-databases-notes.qmd
+      - src/ica/18-interactive-viz-notes.qmd
 
     - part: "Exams"
       chapters:
