@@ -22,7 +22,7 @@ number-depth: 2
 
 book:
   title: "COMP/STAT212 Portfolio"
-  author: "Your Name Here"
+  author: "Tori Duckworth"
   date: today  # use today to update date published based on last time project was edited
   date-format: full
   # favicon: path/to/favorite-logo.png
@@ -45,7 +45,7 @@ book:
       # footer text
 
   sidebar:
-    title: "Your Name Here"
+    title: "Tori Duckworth"
     logo: assets/sidebar-logo.png
     logo-alt: "Random negative space illustration"
     collapse-level: 2
@@ -66,13 +66,32 @@ book:
 
     - part: "TidyTuesday"
       chapters:
-      - src/tt/2025-07-08.qmd
-      - src/tt/2025-07-15.qmd
+      - src/tt/hw01-tt.qmd
+      - src/tt/hw02-tt.qmd
+      - src/tt/hw03-tt.qmd
 
     - part: "In-Class Activities"
       chapters:
-      - src/ica/ica-sample1.qmd
-      - src/ica/ica-sample2.qmd
+      - src/ica/Review.qmd
+      - src/ica/Advanced_data_viz.qmd
+      - src/ica/04_adv_maps/code/Advanced_spatial_data_viz_P1.qmd
+      - src/ica/Advanced_data_wrangling_P1.qmd
+      - src/ica/Advanced_data_wrangling_P2.qmd
+      - src/ica/08-missing-data-notes.qmd
+      - src/ica/09-functions-notes.qmd
+      - src/ica/10-base-r-notes.qmd
+      - src/ica/11-iteration-1-notes.qmd
+      - src/ica/12-iteration-2-notes.qmd
+      - src/ica/14-apis-2-notes.qmd
+      - src/ica/15-scraping-notes.qmd
+      - src/ica/16-databases-notes.qmd
+      - src/ica/18-interactive-viz-notes.qmd
+
+    - part: "Exams"
+      chapters:
+      - src/exams/Exam_summary_sheets.md
+      - src/exams/exam_1/exam_1.qmd
+      - src/exams/exam_2/exam_2.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd

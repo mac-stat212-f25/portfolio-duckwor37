@@ -1,0 +1,62 @@
+---
+title: "Exploring Gt package"
+format: html
+---
+
+# Libraries
+```{r}
+library(gt)
+library(tidyverse)
+```
+
+# Getting the data
+```{r}
+peeps_1 <- peeps |> 
+  rename(
+    given = name_given, 
+    family = name_family, 
+    height = height_cm, 
+    weight = weight_kg
+  ) |> 
+  rename_with(~ str_replace_all(.x, "_", " ")) |> 
+  rename_with(str_to_title)
+```
+
+# Creating a nice table
+```{r}
+peeps_1 |> 
+  gt() |> 
+  tab_header(
+    title = "Friends information", 
+    subtitle = "This is a *normal* thing to keep track of"
+  ) |> 
+  tab_footnote(
+    footnote = "This is not my data, don't worry", 
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_spanner(
+    label = "Names", 
+    columns = c(Given, Family)
+  ) |> 
+  tab_spanner(
+    label = "Location", 
+    columns = c(Address, City, `State Prov`, Postcode, Country)
+  ) |> 
+  tab_spanner(
+    label = "Contact", 
+    columns = c(`Email Addr`, `Phone Number`, `Country Code`)
+  ) |> 
+  tab_spanner(
+    label = "Personal Information", 
+    columns = c(Gender, Dob, Height, Weight)
+  ) |> 
+  cols_align(
+    align = "left"
+  ) |> 
+  grand_summary_rows(columns = c(Weight, Height), 
+               fns = Avg ~ mean(.)) |> 
+  tab_stubhead(
+    "Summary Labels"
+  )
+```
+
