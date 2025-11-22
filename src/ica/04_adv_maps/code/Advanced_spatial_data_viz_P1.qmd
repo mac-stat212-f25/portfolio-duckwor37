@@ -377,7 +377,8 @@ mn_counties_leaf |>
         color = "#444444", weight = 1, smoothFactor = 0.5, opacity = 1.0,
         fillOpacity = 0.5, fillColor = ~colorQuantile("YlOrRd", n)(n),
         highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE)) |>
-    addCircles(data = mn_cities_leaf |> filter(County %in% paste(c("Anoka", "Hennepin", "Ramsey", "Dakota", "Carver", "Washington", "Scott"), "County")), color = "#444444")
+    addCircles(data = mn_cities_leaf |> 
+    filter(County %in% paste(c("Anoka", "Hennepin", "Ramsey", "Dakota", "Carver", "Washington", "Scott"), "County")), color = "#444444")
 ```
 
 

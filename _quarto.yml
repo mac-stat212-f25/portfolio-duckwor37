@@ -90,6 +90,7 @@ book:
       chapters:
       - src/exams/Exam_summary_sheets.md
       - src/exams/exam_1/exam_1.qmd
+      - src/exams/exam_2/exam_2.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd

@@ -36,9 +36,9 @@ ui <- navbarPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotlyOutput("diverse_scatterplot")
-           #plotlyOutput("diverse_map"),
-           #plotlyOutput("distr_bar")
+           plotlyOutput("diverse_scatterplot"),
+           leafletOutput("diverse_map"),
+           plotlyOutput("distr_bar")
         )
     )
 )
@@ -51,16 +51,25 @@ server <- function(input, output) {
         filter(metro_name  == input$city_name) %>%
       ggplot(aes(x = entropy, y = distmiles)) +
         geom_point(aes(key = tract_id)) +
-        geom_smooth(se = FALSE, method = "loess", span = input$span_parameter) +
+        geom_smooth(se = FALSE, method = "loess", span = input$span_parameter, color = "red") +
         theme_minimal()
 
       ggplotly(p, source = "plotly_scatterplot") %>%
         event_register("plotly_selected")
     })
 
-   # output$diverse_map <- renderPlotly({
+   output$diverse_map <- renderLeaflet({
+     pal <- colorNumeric(c("#FFEEEE", "#FF0000","#800000"), domain=data_by_dist$entropy)
+     m <- data_by_dist %>%
+       filter(metro_name  == input$city_name) %>%
+       leaflet() |>
+       addProviderTiles("CartoDB.Positron") |>
+       addPolygons(opacity = 0, fillColor = pal(data_by_dist$entropy), fillOpacity = 0.05, highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE))
+   })
 
-   # })
+   output$distr_bar <- renderPlotly({
+
+   })
 }
 
 # Run the application
